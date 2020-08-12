@@ -8,7 +8,7 @@
 #'     virtualenv_list use_virtualenv
 #' @export
 
-install_MACS <- function(envname = "MACS") {
+install_MACS <- function(envname = "MACS", method = "conda") {
     stopifnot(is.character(envname) && length(envname) == 1)
     is_windows <- identical(.Platform$OS.type, "windows")
     is_osx <- Sys.info()["sysname"] == "Darwin"
@@ -20,12 +20,20 @@ install_MACS <- function(envname = "MACS") {
         )
     }
 
-    if (!envname %in% virtualenv_list()) {
+    if (!envname %in% virtualenv_list() | !envname %in% conda_list()$name) {
         pkgs <- readLines("python_requirements.txt")
-        virtualenv_create(envname)
-        virtualenv_install(envname, pkgs)
+        if(method == "virtualenv"){
+            virtualenv_create(envname)
+            virtualenv_install(envname, pkgs)
+        }else if(method == "conda"){
+            conda_create(envname)
+            conda_install(envname, pkgs, pip =TRUE)
+        }
     }
-    use_virtualenv(virtualenv=envname)
-
+    if(method == "conda"){
+        use_condaenv(envname)
+    }else if(method == "virtualenv"){
+        use_virtualenv(virtualenv=envname)
+    }
     invisible(.MACS())
 }

@@ -4,7 +4,7 @@
 \alias{install_MACS}
 \title{install MACS python package}
 \usage{
-install_MACS(envname = "MACS")
+install_MACS(envname = "MACS", method = "conda")
 }
 \arguments{
 \item{envname}{Virtual environment to install the MACS python
