@@ -6,7 +6,7 @@ Authors@R:
            family = "Hu",
            role = c("aut", "cre"),
            email = "Qiang.Hu@roswellpark.org")
-Description: A package to implement MACS in R.
+Description: A package to invoke MACS in R.
 License: file LICENSE
 Encoding: UTF-8
 LazyData: true

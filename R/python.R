@@ -1,4 +1,4 @@
-#' @importFrom reticulate import py_eval
+#' @importFrom reticulate import py_run_string
 .MACS <- local({
     .MACS <- NULL
     function() {

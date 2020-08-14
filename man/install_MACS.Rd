@@ -9,6 +9,8 @@ install_MACS(envname = "MACS", method = "conda")
 \arguments{
 \item{envname}{Virtual environment to install the MACS python
 module}
+
+\item{method}{Use conda or virtualenv to install MACS.}
 }
 \value{
 install MACS python module

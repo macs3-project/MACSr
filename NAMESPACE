@@ -2,10 +2,12 @@
 
 export(filterdup)
 export(install_MACS)
+importFrom(reticulate,conda_create)
+importFrom(reticulate,conda_install)
 importFrom(reticulate,conda_list)
 importFrom(reticulate,import)
-importFrom(reticulate,py_eval)
 importFrom(reticulate,py_module_available)
+importFrom(reticulate,py_run_string)
 importFrom(reticulate,use_condaenv)
 importFrom(reticulate,use_virtualenv)
 importFrom(reticulate,virtualenv_create)

@@ -1,11 +1,12 @@
 #' install MACS python package
 #'
-#' @rdname install_MACS
 #' @param envname Virtual environment to install the MACS python
 #'     module
+#' @param method Use conda or virtualenv to install MACS.
 #' @return install MACS python module
 #' @importFrom reticulate virtualenv_create virtualenv_install
-#'     virtualenv_list use_virtualenv
+#'     virtualenv_list use_virtualenv conda_create conda_install
+#'     use_condaenv
 #' @export
 
 install_MACS <- function(envname = "MACS", method = "conda") {
