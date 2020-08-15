@@ -23,6 +23,7 @@ jobs:
         shell: Rscript {0}
       - name: Install system dependencies
         run: |
+          sudo -s
           apt-get update
           apt-get install -y python3-pip
           pip install macs2  
