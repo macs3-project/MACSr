@@ -11,13 +11,13 @@
 
 install_MACS <- function(envname = "MACS", method = "conda") {
     stopifnot(is.character(envname) && length(envname) == 1)
-    is_windows <- identical(.Platform$OS.type, "windows")
+    ## is_windows <- identical(.Platform$OS.type, "windows")
     is_osx <- Sys.info()["sysname"] == "Darwin"
     is_linux <- identical(tolower(Sys.info()[["sysname"]]), "linux")
-    if (!is_windows && !is_osx && !is_linux) {
+    if (!is_osx && !is_linux) {
         stop(
             "Unable to install 'MACS' on this platform. ",
-            "Binary installation is available for Windows, macOS, and Linux"
+            "Binary installation is available for macOS, and Linux"
         )
     }
 
@@ -28,13 +28,13 @@ install_MACS <- function(envname = "MACS", method = "conda") {
             virtualenv_install(envname, pkgs)
         }else if(method == "conda"){
             conda_create(envname)
-            conda_install(envname, pkgs, pip =TRUE)
+            conda_install(envname, pkgs, pip = TRUE)
         }
     }
     if(method == "conda"){
         use_condaenv(envname)
     }else if(method == "virtualenv"){
-        use_virtualenv(virtualenv=envname)
+        use_virtualenv(virtualenv = envname)
     }
     invisible(.MACS())
 }

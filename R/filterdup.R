@@ -64,10 +64,10 @@ filterdup <- function(gsize = 2.7e+09, format = "BEDPE", keepduplicates = "auto"
                                  ifile = ifile,
                                  buffer_size = buffer_size,
                                  dryrun = dryrun)
-    .filterdup()$run(opts)
+    res <- .filterdup()$run(opts)
     ofile <- file.path(outdir, outputfile)
     if(intern == TRUE){
-        
+        return(read.table(ofile))
     }
     return(ofile)
 }
