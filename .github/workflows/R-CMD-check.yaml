@@ -20,7 +20,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y python3-setuptools python3-pip
-          pip3 install macs2
+          pip3 install numpy macs2
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "rcmdcheck"))
