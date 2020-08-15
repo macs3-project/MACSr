@@ -23,10 +23,9 @@ jobs:
         shell: Rscript {0}
       - name: Install system dependencies
         run: |
-          sudo -s
-          apt-get update
-          apt-get install -y python3-pip
-          pip install macs2  
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          sudo pip install macs2  
       - name: Check
         run: rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
         shell: Rscript {0}
