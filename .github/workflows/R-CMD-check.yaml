@@ -21,6 +21,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y python3-setuptools python3-pip
           pip3 install numpy
+          pip3 install wheel
           pip3 install macs2
       - name: Install dependencies
         run: |
