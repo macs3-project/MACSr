@@ -1,10 +1,15 @@
 #' filterdup
 #'
+#' @param ifile Input file(s).
 #' @param gsize Effective genome size. It can be 1.0e+9 or 1000000000,
 #'     or shortcuts:'hs' for human (2.7e9), 'mm' for mouse (1.87e9),
 #'     'ce' for C. elegans (9e7) and 'dm' for fruitfly (1.2e8),
 #'     Default:hs.
 #' @param format Input file format.
+#' @param tsize Tag size. This will override the auto detected tag
+#'     size.
+#' @param pvalue Pvalue cutoff for binomial distribution
+#'     test. DEFAULT:1e-5.
 #' @param keepduplicates It controls the behavior towards duplicate
 #'     tags at the exact same location -- the same coordination and
 #'     the same strand. The 'auto' option makes MACS calculate the
@@ -19,7 +24,6 @@
 #'     remove those duplicate reads and save a new alignment file then
 #'     ask MACS2 to keep all by '--keep-dup all'. The default is to
 #'     keep one tag at the same location. Default: 1".
-#' @param ifile Input file(s).
 #' @param outputfile The output file.
 #' @param outdir The output directory.
 #' @param verbose Set verbose level of runtime message. 0: only show
@@ -48,23 +52,25 @@
 #'     list("tests/testthat/CTCF_PE_CTRL_chr22_50k.bedpe.gz"),
 #'     outputfile = "test.bed", outdir = "/tmp"))
 #' }
-filterdup <- function(gsize = 2.7e+09, format = "BEDPE", keepduplicates = "auto",
-                      ifile = list(), outputfile = character(),
-                      outdir = character(), verbose = 1L,
+filterdup <- function(ifile, gsize = "hs", format = "AUTO",
+                      tsize = NULL, pvalue = 1e-5, keepduplicates = "auto",
+                      outputfile = character(), outdir = ".", verbose = 2L,
                       buffer_size = 10000, dryrun = FALSE,
                       intern = FALSE){
     if(is.character(ifile)){
         ifile <- as.list(ifile)
     }
     opts <- .namespace()$Namespace(gsize = gsize,
-                                 format = format,
-                                 keepduplicates = keepduplicates,
-                                 verbose = verbose,
-                                 outputfile = outputfile,
-                                 outdir = outdir,
-                                 ifile = ifile,
-                                 buffer_size = buffer_size,
-                                 dryrun = dryrun)
+                                   tsize = tsize,
+                                   pvalue = pvalue,
+                                   format = format,
+                                   keepduplicates = keepduplicates,
+                                   verbose = verbose,
+                                   outputfile = outputfile,
+                                   outdir = outdir,
+                                   ifile = ifile,
+                                   buffer_size = buffer_size,
+                                   dryrun = dryrun)
     res <- .filterdup()$run(opts)
     ofile <- file.path(outdir, outputfile)
     if(intern == TRUE){
