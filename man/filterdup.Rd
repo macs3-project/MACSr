@@ -5,25 +5,35 @@
 \title{filterdup}
 \usage{
 filterdup(
-  gsize = 2.7e+09,
-  format = "BEDPE",
+  ifile,
+  gsize = "hs",
+  format = "AUTO",
+  tsize = NULL,
+  pvalue = 1e-05,
   keepduplicates = "auto",
-  ifile = list(),
   outputfile = character(),
-  outdir = character(),
-  verbose = 1L,
+  outdir = ".",
+  verbose = 2L,
   buffer_size = 10000,
   dryrun = FALSE,
   intern = FALSE
 )
 }
 \arguments{
+\item{ifile}{Input file(s).}
+
 \item{gsize}{Effective genome size. It can be 1.0e+9 or 1000000000,
 or shortcuts:'hs' for human (2.7e9), 'mm' for mouse (1.87e9),
 'ce' for C. elegans (9e7) and 'dm' for fruitfly (1.2e8),
 Default:hs.}
 
 \item{format}{Input file format.}
+
+\item{tsize}{Tag size. This will override the auto detected tag
+size.}
+
+\item{pvalue}{Pvalue cutoff for binomial distribution
+test. DEFAULT:1e-5.}
 
 \item{keepduplicates}{It controls the behavior towards duplicate
 tags at the exact same location -- the same coordination and
@@ -39,8 +49,6 @@ samtools/picard/any other tool to filter duplicates, please
 remove those duplicate reads and save a new alignment file then
 ask MACS2 to keep all by '--keep-dup all'. The default is to
 keep one tag at the same location. Default: 1".}
-
-\item{ifile}{Input file(s).}
 
 \item{outputfile}{The output file.}
 

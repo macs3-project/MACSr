@@ -36,3 +36,21 @@ class Namespace:
         .filterdup
     }
 })
+
+.predictd <- local({
+    .predictd <- NULL
+    function() {
+        if (is.null(.predictd))
+            .predictd <<- import("MACS2.predictd_cmd")
+        .predictd
+    }
+})
+
+.pileup <- local({
+    .pileup <- NULL
+    function() {
+        if (is.null(.pileup))
+            .pileup <<- import("MACS2.pileup_cmd")
+        .pileup
+    }
+})
