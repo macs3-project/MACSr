@@ -54,3 +54,13 @@ class Namespace:
         .pileup
     }
 })
+
+.callpeak <- local({
+    .callpeak <- NULL
+    function() {
+        if (is.null(.callpeak))
+            .callpeak <<- import("MACS2.callpeak_cmd")
+        .callpeak
+    }
+})
+
