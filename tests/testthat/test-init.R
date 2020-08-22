@@ -11,7 +11,7 @@ CTRLBEDPE <- file.path(datdir, "CTCF_PE_CTRL_chr22_50k.bedpe.gz")
 fd <- filterdup(ifile = CHIP,
                 gsize = 5.2e+7, outputfile = "test.bed", outdir = tempdir())
 test_that("test filterdup", {
-    expect_identical(readLines(fd),
+    expect_identical(readLines(fd$outputs),
                      readLines(file.path(datdir, "run_filterdup_result.bed.gz")))
 })
 
@@ -45,17 +45,17 @@ cp6 <- callpeak(CHIP, CTRL, gsize = 5.2e7, store_bdg = TRUE,
                 name = "run_callpeak_narrow5", outdir = tempdir(),
                 scaleto = "large")
 test_that("test callpeak narrow", {
-    expect_identical(readLines(grep("narrowPeak", cp1, value = TRUE)),
+    expect_identical(readLines(grep("narrowPeak", cp1$outputs, value = TRUE)),
                      readLines(file.path(datdir, "run_callpeak_narrow0_peaks.narrowPeak")))
-    expect_identical(readLines(grep("narrowPeak", cp2, value = TRUE)),
+    expect_identical(readLines(grep("narrowPeak", cp2$outputs, value = TRUE)),
                      readLines(file.path(datdir, "run_callpeak_narrow1_peaks.narrowPeak")))
-    expect_identical(readLines(grep("narrowPeak", cp3, value = TRUE)),
+    expect_identical(readLines(grep("narrowPeak", cp3$outputs, value = TRUE)),
                      readLines(file.path(datdir, "run_callpeak_narrow2_peaks.narrowPeak")))
-    expect_identical(readLines(grep("narrowPeak", cp4, value = TRUE)),
+    expect_identical(readLines(grep("narrowPeak", cp4$outputs, value = TRUE)),
                      readLines(file.path(datdir, "run_callpeak_narrow3_peaks.narrowPeak")))
-    expect_identical(readLines(grep("narrowPeak", cp5, value = TRUE)),
+    expect_identical(readLines(grep("narrowPeak", cp5$outputs, value = TRUE)),
                      readLines(file.path(datdir, "run_callpeak_narrow4_peaks.narrowPeak")))
-    expect_identical(readLines(grep("narrowPeak", cp6, value = TRUE)),
+    expect_identical(readLines(grep("narrowPeak", cp6$outputs, value = TRUE)),
                      readLines(file.path(datdir, "run_callpeak_narrow5_peaks.narrowPeak")))
 })
 
@@ -63,7 +63,7 @@ cp7 <- callpeak(CHIP, CTRL, gsize = 5.2e7, store_bdg = TRUE,
                 name = "run_callpeak_broad", outdir = tempdir(),
                 broad = TRUE)
 test_that("test callpeak broad", {
-    expect_identical(readLines(grep("broadPeak", cp7, value = TRUE)),
+    expect_identical(readLines(grep("broadPeak", cp7$outputs, value = TRUE)),
                      readLines(file.path(datdir, "run_callpeak_broad_peaks.broadPeak")))
 })
 
@@ -76,11 +76,11 @@ cp9 <- callpeak(CHIPBEDPE, CTRLBEDPE, gsize = 5.2e7, store_bdg = TRUE,
 cp10 <- callpeak(CHIPBEDPE, gsize = 5.2e7, store_bdg = TRUE,
                 format = "BEDPE", name = "run_callpeak_pe_narrow_onlychip", outdir = tempdir())
 test_that("test callpeak on PE narrow", {
-    expect_identical(readLines(grep("narrowPeak", cp8, value = TRUE)),
+    expect_identical(readLines(grep("narrowPeak", cp8$outputs, value = TRUE)),
                      readLines(file.path(datdir, "run_callpeak_bampe_narrow_peaks.narrowPeak")))
-    expect_identical(readLines(grep("narrowPeak", cp9, value = TRUE)),
+    expect_identical(readLines(grep("narrowPeak", cp9$outputs, value = TRUE)),
                      readLines(file.path(datdir, "run_callpeak_bedpe_narrow_peaks.narrowPeak")))
-    expect_identical(readLines(grep("narrowPeak", cp10, value = TRUE)),
+    expect_identical(readLines(grep("narrowPeak", cp10$outputs, value = TRUE)),
                      readLines(file.path(datdir, "run_callpeak_pe_narrow_onlychip_peaks.narrowPeak")))
 })
 
@@ -91,8 +91,9 @@ cp12 <- callpeak(CHIPBEDPE, CTRLBEDPE, gsize = 5.2e7, store_bdg = TRUE,
                 format = "BEDPE", name = "run_callpeak_bedpe_broad", outdir = tempdir(),
                 broad = TRUE)
 test_that("test callpeak on PE broad", {
-    expect_identical(readLines(grep("broadPeak", cp11, value = TRUE)),
+    expect_identical(readLines(grep("broadPeak", cp11$outputs, value = TRUE)),
                      readLines(file.path(datdir, "run_callpeak_bampe_broad_peaks.broadPeak")))
-    expect_identical(readLines(grep("broadPeak", cp12, value = TRUE)),
+    expect_identical(readLines(grep("broadPeak", cp12$outputs, value = TRUE)),
                      readLines(file.path(datdir, "run_callpeak_bedpe_broad_peaks.broadPeak")))
 })
+

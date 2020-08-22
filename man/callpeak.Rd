@@ -40,6 +40,7 @@ callpeak(
   call_summits = FALSE,
   buffer_size = 1e+05,
   verbose = 2L,
+  log = TRUE,
   ...
 )
 }
@@ -151,6 +152,8 @@ information. DEFAULT: 100000.}
 \item{verbose}{Set verbose level of runtime message. 0: only show
 critical message, 1: show additional warning message, 2: show
 process information, 3: show debug messages. DEFAULT:2}
+
+\item{log}{Whether to capture logs.}
 
 \item{...}{More options for macs2.}
 }

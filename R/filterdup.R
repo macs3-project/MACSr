@@ -42,8 +42,8 @@
 #'     of writing output files, including maximum allowable
 #'     duplicates, total number of reads before filtering, total
 #'     number of reads after filtering, and redundant rate. Default:
-#'     not set
-#' @param intern Whether to load output file.
+#'     not set.
+#' @param log Whether to capture logs.
 #' @importFrom utils read.table
 #' @export
 #' @examples
@@ -55,8 +55,7 @@
 filterdup <- function(ifile, gsize = "hs", format = "AUTO",
                       tsize = NULL, pvalue = 1e-5, keepduplicates = "auto",
                       outputfile = character(), outdir = ".", verbose = 2L,
-                      buffer_size = 10000, dryrun = FALSE,
-                      intern = FALSE){
+                      buffer_size = 10000, dryrun = FALSE, log = TRUE){
     if(is.character(ifile)){
         ifile <- as.list(ifile)
     }
@@ -71,10 +70,15 @@ filterdup <- function(ifile, gsize = "hs", format = "AUTO",
                                    ifile = ifile,
                                    buffer_size = buffer_size,
                                    dryrun = dryrun)
-    res <- .filterdup()$run(opts)
-    ofile <- file.path(outdir, outputfile)
-    if(intern == TRUE){
-        return(read.table(ofile))
+    if(log){
+        .logging()$run()
+        res <- py_capture_output(.filterdup()$run(opts))
+        message(res)
+    }else{
+        res <- .filterdup()$run(opts)
     }
-    return(ofile)
+
+    ofile <- file.path(outdir, outputfile)
+    args <- as.list(match.call())
+    macsList(fun = args[[1]], arguments = args[-1], outputs = ofile, log = res)
 }

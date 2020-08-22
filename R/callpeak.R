@@ -73,7 +73,10 @@
 #' @param verbose Set verbose level of runtime message. 0: only show
 #'     critical message, 1: show additional warning message, 2: show
 #'     process information, 3: show debug messages. DEFAULT:2
+#' @param log Whether to capture logs.
 #' @param ... More options for macs2.
+#' @importFrom reticulate py_capture_output
+#' @export
 #' @examples
 #' \dontrun{
 #' callpeak("inst/extdata/CTCF_SE_ChIP_chr22_50k.bed.gz",
@@ -89,7 +92,7 @@ callpeak <- function(tfile, cfile = NULL, gsize = "hs", tsize = NULL, format = "
                      slocal = 1000, llocal = 10000, broad = FALSE, broadcutoff = 0.1,
                      maxgap = NULL, minlen = NULL,
                      cutoff_analysis = FALSE, fecutoff = 0.1, call_summits = FALSE,
-                     buffer_size = 100000, verbose = 2L, ...){
+                     buffer_size = 100000, verbose = 2L, log = TRUE, ...){
     if(is.character(tfile)){
         tfile <- as.list(tfile)
     }
@@ -132,7 +135,14 @@ callpeak <- function(tfile, cfile = NULL, gsize = "hs", tsize = NULL, format = "
                                    buffer_size = buffer_size,
                                    verbose = verbose,
                                    ratio = NA, ...)
-
-    res <- .callpeak()$run(opts)
-    list.files(path = outdir, pattern = paste0(name, "_.*"), full.names = TRUE)
+    if(log){
+        .logging()$run()
+        res <- py_capture_output(.callpeak()$run(opts))
+        message(res)
+    }else{
+        res <- .callpeak()$run(opts)
+    }
+    outputs <- list.files(path = outdir, pattern = paste0(name, "_.*"), full.names = TRUE)
+    args <- as.list(match.call())
+    macsList(fun = args[[1]], arguments = args[-1], outputs = outputs, log = res)
 }
