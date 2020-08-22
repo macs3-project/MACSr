@@ -13,7 +13,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Depends: R (>= 4.0.0)
-Imports: reticulate
+Imports: reticulate, S4Vectors, methods
 Suggests: 
     testthat
 PythonRequirements: Python (>= 3.6.0), macs2

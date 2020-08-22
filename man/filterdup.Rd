@@ -16,7 +16,7 @@ filterdup(
   verbose = 2L,
   buffer_size = 10000,
   dryrun = FALSE,
-  intern = FALSE
+  log = TRUE
 )
 }
 \arguments{
@@ -72,9 +72,9 @@ BUFFER_SIZE * 8 Bytes. DEFAULT: 100000.}
 of writing output files, including maximum allowable
 duplicates, total number of reads before filtering, total
 number of reads after filtering, and redundant rate. Default:
-not set}
+not set.}
 
-\item{intern}{Whether to load output file.}
+\item{log}{Whether to capture logs.}
 }
 \description{
 filterdup
