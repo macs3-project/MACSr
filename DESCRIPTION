@@ -16,4 +16,4 @@ Depends: R (>= 4.0.0)
 Imports: reticulate, S4Vectors, methods
 Suggests: 
     testthat
-PythonRequirements: Python (>= 3.6.0), macs2
+PythonRequirements: Python (>= 3.6.0), macs2 (>= 2.2.7), numpy (>= 1.17)
