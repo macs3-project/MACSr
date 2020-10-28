@@ -19,14 +19,7 @@ addons:
 install:
   - pip3 install --upgrade pip
   - pip3 install --upgrade -r python_requirements.txt --no-cache-dir
-  - R -e "0" --args --bootstrap-packrat
-  - R -e "packrat::restore(restart = FALSE)"
   - R -e 'devtools::install_deps(dep = T)'
 script:
   - R CMD build .
   - R CMD check *tar.gz
-cache:
-  directories:
-    - $TRAVIS_BUILD_DIR/packrat/src
-    - $TRAVIS_BUILD_DIR/packrat/lib
-  packages: true
