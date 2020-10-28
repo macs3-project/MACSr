@@ -1,23 +1,24 @@
 language: r
 os: linux
 dist: bionic
-python: 3.7
 jobs:
   include:
     - name: amd64_r3.6
       arch: amd64
       r: 3.6
+      python: 3.7
     - name: amd64_r4.0
       arch: amd64
       r: 4.0
+      python: 3.7
 addons:
   apt:
     packages:
       - python3-setuptools
       - python3-pip
 install:
-  - pip install --upgrade pip
-  - pip install --upgrade -r python_requirements.txt --no-cache-dir
+  - pip3 install --upgrade pip
+  - pip3 install --upgrade -r python_requirements.txt --no-cache-dir
   - R -e "0" --args --bootstrap-packrat
   - R -e "packrat::restore(restart = FALSE)"
   - R -e 'devtools::install_deps(dep = T)'
