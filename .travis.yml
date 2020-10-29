@@ -1,15 +1,14 @@
 language: r
 os: linux
-dist: bionic
 jobs:
   include:
-    - name: amd64_r3.6
+    - name: amd64_r_release
       arch: amd64
-      r: 3.6
+      r: release
       python: 3.7
-    - name: amd64_r4.0
+    - name: amd64_r_devel
       arch: amd64
-      r: 4.0
+      r: devel
       python: 3.7
 addons:
   apt:
