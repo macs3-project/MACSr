@@ -3,8 +3,8 @@ cache: packages
 dist: bionic
 
 r:
-  - bioc-devel
-  - bioc-release
+  - devel
+  - release
 
 addons:
   apt:
