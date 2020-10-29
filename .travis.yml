@@ -16,8 +16,6 @@ addons:
 r_binary_packages:
   - testthat
   - reticulate
-  - S4Vectors
-  - methods
 
 script:
   - pip3 install --upgrade pip
