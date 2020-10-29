@@ -1,28 +1,28 @@
 language: r
-os: linux
+cache: packages
 dist: bionic
-jobs:
-  include:
-    - name: amd64_r_release
-      arch: amd64
-      r: release
-    - name: amd64_r_devel
-      arch: amd64
-      r: devel
+
+r:
+  - bioc-devel
+  - bioc-release
+
 addons:
   apt:
     packages:
       - python3.8
       - python3-setuptools
       - python3-pip
-r_packages:
+
+r_binary_packages:
   - testthat
   - reticulate
   - S4Vectors
   - methods
+
 install:
   - pip3 install --upgrade pip
   - pip3 install --upgrade -r python_requirements.txt --no-cache-dir
+  
 script:
   - R CMD build .
   - R CMD check *tar.gz
