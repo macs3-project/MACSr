@@ -1,7 +1,7 @@
-import MACS2
+import MACS3
 import argparse
-from MACS2 import filterdup_cmd
-from MACS2 import OptValidator
+from MACS3 import filterdup_cmd
+from MACS3 import OptValidator
 
 class Namespace:
     def __init__(self, **kwargs):

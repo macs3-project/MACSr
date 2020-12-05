@@ -18,11 +18,11 @@
 #'     keeps every tags.  If an integer is given, at most this number
 #'     of tags will be kept at the same location. Note, if you've used
 #'     samtools or picard to flag reads as 'PCR/Optical duplicate' in
-#'     bit 1024, MACS2 will still read them although the reads may be
-#'     decided by MACS2 as duplicate later. If you plan to rely on
+#'     bit 1024, MACS3 will still read them although the reads may be
+#'     decided by MACS3 as duplicate later. If you plan to rely on
 #'     samtools/picard/any other tool to filter duplicates, please
 #'     remove those duplicate reads and save a new alignment file then
-#'     ask MACS2 to keep all by '--keep-dup all'. The default is to
+#'     ask MACS3 to keep all by '--keep-dup all'. The default is to
 #'     keep one tag at the same location. Default: 1".
 #' @param outputfile The output file.
 #' @param outdir The output directory.

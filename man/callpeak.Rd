@@ -133,7 +133,7 @@ size.}
 \item{minlen}{Minimum length of a peak. The DEFAULT value is the predicted
 fragment size d.}
 
-\item{cutoff_analysis}{While set, MACS2 will analyze number or
+\item{cutoff_analysis}{While set, MACS3 will analyze number or
 total length of peaks that can be called by different p-value
 cutoff then output a summary table to help user decide a better
 cutoff.}
@@ -155,7 +155,7 @@ process information, 3: show debug messages. DEFAULT:2}
 
 \item{log}{Whether to capture logs.}
 
-\item{...}{More options for macs2.}
+\item{...}{More options for macs3.}
 }
 \description{
 callpeak

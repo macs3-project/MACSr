@@ -1,12 +1,6 @@
 # For help debugging build failures open an issue on the RStudio community with the 'github-actions' tag.
 # https://community.rstudio.com/new-topic?category=Package%20development&tags=github-actions
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+on: [push, pull_request]
 
 name: R-CMD-check
 
@@ -19,10 +13,12 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y python3-setuptools python3-pip
+          sudo apt-get install -y python3 python3-setuptools python3-pip
           pip3 install numpy
+          pip3 install cython
+          pip3 install cykhash
           pip3 install wheel
-          pip3 install macs2
+          pip3 install macs3
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "rcmdcheck", "BiocManager"))

@@ -58,7 +58,7 @@
 #'     size.
 #' @param minlen Minimum length of a peak. The DEFAULT value is the predicted
 #'     fragment size d.
-#' @param cutoff_analysis While set, MACS2 will analyze number or
+#' @param cutoff_analysis While set, MACS will analyze number or
 #'     total length of peaks that can be called by different p-value
 #'     cutoff then output a summary table to help user decide a better
 #'     cutoff.
@@ -74,7 +74,7 @@
 #'     critical message, 1: show additional warning message, 2: show
 #'     process information, 3: show debug messages. DEFAULT:2
 #' @param log Whether to capture logs.
-#' @param ... More options for macs2.
+#' @param ... More options for macs3.
 #' @importFrom reticulate py_capture_output
 #' @export
 #' @examples
