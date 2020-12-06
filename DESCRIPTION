@@ -15,5 +15,8 @@ RoxygenNote: 7.1.1
 Depends: R (>= 4.0.0)
 Imports: reticulate, S4Vectors, methods
 Suggests: 
-    testthat
+    testthat,
+    knitr,
+    rmarkdown
 PythonRequirements: Python (>= 3.6.0), macs3
+VignetteBuilder: knitr
