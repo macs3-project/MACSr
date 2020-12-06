@@ -1,0 +1,111 @@
+---
+title: "MACSr"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{MACSr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Introduction
+
+With the improvement of sequencing techniques, chromatin
+immunoprecipitation followed by high throughput sequencing (ChIP-Seq)
+is getting popular to study genome-wide protein-DNA interactions. To
+address the lack of powerful ChIP-Seq analysis method, we presented
+the Model-based Analysis of ChIP-Seq (MACS), for identifying
+transcript factor binding sites. MACS captures the influence of genome
+complexity to evaluate the significance of enriched ChIP regions and
+MACS improves the spatial resolution of binding sites through
+combining the information of both sequencing tag position and
+orientation. MACS can be easily used for ChIP-Seq data alone, or with
+a control sample with the increase of specificity. Moreover, as a
+general peak-caller, MACS can also be applied to any “DNA enrichment
+assays” if the question to be asked is simply: where we can find
+significant reads coverage than the random background.
+
+This package is a wrapper of the MACS toolkit based on `reticulate`.
+
+# Import the package
+
+The dependent python library `MACS3` can be installed from the
+build-in method.
+
+```{r, eval=FALSE}
+install_MACS()
+```
+
+The library `MACS3` is suggested to be install with `pip` or `conda`
+first. Then we can load the package.
+
+```{r setup}
+library(MACSr)
+```
+
+# Usage
+## Function `callpeak`
+Here is an example to call narrow and broad peaks on SE bed files.
+```{r}
+datdir <- system.file("extdata", package = "MACSr")
+CHIP <- file.path(datdir, "CTCF_SE_ChIP_chr22_50k.bed.gz")
+CTRL <- file.path(datdir, "CTCF_SE_CTRL_chr22_50k.bed.gz")
+cp1 <- callpeak(CHIP, CTRL, gsize = 5.2e7, store_bdg = TRUE,
+                name = "run_callpeak_narrow0", outdir = tempdir(),
+                cutoff_analysis = T)
+cp2 <- callpeak(CHIP, CTRL, gsize = 5.2e7, store_bdg = TRUE,
+                name = "run_callpeak_broad", outdir = tempdir(),
+                broad = TRUE)
+```
+
+Here are the outputs.
+```{r}
+cp1
+cp2
+```
+
+An example to call peaks on PE bam files.
+```{r}
+CHIPPE <- file.path(datdir, "CTCF_PE_ChIP_chr22_50k.bam")
+CTRLPE <- file.path(datdir, "CTCF_PE_CTRL_chr22_50k.bam")
+
+cp3 <- callpeak(CHIPPE, CTRLPE, gsize = 5.2e7, store_bdg = TRUE,
+                format = "BAMPE", name = "run_callpeak_bampe_narrow", outdir = tempdir(),
+                call_summits = TRUE)
+cp4 <- callpeak(CHIPPE, CTRLPE, gsize = 5.2e7, store_bdg = TRUE,
+                format = "BAMPE", name = "run_callpeak_bampe_broad", outdir = tempdir(),
+                broad = TRUE)
+```
+
+
+## The `macsList` class
+The `macsList` is designed to contain everything of an execution, including function,
+inputs, outputs and logs, for the purpose of reproducibility. 
+
+For example, we can the function and input arguments.
+```{r}
+cp1$fun
+cp1$arguments
+```
+
+The files of all the outputs are collected.
+```{r}
+cp1$outputs
+```
+
+The `log` is especially important for `MACS` to check. Detailed
+information was given in the log when running.
+```{r}
+cat(cp1$log)
+```
+
+# SessionInfo
+```{r}
+sessionInfo()
+```

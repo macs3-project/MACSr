@@ -1,0 +1,15 @@
+url: https://macs3-project.github.io/MACSr
+
+template:
+  params:
+    bootswatch: flatly
+    ganalytics: UA-93043521-1
+
+home:
+  title: "MACSr"
+  type: inverse
+
+navbar:
+  right:
+   - icon: fa-github
+     href: https://github.com/macs3-project/MACSr

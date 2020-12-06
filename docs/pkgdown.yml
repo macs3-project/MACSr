@@ -1,0 +1,10 @@
+pandoc: 2.10.1
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  MACSr: MACSr.html
+last_built: 2020-12-06T03:52Z
+urls:
+  reference: https://macs3-project.github.io/MACSr/reference
+  article: https://macs3-project.github.io/MACSr/articles
+

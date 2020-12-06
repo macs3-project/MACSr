@@ -1,6 +1,6 @@
 Package: MACSr
 Title: MACS: Model-based Analysis for ChIP-Seq
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     person(given = "Qiang",
            family = "Hu",
@@ -15,5 +15,8 @@ RoxygenNote: 7.1.1
 Depends: R (>= 4.0.0)
 Imports: reticulate, S4Vectors, methods
 Suggests: 
-    testthat
-PythonRequirements: Python (>= 3.6.0), macs2
+    testthat,
+    knitr,
+    rmarkdown
+PythonRequirements: Python (>= 3.6.0), macs3
+VignetteBuilder: knitr
