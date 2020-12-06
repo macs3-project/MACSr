@@ -42,7 +42,7 @@ def run():
     .filterdup <- NULL
     function() {
         if (is.null(.filterdup))
-            .filterdup <<- import("MACS3.filterdup_cmd")
+            .filterdup <<- import("MACS3.Commands.filterdup_cmd")
         .filterdup
     }
 })
@@ -51,7 +51,7 @@ def run():
     .predictd <- NULL
     function() {
         if (is.null(.predictd))
-            .predictd <<- import("MACS3.predictd_cmd")
+            .predictd <<- import("MACS3.Commands.predictd_cmd")
         .predictd
     }
 })
@@ -60,7 +60,7 @@ def run():
     .pileup <- NULL
     function() {
         if (is.null(.pileup))
-            .pileup <<- import("MACS3.pileup_cmd")
+            .pileup <<- import("MACS3.Commands.pileup_cmd")
         .pileup
     }
 })
@@ -69,7 +69,7 @@ def run():
     .callpeak <- NULL
     function() {
         if (is.null(.callpeak))
-            .callpeak <<- import("MACS3.callpeak_cmd")
+            .callpeak <<- import("MACS3.Commands.callpeak_cmd")
         .callpeak
     }
 })
