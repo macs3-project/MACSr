@@ -20,7 +20,7 @@ context("test predictd")
 flen <- predictd(ifile = CHIP,
                  d_min=10, gsize=5.2e+7, plot = NULL)
 test_that("test predictd", {
-    expect_equal(flen, 244)
+    expect_equal(flen, 239)
 })
 
 context("test callpeak")
