@@ -3,8 +3,8 @@ context("test filterdup")
 datdir <- system.file("extdata", package = "MACSr")
 CHIP <- file.path(datdir, "CTCF_SE_ChIP_chr22_50k.bed.gz")
 CTRL <- file.path(datdir, "CTCF_SE_CTRL_chr22_50k.bed.gz")
-CHIPPE <- file.path(datdir, "CTCF_PE_ChIP_chr22_50k.bam")
-CTRLPE <- file.path(datdir, "CTCF_PE_CTRL_chr22_50k.bam")
+## CHIPPE <- file.path(datdir, "CTCF_PE_ChIP_chr22_50k.bam")
+## CTRLPE <- file.path(datdir, "CTCF_PE_CTRL_chr22_50k.bam")
 CHIPBEDPE <- file.path(datdir, "CTCF_PE_ChIP_chr22_50k.bedpe.gz")
 CTRLBEDPE <- file.path(datdir, "CTCF_PE_CTRL_chr22_50k.bedpe.gz")
 
@@ -67,32 +67,32 @@ test_that("test callpeak broad", {
                      readLines(file.path(datdir, "run_callpeak_broad_peaks.broadPeak")))
 })
 
-cp8 <- callpeak(CHIPPE, CTRLPE, gsize = 5.2e7, store_bdg = TRUE,
-                format = "BAMPE", name = "run_callpeak_bampe_narrow", outdir = tempdir(),
-                call_summits = TRUE)
+## cp8 <- callpeak(CHIPPE, CTRLPE, gsize = 5.2e7, store_bdg = TRUE,
+##                 format = "BAMPE", name = "run_callpeak_bampe_narrow", outdir = tempdir(),
+##                 call_summits = TRUE)
 cp9 <- callpeak(CHIPBEDPE, CTRLBEDPE, gsize = 5.2e7, store_bdg = TRUE,
                 format = "BEDPE", name = "run_callpeak_bedpe_narrow", outdir = tempdir(),
                 call_summits = TRUE)
 cp10 <- callpeak(CHIPBEDPE, gsize = 5.2e7, store_bdg = TRUE,
                 format = "BEDPE", name = "run_callpeak_pe_narrow_onlychip", outdir = tempdir())
 test_that("test callpeak on PE narrow", {
-    expect_identical(readLines(grep("narrowPeak", cp8$outputs, value = TRUE)),
-                     readLines(file.path(datdir, "run_callpeak_bampe_narrow_peaks.narrowPeak")))
+    ## expect_identical(readLines(grep("narrowPeak", cp8$outputs, value = TRUE)),
+    ##                  readLines(file.path(datdir, "run_callpeak_bampe_narrow_peaks.narrowPeak")))
     expect_identical(readLines(grep("narrowPeak", cp9$outputs, value = TRUE)),
                      readLines(file.path(datdir, "run_callpeak_bedpe_narrow_peaks.narrowPeak")))
     expect_identical(readLines(grep("narrowPeak", cp10$outputs, value = TRUE)),
                      readLines(file.path(datdir, "run_callpeak_pe_narrow_onlychip_peaks.narrowPeak")))
 })
 
-cp11 <- callpeak(CHIPPE, CTRLPE, gsize = 5.2e7, store_bdg = TRUE,
-                format = "BAMPE", name = "run_callpeak_bampe_broad", outdir = tempdir(),
-                broad = TRUE)
+## cp11 <- callpeak(CHIPPE, CTRLPE, gsize = 5.2e7, store_bdg = TRUE,
+##                 format = "BAMPE", name = "run_callpeak_bampe_broad", outdir = tempdir(),
+##                 broad = TRUE)
 cp12 <- callpeak(CHIPBEDPE, CTRLBEDPE, gsize = 5.2e7, store_bdg = TRUE,
                 format = "BEDPE", name = "run_callpeak_bedpe_broad", outdir = tempdir(),
                 broad = TRUE)
 test_that("test callpeak on PE broad", {
-    expect_identical(readLines(grep("broadPeak", cp11$outputs, value = TRUE)),
-                     readLines(file.path(datdir, "run_callpeak_bampe_broad_peaks.broadPeak")))
+    ## expect_identical(readLines(grep("broadPeak", cp11$outputs, value = TRUE)),
+    ##                  readLines(file.path(datdir, "run_callpeak_bampe_broad_peaks.broadPeak")))
     expect_identical(readLines(grep("broadPeak", cp12$outputs, value = TRUE)),
                      readLines(file.path(datdir, "run_callpeak_bedpe_broad_peaks.broadPeak")))
 })

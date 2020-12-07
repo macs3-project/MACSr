@@ -90,19 +90,6 @@ cp1
 cp2
 ```
 
-An example to call peaks on PE bam files.
-```{r}
-CHIPPE <- file.path(datdir, "CTCF_PE_ChIP_chr22_50k.bam")
-CTRLPE <- file.path(datdir, "CTCF_PE_CTRL_chr22_50k.bam")
-
-cp3 <- callpeak(CHIPPE, CTRLPE, gsize = 5.2e7, store_bdg = TRUE,
-                format = "BAMPE", name = "run_callpeak_bampe_narrow", outdir = tempdir(),
-                call_summits = TRUE)
-cp4 <- callpeak(CHIPPE, CTRLPE, gsize = 5.2e7, store_bdg = TRUE,
-                format = "BAMPE", name = "run_callpeak_bampe_broad", outdir = tempdir(),
-                broad = TRUE)
-```
-
 ## The `macsList` class
 The `macsList` is designed to contain everything of an execution, including function,
 inputs, outputs and logs, for the purpose of reproducibility. 
