@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>predictd — predictd • MACSr</title>
+<title>pileup — pileup • MACSr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,11 @@
 
 
 
-<meta property="og:title" content="predictd — predictd" />
-<meta property="og:description" content="predictd" />
+<meta property="og:title" content="pileup — pileup" />
+<meta property="og:description" content="Pileup aligned reads with a given extension size (fragment size or
+d in MACS language). Note there will be no step for duplicate reads
+filtering or sequencing depth scaling, so you may need to do
+certain pre/post-processing." />
 
 
 
@@ -121,26 +124,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>predictd</h1>
+    <h1>pileup</h1>
     
-    <div class="hidden name"><code>predictd.Rd</code></div>
+    <div class="hidden name"><code>pileup.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>predictd</p>
+    <p>Pileup aligned reads with a given extension size (fragment size or
+d in MACS language). Note there will be no step for duplicate reads
+filtering or sequencing depth scaling, so you may need to do
+certain pre/post-processing.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>predictd</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>pileup</span><span class='op'>(</span>
   <span class='va'>ifile</span>,
-  gsize <span class='op'>=</span> <span class='st'>"hs"</span>,
-  format <span class='op'>=</span> <span class='st'>"AUTO"</span>,
-  plot <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"predictd_mode.pdf"</span><span class='op'>)</span>,
-  tsize <span class='op'>=</span> <span class='cn'>NULL</span>,
-  bw <span class='op'>=</span> <span class='fl'>300</span>,
-  d_min <span class='op'>=</span> <span class='fl'>20</span>,
-  mfold <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>50</span><span class='op'>)</span>,
-  buffer_size <span class='op'>=</span> <span class='fl'>1e+05</span>,
-  verbose <span class='op'>=</span> <span class='fl'>2L</span>
+  outputfile <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  outdir <span class='op'>=</span> <span class='st'>"."</span>,
+  format <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"AUTO"</span>, <span class='st'>"BAM"</span>, <span class='st'>"SAM"</span>, <span class='st'>"BED"</span>, <span class='st'>"ELAND"</span>, <span class='st'>"ELANDMULTI"</span>, <span class='st'>"ELANDEXPORT"</span>,
+    <span class='st'>"BOWTIE"</span>, <span class='st'>"BAMPE"</span>, <span class='st'>"BEDPE"</span><span class='op'>)</span>,
+  bothdirection <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  extsize <span class='op'>=</span> <span class='fl'>200L</span>,
+  buffer_size <span class='op'>=</span> <span class='fl'>100000L</span>,
+  verbose <span class='op'>=</span> <span class='fl'>2L</span>,
+  log <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -148,67 +154,83 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>ifile</th>
-      <td><p>Input file(s).</p></td>
+      <td><p>Alignment file. If multiple files are given as '-t A B
+C', then they will all be read and combined. Note that pair-end
+data is not supposed to work with this command. REQUIRED.</p></td>
     </tr>
     <tr>
-      <th>gsize</th>
-      <td><p>Effective genome size. It can be 1.0e+9 or 1000000000,
-or shortcuts:'hs' for human (2.7e9), 'mm' for mouse (1.87e9),
-'ce' for C. elegans (9e7) and 'dm' for fruitfly (1.2e8),
-Default:hs.</p></td>
+      <th>outputfile</th>
+      <td><p>Output bedGraph file name. If not specified, will
+write to standard output. REQUIRED.</p></td>
+    </tr>
+    <tr>
+      <th>outdir</th>
+      <td><p>The output directory.</p></td>
     </tr>
     <tr>
       <th>format</th>
-      <td><p>Input file format.</p></td>
+      <td><p>Format of tag file, \"AUTO\", \"BED\", \"ELAND\",
+\"ELANDMULTI\", \"ELANDEXPORT\", \"SAM\", \"BAM\", \"BOWTIE\",
+\"BAMPE\", or \"BEDPE\". The default AUTO option will let
+'%(prog)s' decide which format the file is. DEFAULT: \"AUTO\",
+MACS3 will pick a format from \"AUTO\", \"BED\", \"ELAND\",
+\"ELANDMULTI\", \"ELANDEXPORT\", \"SAM\", \"BAM\" and
+\"BOWTIE\". If the format is BAMPE or BEDPE, please specify it
+explicitly. Please note that when the format is BAMPE or BEDPE,
+the -B and --extsize options would be ignored.</p></td>
     </tr>
     <tr>
-      <th>plot</th>
-      <td><p>PDF path of peak model and correlation plots.</p></td>
+      <th>bothdirection</th>
+      <td><p>By default, any read will be extended towards
+downstream direction by extension size. So it's [0,size-1]
+(1-based index system) for plus strand read and [-size+1,0] for
+minus strand read where position 0 is 5' end of the aligned
+read. Default behavior can simulate MACS3 way of piling up ChIP
+sample reads where extension size is set as fragment size/d. If
+this option is set as on, aligned reads will be extended in
+both upstream and downstream directions by extension size. It
+means [-size,size] where 0 is the 5' end of a aligned read. It
+can partially simulate MACS3 way of piling up control
+reads. However MACS3 local bias is calculated by maximizing the
+expected pileup over a ChIP fragment size/d estimated from
+10kb, 1kb, d and whole genome background. This option will be
+ignored when the format is set as BAMPE or BEDPE. DEFAULT:
+False</p></td>
     </tr>
     <tr>
-      <th>tsize</th>
-      <td><p>Tag size. This will override the auto detected tag
-size.</p></td>
-    </tr>
-    <tr>
-      <th>bw</th>
-      <td><p>Band width for picking regions to compute fragment
-size. This value is only used while building the shifting
-model. DEFAULT: 300</p></td>
-    </tr>
-    <tr>
-      <th>d_min</th>
-      <td><p>Minimum fragment size in basepair. Any predicted
-fragment size less than this will be excluded. DEFAULT: 20</p></td>
-    </tr>
-    <tr>
-      <th>mfold</th>
-      <td><p>Select the regions within MFOLD range of
-high-confidence enrichment ratio against background to build
-model. Fold-enrichment in regions must be lower than upper
-limit, and higher than the lower limit. Use as
-"-m 10 30". DEFAULT:5 50</p></td>
+      <th>extsize</th>
+      <td><p>The extension size in bps. Each alignment read will
+become a EXTSIZE of fragment, then be piled up. Check
+description for -B for detail. It's twice the <code>shiftsize</code> in
+old MACSv1 language. This option will be ignored when the
+format is set as BAMPE or BEDPE. DEFAULT: 200</p></td>
     </tr>
     <tr>
       <th>buffer_size</th>
       <td><p>Buffer size for incrementally increasing
-internal array size to store reads alignment
-information. DEFAULT: 100000.</p></td>
+internal array size to store reads alignment information. In
+most cases, you don't have to change this parameter. However,
+if there are large number of chromosomes/contigs/scaffolds in
+your alignment, it's recommended to specify a smaller buffer
+size in order to decrease memory usage (but it will take longer
+time to read alignment files). Minimum memory requested for
+reading an alignment file is about # of CHROMOSOME *
+BUFFER_SIZE * 8 Bytes. DEFAULT: 100000</p></td>
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>Set verbose level of runtime message. 0: only show
-critical message, 1: show additional warning message, 2: show
-process information, 3: show debug messages. DEFAULT:2</p></td>
+      <td><p>Set verbose level. 0: only show critical message, 1:
+show additional warning message, 2: show process information,
+3: show debug messages. If you want to know where are the
+duplicate reads, use 3. DEFAULT:2</p></td>
+    </tr>
+    <tr>
+      <th>log</th>
+      <td><p>Whether to capture logs.</p></td>
     </tr>
     </table>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>predictd</span><span class='op'>(</span><span class='st'>"extdata/CTCF_SE_ChIP_chr22_50k.bed.gz"</span>, d_min <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MACSr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
       </span>
     </div>
 
@@ -106,6 +106,71 @@
 <div id="usage" class="section level1">
 <h1 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h1>
+<div id="macs3-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#macs3-functions" class="anchor"></a>MACS3 functions</h2>
+<p>There are 13 functions imported from MACS3. Details of each function can be checked from its manual.</p>
+<table class="table">
+<thead><tr class="header">
+<th>Functions</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>callpeak</code></td>
+<td>Main MACS3 Function to call peaks from alignment results.</td>
+</tr>
+<tr class="even">
+<td><code>bdgpeakcall</code></td>
+<td>Call peaks from bedGraph output.</td>
+</tr>
+<tr class="odd">
+<td><code>bdgbroadcall</code></td>
+<td>Call broad peaks from bedGraph output.</td>
+</tr>
+<tr class="even">
+<td><code>bdgcmp</code></td>
+<td>Comparing two signal tracks in bedGraph format.</td>
+</tr>
+<tr class="odd">
+<td><code>bdgopt</code></td>
+<td>Operate the score column of bedGraph file.</td>
+</tr>
+<tr class="even">
+<td><code>cmbreps</code></td>
+<td>Combine BEDGraphs of scores from replicates.</td>
+</tr>
+<tr class="odd">
+<td><code>bdgdiff</code></td>
+<td>Differential peak detection based on paired four bedGraph files.</td>
+</tr>
+<tr class="even">
+<td><code>filterdup</code></td>
+<td>Remove duplicate reads, then save in BED/BEDPE format.</td>
+</tr>
+<tr class="odd">
+<td><code>predictd</code></td>
+<td>Predict d or fragment size from alignment results.</td>
+</tr>
+<tr class="even">
+<td><code>pileup</code></td>
+<td>Pileup aligned reads (single-end) or fragments (paired-end)</td>
+</tr>
+<tr class="odd">
+<td><code>randsample</code></td>
+<td>Randomly choose a number/percentage of total reads.</td>
+</tr>
+<tr class="even">
+<td><code>refinepeak</code></td>
+<td>Take raw reads alignment, refine peak summits.</td>
+</tr>
+<tr class="odd">
+<td><code>callvar</code></td>
+<td>Call variants in given peak regions from the alignment BAM files.</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div id="function-callpeak" class="section level2">
 <h2 class="hasAnchor">
 <a href="#function-callpeak" class="anchor"></a>Function <code>callpeak</code>
@@ -118,13 +183,13 @@
 <span class="va">cp1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/callpeak.html">callpeak</a></span><span class="op">(</span><span class="va">CHIP</span>, <span class="va">CTRL</span>, gsize <span class="op">=</span> <span class="fl">5.2e7</span>, store_bdg <span class="op">=</span> <span class="cn">TRUE</span>,
                 name <span class="op">=</span> <span class="st">"run_callpeak_narrow0"</span>, outdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>,
                 cutoff_analysis <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: </span>
 <span class="co">#&gt; # Command line: </span>
 <span class="co">#&gt; # ARGUMENTS LIST:</span>
 <span class="co">#&gt; # name = run_callpeak_narrow0</span>
 <span class="co">#&gt; # format = AUTO</span>
-<span class="co">#&gt; # ChIP-seq file = ['/private/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T/Rtmp4CTOXY/temp_libpath177023d225f5/MACSr/extdata/CTCF_SE_ChIP_chr22_50k.bed.gz']</span>
-<span class="co">#&gt; # control file = ['/private/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T/Rtmp4CTOXY/temp_libpath177023d225f5/MACSr/extdata/CTCF_SE_CTRL_chr22_50k.bed.gz']</span>
+<span class="co">#&gt; # ChIP-seq file = ['/private/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T/RtmpXKNJeu/temp_libpath2b8a1a366359/MACSr/extdata/CTCF_SE_ChIP_chr22_50k.bed.gz']</span>
+<span class="co">#&gt; # control file = ['/private/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T/RtmpXKNJeu/temp_libpath2b8a1a366359/MACSr/extdata/CTCF_SE_CTRL_chr22_50k.bed.gz']</span>
 <span class="co">#&gt; # effective genome size = 5.20e+07</span>
 <span class="co">#&gt; # band width = 300</span>
 <span class="co">#&gt; # model fold = [5.0, 50.0]</span>
@@ -137,57 +202,57 @@
 <span class="co">#&gt; # Additional cutoff on fold-enrichment is: 0.10</span>
 <span class="co">#&gt; # Paired-End mode is off</span>
 <span class="co">#&gt;  </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1 read tag files... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1 read treatment tags... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: Detected format is: BED </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: * Input file is gzipped. </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1.2 read input tags... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: Detected format is: BED </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: * Input file is gzipped. </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1 tag size is determined as 101 bps </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1 tag size = 101.0 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1  total tags in treatment: 49622 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1 user defined the maximum tags... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1  tags after filtering in treatment: 48047 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1  Redundant rate of treatment: 0.03 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1  total tags in control: 50837 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1 user defined the maximum tags... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1  tags after filtering in control: 50783 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1  Redundant rate of control: 0.00 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1 finished! </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #2 Build Peak Model... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #2 looking for paired plus/minus strand peaks... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #2 Total number of paired peaks: 1036 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #2 Model building with cross-correlation: Done </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #2 finished! </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #2 predicted fragment length is 230 bps </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #2 alternative fragment length(s) may be 230,238 bps </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #2.2 Generate R script for model : /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_narrow0_model.r </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #3 Call peaks... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #3 Pre-compute pvalue-qvalue table... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #3 Cutoff vs peaks called will be analyzed! </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #3 Analysis of cutoff vs num of peaks or total length has been saved in b'/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_narrow0_cutoff_analysis.txt' </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #3 In the peak calling step, the following will be performed simultaneously: </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #3   Write bedGraph files for treatment pileup (after scaling if necessary)... run_callpeak_narrow0_treat_pileup.bdg </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #3   Write bedGraph files for control lambda (after scaling if necessary)... run_callpeak_narrow0_control_lambda.bdg </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #3   Pileup will be based on sequencing depth in treatment. </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #3 Call peaks for each chromosome... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #4 Write output xls file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_narrow0_peaks.xls </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #4 Write peak in narrowPeak format file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_narrow0_peaks.narrowPeak </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #4 Write summits bed file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_narrow0_summits.bed </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: Done!</span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1 read tag files... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1 read treatment tags... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: Detected format is: BED </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: * Input file is gzipped. </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1.2 read input tags... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: Detected format is: BED </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: * Input file is gzipped. </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1 tag size is determined as 101 bps </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1 tag size = 101.0 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1  total tags in treatment: 49622 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1 user defined the maximum tags... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1  tags after filtering in treatment: 48047 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1  Redundant rate of treatment: 0.03 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1  total tags in control: 50837 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1 user defined the maximum tags... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1  tags after filtering in control: 50783 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1  Redundant rate of control: 0.00 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1 finished! </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #2 Build Peak Model... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #2 looking for paired plus/minus strand peaks... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #2 Total number of paired peaks: 1036 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #2 Model building with cross-correlation: Done </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #2 finished! </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #2 predicted fragment length is 230 bps </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #2 alternative fragment length(s) may be 230,238 bps </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #2.2 Generate R script for model : /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_narrow0_model.r </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #3 Call peaks... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #3 Pre-compute pvalue-qvalue table... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #3 Cutoff vs peaks called will be analyzed! </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #3 Analysis of cutoff vs num of peaks or total length has been saved in b'/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_narrow0_cutoff_analysis.txt' </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #3 In the peak calling step, the following will be performed simultaneously: </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #3   Write bedGraph files for treatment pileup (after scaling if necessary)... run_callpeak_narrow0_treat_pileup.bdg </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #3   Write bedGraph files for control lambda (after scaling if necessary)... run_callpeak_narrow0_control_lambda.bdg </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #3   Pileup will be based on sequencing depth in treatment. </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #3 Call peaks for each chromosome... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #4 Write output xls file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_narrow0_peaks.xls </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #4 Write peak in narrowPeak format file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_narrow0_peaks.narrowPeak </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #4 Write summits bed file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_narrow0_summits.bed </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: Done!</span>
 <span class="va">cp2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/callpeak.html">callpeak</a></span><span class="op">(</span><span class="va">CHIP</span>, <span class="va">CTRL</span>, gsize <span class="op">=</span> <span class="fl">5.2e7</span>, store_bdg <span class="op">=</span> <span class="cn">TRUE</span>,
                 name <span class="op">=</span> <span class="st">"run_callpeak_broad"</span>, outdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>,
                 broad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: </span>
 <span class="co">#&gt; # Command line: </span>
 <span class="co">#&gt; # ARGUMENTS LIST:</span>
 <span class="co">#&gt; # name = run_callpeak_broad</span>
 <span class="co">#&gt; # format = AUTO</span>
-<span class="co">#&gt; # ChIP-seq file = ['/private/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T/Rtmp4CTOXY/temp_libpath177023d225f5/MACSr/extdata/CTCF_SE_ChIP_chr22_50k.bed.gz']</span>
-<span class="co">#&gt; # control file = ['/private/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T/Rtmp4CTOXY/temp_libpath177023d225f5/MACSr/extdata/CTCF_SE_CTRL_chr22_50k.bed.gz']</span>
+<span class="co">#&gt; # ChIP-seq file = ['/private/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T/RtmpXKNJeu/temp_libpath2b8a1a366359/MACSr/extdata/CTCF_SE_ChIP_chr22_50k.bed.gz']</span>
+<span class="co">#&gt; # control file = ['/private/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T/RtmpXKNJeu/temp_libpath2b8a1a366359/MACSr/extdata/CTCF_SE_CTRL_chr22_50k.bed.gz']</span>
 <span class="co">#&gt; # effective genome size = 5.20e+07</span>
 <span class="co">#&gt; # band width = 300</span>
 <span class="co">#&gt; # model fold = [5.0, 50.0]</span>
@@ -201,45 +266,45 @@
 <span class="co">#&gt; # Additional cutoff on fold-enrichment is: 0.10</span>
 <span class="co">#&gt; # Paired-End mode is off</span>
 <span class="co">#&gt;  </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #1 read tag files... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #1 read treatment tags... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: Detected format is: BED </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: * Input file is gzipped. </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #1.2 read input tags... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: Detected format is: BED </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: * Input file is gzipped. </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #1 tag size is determined as 101 bps </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #1 tag size = 101.0 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #1  total tags in treatment: 49622 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #1 user defined the maximum tags... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #1  tags after filtering in treatment: 48047 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #1  Redundant rate of treatment: 0.03 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #1  total tags in control: 50837 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #1 user defined the maximum tags... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #1  tags after filtering in control: 50783 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #1  Redundant rate of control: 0.00 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #1 finished! </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #2 Build Peak Model... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #2 looking for paired plus/minus strand peaks... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #2 Total number of paired peaks: 1036 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #2 Model building with cross-correlation: Done </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #2 finished! </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #2 predicted fragment length is 230 bps </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #2 alternative fragment length(s) may be 230,238 bps </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #2.2 Generate R script for model : /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_broad_model.r </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #3 Call peaks... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #3 Call broad peaks with given level1 -log10qvalue cutoff and level2: 1.301030, 1.000000... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #3 Pre-compute pvalue-qvalue table... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:04: #3 In the peak calling step, the following will be performed simultaneously: </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:04: #3   Write bedGraph files for treatment pileup (after scaling if necessary)... run_callpeak_broad_treat_pileup.bdg </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:04: #3   Write bedGraph files for control lambda (after scaling if necessary)... run_callpeak_broad_control_lambda.bdg </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:04: #3 Call peaks for each chromosome... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:04: #4 Write output xls file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_broad_peaks.xls </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:04: #4 Write broad peak in broadPeak format file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_broad_peaks.broadPeak </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:04: #4 Write broad peak in bed12/gappedPeak format file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_broad_peaks.gappedPeak </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:04: Done!</span></code></pre></div>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1 read tag files... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1 read treatment tags... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: Detected format is: BED </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: * Input file is gzipped. </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1.2 read input tags... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: Detected format is: BED </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: * Input file is gzipped. </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #1 tag size is determined as 101 bps </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #1 tag size = 101.0 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #1  total tags in treatment: 49622 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #1 user defined the maximum tags... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #1  tags after filtering in treatment: 48047 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #1  Redundant rate of treatment: 0.03 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #1  total tags in control: 50837 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #1 user defined the maximum tags... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #1  tags after filtering in control: 50783 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #1  Redundant rate of control: 0.00 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #1 finished! </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #2 Build Peak Model... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #2 looking for paired plus/minus strand peaks... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #2 Total number of paired peaks: 1036 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #2 Model building with cross-correlation: Done </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #2 finished! </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #2 predicted fragment length is 230 bps </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #2 alternative fragment length(s) may be 230,238 bps </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #2.2 Generate R script for model : /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_broad_model.r </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #3 Call peaks... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #3 Call broad peaks with given level1 -log10qvalue cutoff and level2: 1.301030, 1.000000... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #3 Pre-compute pvalue-qvalue table... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #3 In the peak calling step, the following will be performed simultaneously: </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #3   Write bedGraph files for treatment pileup (after scaling if necessary)... run_callpeak_broad_treat_pileup.bdg </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #3   Write bedGraph files for control lambda (after scaling if necessary)... run_callpeak_broad_control_lambda.bdg </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #3 Call peaks for each chromosome... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #4 Write output xls file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_broad_peaks.xls </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #4 Write broad peak in broadPeak format file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_broad_peaks.broadPeak </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #4 Write broad peak in bed12/gappedPeak format file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_broad_peaks.gappedPeak </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: Done!</span></code></pre></div>
 <p>Here are the outputs.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cp1</span>
@@ -256,13 +321,13 @@
 <span class="va">cp3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/callpeak.html">callpeak</a></span><span class="op">(</span><span class="va">CHIPPE</span>, <span class="va">CTRLPE</span>, gsize <span class="op">=</span> <span class="fl">5.2e7</span>, store_bdg <span class="op">=</span> <span class="cn">TRUE</span>,
                 format <span class="op">=</span> <span class="st">"BAMPE"</span>, name <span class="op">=</span> <span class="st">"run_callpeak_bampe_narrow"</span>, outdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>,
                 call_summits <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:04: </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: </span>
 <span class="co">#&gt; # Command line: </span>
 <span class="co">#&gt; # ARGUMENTS LIST:</span>
 <span class="co">#&gt; # name = run_callpeak_bampe_narrow</span>
 <span class="co">#&gt; # format = BAMPE</span>
-<span class="co">#&gt; # ChIP-seq file = ['/private/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T/Rtmp4CTOXY/temp_libpath177023d225f5/MACSr/extdata/CTCF_PE_ChIP_chr22_50k.bam']</span>
-<span class="co">#&gt; # control file = ['/private/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T/Rtmp4CTOXY/temp_libpath177023d225f5/MACSr/extdata/CTCF_PE_CTRL_chr22_50k.bam']</span>
+<span class="co">#&gt; # ChIP-seq file = ['/private/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T/RtmpXKNJeu/temp_libpath2b8a1a366359/MACSr/extdata/CTCF_PE_ChIP_chr22_50k.bam']</span>
+<span class="co">#&gt; # control file = ['/private/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T/RtmpXKNJeu/temp_libpath2b8a1a366359/MACSr/extdata/CTCF_PE_CTRL_chr22_50k.bam']</span>
 <span class="co">#&gt; # effective genome size = 5.20e+07</span>
 <span class="co">#&gt; # band width = 300</span>
 <span class="co">#&gt; # model fold = [5.0, 50.0]</span>
@@ -276,49 +341,49 @@
 <span class="co">#&gt; # Paired-End mode is on</span>
 <span class="co">#&gt; # Searching for subpeak summits is on</span>
 <span class="co">#&gt;  </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:04: #1 read fragment files... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:04: #1 read treatment fragments... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:04: 49622 fragments have been read. </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:04: #1.2 read input fragments... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: 50837 fragments have been read. </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #1 mean fragment size is determined as 253.5 bp from treatment </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #1 note: mean fragment size in control is 313.6 bp -- value ignored </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #1 fragment size = 253.5 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #1  total fragments in treatment: 49622 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #1 user defined the maximum fragments... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #1 filter out redundant fragments by allowing at most 1 identical fragment(s) </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #1  fragments after filtering in treatment: 49617 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #1  Redundant rate of treatment: 0.00 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #1  total fragments in control: 50837 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #1 user defined the maximum fragments... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #1 filter out redundant fragments by allowing at most 1 identical fragment(s) </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #1  fragments after filtering in control: 50816 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #1  Redundant rate of control: 0.00 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #1 finished! </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #2 Build Peak Model... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #2 Skipped... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #3 Call peaks... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #3 Going to call summits inside each peak ... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #3 Pre-compute pvalue-qvalue table... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #3 In the peak calling step, the following will be performed simultaneously: </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #3   Write bedGraph files for treatment pileup (after scaling if necessary)... run_callpeak_bampe_narrow_treat_pileup.bdg </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #3   Write bedGraph files for control lambda (after scaling if necessary)... run_callpeak_bampe_narrow_control_lambda.bdg </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #3   Pileup will be based on sequencing depth in treatment. </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:05: #3 Call peaks for each chromosome... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #4 Write output xls file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_bampe_narrow_peaks.xls </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #4 Write peak in narrowPeak format file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_bampe_narrow_peaks.narrowPeak </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #4 Write summits bed file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_bampe_narrow_summits.bed </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: Done!</span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #1 read fragment files... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:31: #1 read treatment fragments... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: 49622 fragments have been read. </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: #1.2 read input fragments... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: 50837 fragments have been read. </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: #1 mean fragment size is determined as 253.5 bp from treatment </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: #1 note: mean fragment size in control is 313.6 bp -- value ignored </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: #1 fragment size = 253.5 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: #1  total fragments in treatment: 49622 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: #1 user defined the maximum fragments... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: #1 filter out redundant fragments by allowing at most 1 identical fragment(s) </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: #1  fragments after filtering in treatment: 49617 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: #1  Redundant rate of treatment: 0.00 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: #1  total fragments in control: 50837 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: #1 user defined the maximum fragments... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: #1 filter out redundant fragments by allowing at most 1 identical fragment(s) </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: #1  fragments after filtering in control: 50816 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: #1  Redundant rate of control: 0.00 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: #1 finished! </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: #2 Build Peak Model... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: #2 Skipped... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: #3 Call peaks... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: #3 Going to call summits inside each peak ... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:32: #3 Pre-compute pvalue-qvalue table... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:33: #3 In the peak calling step, the following will be performed simultaneously: </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:33: #3   Write bedGraph files for treatment pileup (after scaling if necessary)... run_callpeak_bampe_narrow_treat_pileup.bdg </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:33: #3   Write bedGraph files for control lambda (after scaling if necessary)... run_callpeak_bampe_narrow_control_lambda.bdg </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:33: #3   Pileup will be based on sequencing depth in treatment. </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:33: #3 Call peaks for each chromosome... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #4 Write output xls file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_bampe_narrow_peaks.xls </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #4 Write peak in narrowPeak format file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_bampe_narrow_peaks.narrowPeak </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #4 Write summits bed file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_bampe_narrow_summits.bed </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: Done!</span>
 <span class="va">cp4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/callpeak.html">callpeak</a></span><span class="op">(</span><span class="va">CHIPPE</span>, <span class="va">CTRLPE</span>, gsize <span class="op">=</span> <span class="fl">5.2e7</span>, store_bdg <span class="op">=</span> <span class="cn">TRUE</span>,
                 format <span class="op">=</span> <span class="st">"BAMPE"</span>, name <span class="op">=</span> <span class="st">"run_callpeak_bampe_broad"</span>, outdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>,
                 broad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: </span>
 <span class="co">#&gt; # Command line: </span>
 <span class="co">#&gt; # ARGUMENTS LIST:</span>
 <span class="co">#&gt; # name = run_callpeak_bampe_broad</span>
 <span class="co">#&gt; # format = BAMPE</span>
-<span class="co">#&gt; # ChIP-seq file = ['/private/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T/Rtmp4CTOXY/temp_libpath177023d225f5/MACSr/extdata/CTCF_PE_ChIP_chr22_50k.bam']</span>
-<span class="co">#&gt; # control file = ['/private/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T/Rtmp4CTOXY/temp_libpath177023d225f5/MACSr/extdata/CTCF_PE_CTRL_chr22_50k.bam']</span>
+<span class="co">#&gt; # ChIP-seq file = ['/private/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T/RtmpXKNJeu/temp_libpath2b8a1a366359/MACSr/extdata/CTCF_PE_ChIP_chr22_50k.bam']</span>
+<span class="co">#&gt; # control file = ['/private/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T/RtmpXKNJeu/temp_libpath2b8a1a366359/MACSr/extdata/CTCF_PE_CTRL_chr22_50k.bam']</span>
 <span class="co">#&gt; # effective genome size = 5.20e+07</span>
 <span class="co">#&gt; # band width = 300</span>
 <span class="co">#&gt; # model fold = [5.0, 50.0]</span>
@@ -332,38 +397,38 @@
 <span class="co">#&gt; # Additional cutoff on fold-enrichment is: 0.10</span>
 <span class="co">#&gt; # Paired-End mode is on</span>
 <span class="co">#&gt;  </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #1 read fragment files... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #1 read treatment fragments... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: 49622 fragments have been read. </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #1.2 read input fragments... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: 50837 fragments have been read. </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #1 mean fragment size is determined as 253.5 bp from treatment </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #1 note: mean fragment size in control is 313.6 bp -- value ignored </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #1 fragment size = 253.5 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #1  total fragments in treatment: 49622 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #1 user defined the maximum fragments... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #1 filter out redundant fragments by allowing at most 1 identical fragment(s) </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #1  fragments after filtering in treatment: 49617 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #1  Redundant rate of treatment: 0.00 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #1  total fragments in control: 50837 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #1 user defined the maximum fragments... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #1 filter out redundant fragments by allowing at most 1 identical fragment(s) </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #1  fragments after filtering in control: 50816 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #1  Redundant rate of control: 0.00 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #1 finished! </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #2 Build Peak Model... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #2 Skipped... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #3 Call peaks... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #3 Call broad peaks with given level1 -log10qvalue cutoff and level2: 1.301030, 1.000000... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:06: #3 Pre-compute pvalue-qvalue table... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:07: #3 In the peak calling step, the following will be performed simultaneously: </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:07: #3   Write bedGraph files for treatment pileup (after scaling if necessary)... run_callpeak_bampe_broad_treat_pileup.bdg </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:07: #3   Write bedGraph files for control lambda (after scaling if necessary)... run_callpeak_bampe_broad_control_lambda.bdg </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:07: #3 Call peaks for each chromosome... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:07: #4 Write output xls file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_bampe_broad_peaks.xls </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:07: #4 Write broad peak in broadPeak format file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_bampe_broad_peaks.broadPeak </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:07: #4 Write broad peak in bed12/gappedPeak format file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_bampe_broad_peaks.gappedPeak </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:07: Done!</span></code></pre></div>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #1 read fragment files... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #1 read treatment fragments... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: 49622 fragments have been read. </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #1.2 read input fragments... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: 50837 fragments have been read. </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #1 mean fragment size is determined as 253.5 bp from treatment </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #1 note: mean fragment size in control is 313.6 bp -- value ignored </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #1 fragment size = 253.5 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #1  total fragments in treatment: 49622 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #1 user defined the maximum fragments... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #1 filter out redundant fragments by allowing at most 1 identical fragment(s) </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #1  fragments after filtering in treatment: 49617 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #1  Redundant rate of treatment: 0.00 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #1  total fragments in control: 50837 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #1 user defined the maximum fragments... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #1 filter out redundant fragments by allowing at most 1 identical fragment(s) </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #1  fragments after filtering in control: 50816 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #1  Redundant rate of control: 0.00 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #1 finished! </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #2 Build Peak Model... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #2 Skipped... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #3 Call peaks... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #3 Call broad peaks with given level1 -log10qvalue cutoff and level2: 1.301030, 1.000000... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:34: #3 Pre-compute pvalue-qvalue table... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:35: #3 In the peak calling step, the following will be performed simultaneously: </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:35: #3   Write bedGraph files for treatment pileup (after scaling if necessary)... run_callpeak_bampe_broad_treat_pileup.bdg </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:35: #3   Write bedGraph files for control lambda (after scaling if necessary)... run_callpeak_bampe_broad_control_lambda.bdg </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:35: #3 Call peaks for each chromosome... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:35: #4 Write output xls file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_bampe_broad_peaks.xls </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:35: #4 Write broad peak in broadPeak format file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_bampe_broad_peaks.broadPeak </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:35: #4 Write broad peak in bed12/gappedPeak format file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_bampe_broad_peaks.gappedPeak </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:35: Done!</span></code></pre></div>
 </div>
 <div id="the-macslist-class" class="section level2">
 <h2 class="hasAnchor">
@@ -397,23 +462,23 @@
 <p>The files of all the outputs are collected.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cp1</span><span class="op">$</span><span class="va">outputs</span>
-<span class="co">#&gt; [1] "/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_narrow0_control_lambda.bdg" </span>
-<span class="co">#&gt; [2] "/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_narrow0_cutoff_analysis.txt"</span>
-<span class="co">#&gt; [3] "/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_narrow0_model.r"            </span>
-<span class="co">#&gt; [4] "/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_narrow0_peaks.narrowPeak"   </span>
-<span class="co">#&gt; [5] "/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_narrow0_peaks.xls"          </span>
-<span class="co">#&gt; [6] "/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_narrow0_summits.bed"        </span>
-<span class="co">#&gt; [7] "/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_narrow0_treat_pileup.bdg"</span></code></pre></div>
+<span class="co">#&gt; [1] "/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_narrow0_control_lambda.bdg" </span>
+<span class="co">#&gt; [2] "/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_narrow0_cutoff_analysis.txt"</span>
+<span class="co">#&gt; [3] "/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_narrow0_model.r"            </span>
+<span class="co">#&gt; [4] "/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_narrow0_peaks.narrowPeak"   </span>
+<span class="co">#&gt; [5] "/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_narrow0_peaks.xls"          </span>
+<span class="co">#&gt; [6] "/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_narrow0_summits.bed"        </span>
+<span class="co">#&gt; [7] "/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_narrow0_treat_pileup.bdg"</span></code></pre></div>
 <p>The <code>log</code> is especially important for <code>MACS</code> to check. Detailed information was given in the log when running.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="va">cp1</span><span class="op">$</span><span class="va">log</span><span class="op">)</span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: </span>
 <span class="co">#&gt; # Command line: </span>
 <span class="co">#&gt; # ARGUMENTS LIST:</span>
 <span class="co">#&gt; # name = run_callpeak_narrow0</span>
 <span class="co">#&gt; # format = AUTO</span>
-<span class="co">#&gt; # ChIP-seq file = ['/private/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T/Rtmp4CTOXY/temp_libpath177023d225f5/MACSr/extdata/CTCF_SE_ChIP_chr22_50k.bed.gz']</span>
-<span class="co">#&gt; # control file = ['/private/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T/Rtmp4CTOXY/temp_libpath177023d225f5/MACSr/extdata/CTCF_SE_CTRL_chr22_50k.bed.gz']</span>
+<span class="co">#&gt; # ChIP-seq file = ['/private/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T/RtmpXKNJeu/temp_libpath2b8a1a366359/MACSr/extdata/CTCF_SE_ChIP_chr22_50k.bed.gz']</span>
+<span class="co">#&gt; # control file = ['/private/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T/RtmpXKNJeu/temp_libpath2b8a1a366359/MACSr/extdata/CTCF_SE_CTRL_chr22_50k.bed.gz']</span>
 <span class="co">#&gt; # effective genome size = 5.20e+07</span>
 <span class="co">#&gt; # band width = 300</span>
 <span class="co">#&gt; # model fold = [5.0, 50.0]</span>
@@ -426,48 +491,53 @@
 <span class="co">#&gt; # Additional cutoff on fold-enrichment is: 0.10</span>
 <span class="co">#&gt; # Paired-End mode is off</span>
 <span class="co">#&gt;  </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1 read tag files... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1 read treatment tags... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: Detected format is: BED </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: * Input file is gzipped. </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1.2 read input tags... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: Detected format is: BED </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: * Input file is gzipped. </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1 tag size is determined as 101 bps </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1 tag size = 101.0 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1  total tags in treatment: 49622 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1 user defined the maximum tags... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1  tags after filtering in treatment: 48047 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1  Redundant rate of treatment: 0.03 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1  total tags in control: 50837 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1 user defined the maximum tags... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1  tags after filtering in control: 50783 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1  Redundant rate of control: 0.00 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #1 finished! </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #2 Build Peak Model... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #2 looking for paired plus/minus strand peaks... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #2 Total number of paired peaks: 1036 </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #2 Model building with cross-correlation: Done </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #2 finished! </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #2 predicted fragment length is 230 bps </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #2 alternative fragment length(s) may be 230,238 bps </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #2.2 Generate R script for model : /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_narrow0_model.r </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #3 Call peaks... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #3 Pre-compute pvalue-qvalue table... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:02: #3 Cutoff vs peaks called will be analyzed! </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #3 Analysis of cutoff vs num of peaks or total length has been saved in b'/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_narrow0_cutoff_analysis.txt' </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #3 In the peak calling step, the following will be performed simultaneously: </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #3   Write bedGraph files for treatment pileup (after scaling if necessary)... run_callpeak_narrow0_treat_pileup.bdg </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #3   Write bedGraph files for control lambda (after scaling if necessary)... run_callpeak_narrow0_control_lambda.bdg </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #3   Pileup will be based on sequencing depth in treatment. </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #3 Call peaks for each chromosome... </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #4 Write output xls file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_narrow0_peaks.xls </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #4 Write peak in narrowPeak format file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_narrow0_peaks.narrowPeak </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: #4 Write summits bed file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpuhAVfH/run_callpeak_narrow0_summits.bed </span>
-<span class="co">#&gt; INFO  @ Sat, 05 Dec 2020 22:53:03: Done!</span></code></pre></div>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1 read tag files... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1 read treatment tags... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: Detected format is: BED </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: * Input file is gzipped. </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1.2 read input tags... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: Detected format is: BED </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: * Input file is gzipped. </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1 tag size is determined as 101 bps </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1 tag size = 101.0 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1  total tags in treatment: 49622 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1 user defined the maximum tags... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1  tags after filtering in treatment: 48047 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1  Redundant rate of treatment: 0.03 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1  total tags in control: 50837 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1 user defined the maximum tags... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1  tags after filtering in control: 50783 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1  Redundant rate of control: 0.00 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #1 finished! </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #2 Build Peak Model... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #2 looking for paired plus/minus strand peaks... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #2 Total number of paired peaks: 1036 </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #2 Model building with cross-correlation: Done </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #2 finished! </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #2 predicted fragment length is 230 bps </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #2 alternative fragment length(s) may be 230,238 bps </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #2.2 Generate R script for model : /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_narrow0_model.r </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #3 Call peaks... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #3 Pre-compute pvalue-qvalue table... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #3 Cutoff vs peaks called will be analyzed! </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #3 Analysis of cutoff vs num of peaks or total length has been saved in b'/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_narrow0_cutoff_analysis.txt' </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #3 In the peak calling step, the following will be performed simultaneously: </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #3   Write bedGraph files for treatment pileup (after scaling if necessary)... run_callpeak_narrow0_treat_pileup.bdg </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #3   Write bedGraph files for control lambda (after scaling if necessary)... run_callpeak_narrow0_control_lambda.bdg </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #3   Pileup will be based on sequencing depth in treatment. </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #3 Call peaks for each chromosome... </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #4 Write output xls file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_narrow0_peaks.xls </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #4 Write peak in narrowPeak format file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_narrow0_peaks.narrowPeak </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: #4 Write summits bed file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpzFD0DW/run_callpeak_narrow0_summits.bed </span>
+<span class="co">#&gt; INFO  @ Sun, 06 Dec 2020 22:38:30: Done!</span></code></pre></div>
 </div>
+</div>
+<div id="resources" class="section level1">
+<h1 class="hasAnchor">
+<a href="#resources" class="anchor"></a>Resources</h1>
+<p>More details about <code>MACS3</code> can be found: <a href="https://macs3-project.github.io/MACS/" class="uri">https://macs3-project.github.io/MACS/</a>.</p>
 </div>
 <div id="sessioninfo" class="section level1">
 <h1 class="hasAnchor">
@@ -488,7 +558,7 @@
 <span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; other attached packages:</span>
-<span class="co">#&gt; [1] MACSr_0.0.1</span>
+<span class="co">#&gt; [1] MACSr_0.0.2</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; loaded via a namespace (and not attached):</span>
 <span class="co">#&gt;  [1] Rcpp_1.0.5          knitr_1.30          magrittr_2.0.1     </span>

@@ -1,5 +1,6 @@
 #' callpeak
-#' 
+#'
+#' Main MACS3 Function to call peaks from alignment results.
 #' @param tfile ChIP-seq treatment files.
 #' @param cfile Control files.
 #' @param gsize Effective genome size. It can be 1.0e+9 or 1000000000,

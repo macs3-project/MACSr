@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>predictd — predictd • MACSr</title>
+<title>callvar — callvar • MACSr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="predictd — predictd" />
-<meta property="og:description" content="predictd" />
+<meta property="og:title" content="callvar — callvar" />
+<meta property="og:description" content="Call variants in given peak regions from the alignment BAM files." />
 
 
 
@@ -121,79 +121,138 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>predictd</h1>
+    <h1>callvar</h1>
     
-    <div class="hidden name"><code>predictd.Rd</code></div>
+    <div class="hidden name"><code>callvar.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>predictd</p>
+    <p>Call variants in given peak regions from the alignment BAM files.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>predictd</span><span class='op'>(</span>
-  <span class='va'>ifile</span>,
-  gsize <span class='op'>=</span> <span class='st'>"hs"</span>,
-  format <span class='op'>=</span> <span class='st'>"AUTO"</span>,
-  plot <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"predictd_mode.pdf"</span><span class='op'>)</span>,
-  tsize <span class='op'>=</span> <span class='cn'>NULL</span>,
-  bw <span class='op'>=</span> <span class='fl'>300</span>,
-  d_min <span class='op'>=</span> <span class='fl'>20</span>,
-  mfold <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>50</span><span class='op'>)</span>,
-  buffer_size <span class='op'>=</span> <span class='fl'>1e+05</span>,
-  verbose <span class='op'>=</span> <span class='fl'>2L</span>
+    <pre class="usage"><span class='fu'>callvar</span><span class='op'>(</span>
+  <span class='va'>peakbed</span>,
+  <span class='va'>tfile</span>,
+  <span class='va'>cfile</span>,
+  outdir <span class='op'>=</span> <span class='st'>"."</span>,
+  outputfile <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  GQCutoffHetero <span class='op'>=</span> <span class='fl'>0</span>,
+  GQCutoffHomo <span class='op'>=</span> <span class='fl'>0</span>,
+  Q <span class='op'>=</span> <span class='fl'>20</span>,
+  maxDuplicate <span class='op'>=</span> <span class='fl'>1L</span>,
+  fermi <span class='op'>=</span> <span class='st'>"auto"</span>,
+  fermiMinOverlap <span class='op'>=</span> <span class='fl'>30L</span>,
+  top2allelesMinRatio <span class='op'>=</span> <span class='fl'>0.8</span>,
+  altalleleMinCount <span class='op'>=</span> <span class='fl'>2L</span>,
+  maxAR <span class='op'>=</span> <span class='fl'>0.95</span>,
+  np <span class='op'>=</span> <span class='fl'>1L</span>,
+  verbose <span class='op'>=</span> <span class='va'>verbose</span>,
+  log <span class='op'>=</span> <span class='va'>log</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ifile</th>
-      <td><p>Input file(s).</p></td>
+      <th>peakbed</th>
+      <td><p>Peak regions in BED format, sorted by
+coordinates. REQUIRED.</p></td>
     </tr>
     <tr>
-      <th>gsize</th>
-      <td><p>Effective genome size. It can be 1.0e+9 or 1000000000,
-or shortcuts:'hs' for human (2.7e9), 'mm' for mouse (1.87e9),
-'ce' for C. elegans (9e7) and 'dm' for fruitfly (1.2e8),
-Default:hs.</p></td>
+      <th>tfile</th>
+      <td><p>ChIP-seq/ATAC-seq treatment file in BAM format,
+containing only records in peak regions, sorted by
+coordinates. Check instruction on how to make the file using
+samtools. REQUIRED.</p></td>
     </tr>
     <tr>
-      <th>format</th>
-      <td><p>Input file format.</p></td>
+      <th>cfile</th>
+      <td><p>Control file in BAM format, containing only records in
+peak regions, sorted by coordinates. Check instruction on how
+to make the file using samtools.</p></td>
     </tr>
     <tr>
-      <th>plot</th>
-      <td><p>PDF path of peak model and correlation plots.</p></td>
+      <th>outdir</th>
+      <td><p>The output directory.</p></td>
     </tr>
     <tr>
-      <th>tsize</th>
-      <td><p>Tag size. This will override the auto detected tag
-size.</p></td>
+      <th>outputfile</th>
+      <td><p>Output VCF file name.</p></td>
     </tr>
     <tr>
-      <th>bw</th>
-      <td><p>Band width for picking regions to compute fragment
-size. This value is only used while building the shifting
-model. DEFAULT: 300</p></td>
+      <th>GQCutoffHetero</th>
+      <td><p>Genotype Quality score
+(-10log10((L00+L11)/(L01+L00+L11))) cutoff for Heterozygous
+allele type. Default:0, or there is no cutoff on GQ.</p></td>
     </tr>
     <tr>
-      <th>d_min</th>
-      <td><p>Minimum fragment size in basepair. Any predicted
-fragment size less than this will be excluded. DEFAULT: 20</p></td>
+      <th>GQCutoffHomo</th>
+      <td><p>Genotype Quality score
+(-10log10((L00+L01)/(L01+L00+L11))) cutoff for Homozygous
+allele (not the same as reference) type. Default:0, or ther is
+no cutoff on GQ.</p></td>
     </tr>
     <tr>
-      <th>mfold</th>
-      <td><p>Select the regions within MFOLD range of
-high-confidence enrichment ratio against background to build
-model. Fold-enrichment in regions must be lower than upper
-limit, and higher than the lower limit. Use as
-"-m 10 30". DEFAULT:5 50</p></td>
+      <th>Q</th>
+      <td><p>Only consider bases with quality score greater than this
+value. Default: 20, which means Q20 or 0.01 error rate.</p></td>
     </tr>
     <tr>
-      <th>buffer_size</th>
-      <td><p>Buffer size for incrementally increasing
-internal array size to store reads alignment
-information. DEFAULT: 100000.</p></td>
+      <th>maxDuplicate</th>
+      <td><p>Maximum duplicated reads allowed per mapping
+position, mapping strand and the same CIGAR code. Default:
+1. When sequencing depth is high, to set a higher value might
+help evaluate the correct allele ratio.</p></td>
+    </tr>
+    <tr>
+      <th>fermi</th>
+      <td><p>Option to control when to apply local assembly through
+Fermi. By default (set as 'auto'), while SAPPER detects any
+INDEL variant in a peak region, it will utilize Fermi to
+recover the actual DNA sequences to refine the read
+alignments. If set as 'on', Fermi will be always invoked. It
+can increase specificity however sensivity and speed will be
+significantly lower. If set as 'off', Fermi won't be invoked at
+all. If so, speed and sensitivity can be higher but specificity
+will be significantly lower. Default: auto</p></td>
+    </tr>
+    <tr>
+      <th>fermiMinOverlap</th>
+      <td><p>The minimal overlap for fermi to initially
+assemble two reads. Must be between 1 and read length. A longer
+fermiMinOverlap is needed while read length is small (e.g. 30
+for 36bp read, but 33 for 100bp read may work). Default:30</p></td>
+    </tr>
+    <tr>
+      <th>top2allelesMinRatio</th>
+      <td><p>The reads for the top 2 most frequent
+alleles (e.g. a ref allele and an alternative allele) at a loci
+shouldn't be too few comparing to total reads mapped. The
+minimum ratio is set by this optoin. Must be a float between
+0.5 and 1.  Default:0.8 which means at least 80%% of reads
+contain the top 2 alleles.</p></td>
+    </tr>
+    <tr>
+      <th>altalleleMinCount</th>
+      <td><p>The count of the alternative
+(non-reference) allele at a loci shouldn't be too few. By
+default, we require at least two reads support the alternative
+allele. Default:2</p></td>
+    </tr>
+    <tr>
+      <th>maxAR</th>
+      <td><p>The maximum Allele-Ratio allowed while calculating
+likelihood for allele-specific binding. If we allow higher
+maxAR, we may mistakenly assign some homozygous loci as
+heterozygous. Default:0.95</p></td>
+    </tr>
+    <tr>
+      <th>np</th>
+      <td><p>CPU used for mutliple processing. Please note that,
+assigning more CPUs does not guarantee the process being
+faster. Creating too many parrallel processes need memory
+operations and may negate benefit from multi
+processing. Default: 1</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -201,14 +260,13 @@ information. DEFAULT: 100000.</p></td>
 critical message, 1: show additional warning message, 2: show
 process information, 3: show debug messages. DEFAULT:2</p></td>
     </tr>
+    <tr>
+      <th>log</th>
+      <td><p>Whether to capture logs.</p></td>
+    </tr>
     </table>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>predictd</span><span class='op'>(</span><span class='st'>"extdata/CTCF_SE_ChIP_chr22_50k.bed.gz"</span>, d_min <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

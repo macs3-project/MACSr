@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>predictd — predictd • MACSr</title>
+<title>bdgbroadcall — bdgbroadcall • MACSr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,10 @@
 
 
 
-<meta property="og:title" content="predictd — predictd" />
-<meta property="og:description" content="predictd" />
+<meta property="og:title" content="bdgbroadcall — bdgbroadcall" />
+<meta property="og:description" content="Call broad peaks from bedGraph output. Note: All regions on the
+same chromosome in the bedGraph file should be continuous so only
+bedGraph files from MACS3 are accpetable." />
 
 
 
@@ -121,26 +123,28 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>predictd</h1>
+    <h1>bdgbroadcall</h1>
     
-    <div class="hidden name"><code>predictd.Rd</code></div>
+    <div class="hidden name"><code>bdgbroadcall.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>predictd</p>
+    <p>Call broad peaks from bedGraph output. Note: All regions on the
+same chromosome in the bedGraph file should be continuous so only
+bedGraph files from MACS3 are accpetable.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>predictd</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>bdgbroadcall</span><span class='op'>(</span>
   <span class='va'>ifile</span>,
-  gsize <span class='op'>=</span> <span class='st'>"hs"</span>,
-  format <span class='op'>=</span> <span class='st'>"AUTO"</span>,
-  plot <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='st'>"predictd_mode.pdf"</span><span class='op'>)</span>,
-  tsize <span class='op'>=</span> <span class='cn'>NULL</span>,
-  bw <span class='op'>=</span> <span class='fl'>300</span>,
-  d_min <span class='op'>=</span> <span class='fl'>20</span>,
-  mfold <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>50</span><span class='op'>)</span>,
-  buffer_size <span class='op'>=</span> <span class='fl'>1e+05</span>,
-  verbose <span class='op'>=</span> <span class='fl'>2L</span>
+  cutoffpeak <span class='op'>=</span> <span class='fl'>2</span>,
+  cutofflink <span class='op'>=</span> <span class='fl'>1</span>,
+  minlen <span class='op'>=</span> <span class='fl'>200L</span>,
+  lvl1maxgap <span class='op'>=</span> <span class='fl'>30L</span>,
+  lvl2maxgap <span class='op'>=</span> <span class='fl'>800L</span>,
+  trackline <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  outdir <span class='op'>=</span> <span class='st'>"."</span>,
+  outputfile <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='op'>)</span>,
+  log <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -148,65 +152,59 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>ifile</th>
-      <td><p>Input file(s).</p></td>
+      <td><p>MACS score in bedGraph. REQUIRED.</p></td>
     </tr>
     <tr>
-      <th>gsize</th>
-      <td><p>Effective genome size. It can be 1.0e+9 or 1000000000,
-or shortcuts:'hs' for human (2.7e9), 'mm' for mouse (1.87e9),
-'ce' for C. elegans (9e7) and 'dm' for fruitfly (1.2e8),
-Default:hs.</p></td>
+      <th>cutoffpeak</th>
+      <td><p>Cutoff for peaks depending on which method you
+used for score track. If the file contains qvalue scores from
+MACS3, score 2 means qvalue 0.01. DEFAULT: 2</p></td>
     </tr>
     <tr>
-      <th>format</th>
-      <td><p>Input file format.</p></td>
+      <th>cutofflink</th>
+      <td><p>Cutoff for linking regions/low abundance regions
+depending on which method you used for score track. If the file
+contains qvalue scores from MACS3, score 1 means qvalue 0.1,
+and score 0.3 means qvalue 0.5. DEFAULT: 1", default = 1</p></td>
     </tr>
     <tr>
-      <th>plot</th>
-      <td><p>PDF path of peak model and correlation plots.</p></td>
+      <th>minlen</th>
+      <td><p>minimum length of peak, better to set it as d value. DEFAULT: 200",
+default = 200</p></td>
     </tr>
     <tr>
-      <th>tsize</th>
-      <td><p>Tag size. This will override the auto detected tag
-size.</p></td>
+      <th>lvl1maxgap</th>
+      <td><p>maximum gap between significant peaks, better to
+set it as tag size. DEFAULT: 30</p></td>
     </tr>
     <tr>
-      <th>bw</th>
-      <td><p>Band width for picking regions to compute fragment
-size. This value is only used while building the shifting
-model. DEFAULT: 300</p></td>
+      <th>lvl2maxgap</th>
+      <td><p>maximum linking between significant peaks, better
+to set it as 4 times of d value. DEFAULT: 800</p></td>
     </tr>
     <tr>
-      <th>d_min</th>
-      <td><p>Minimum fragment size in basepair. Any predicted
-fragment size less than this will be excluded. DEFAULT: 20</p></td>
+      <th>trackline</th>
+      <td><p>Tells MACS not to include trackline with bedGraph
+files. The trackline is required by UCSC.</p></td>
     </tr>
     <tr>
-      <th>mfold</th>
-      <td><p>Select the regions within MFOLD range of
-high-confidence enrichment ratio against background to build
-model. Fold-enrichment in regions must be lower than upper
-limit, and higher than the lower limit. Use as
-"-m 10 30". DEFAULT:5 50</p></td>
+      <th>outdir</th>
+      <td><p>The output directory.</p></td>
     </tr>
     <tr>
-      <th>buffer_size</th>
-      <td><p>Buffer size for incrementally increasing
-internal array size to store reads alignment
-information. DEFAULT: 100000.</p></td>
+      <th>outputfile</th>
+      <td><p>The output file.</p></td>
     </tr>
     <tr>
-      <th>verbose</th>
-      <td><p>Set verbose level of runtime message. 0: only show
-critical message, 1: show additional warning message, 2: show
-process information, 3: show debug messages. DEFAULT:2</p></td>
+      <th>log</th>
+      <td><p>Whether to capture logs.</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'>predictd</span><span class='op'>(</span><span class='st'>"extdata/CTCF_SE_ChIP_chr22_50k.bed.gz"</span>, d_min <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
+<span class='fu'>bdgbroadcall</span><span class='op'>(</span><span class='st'>"run_bdgcmp_FE.bdg"</span>, cutoffpeak <span class='op'>=</span> <span class='fl'>2</span>, cutofflink <span class='op'>=</span> <span class='fl'>1.5</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>

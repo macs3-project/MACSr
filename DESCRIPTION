@@ -1,12 +1,14 @@
 Package: MACSr
 Title: MACS: Model-based Analysis for ChIP-Seq
-Version: 0.0.1
+Version: 0.99.2
 Authors@R: 
     person(given = "Qiang",
            family = "Hu",
            role = c("aut", "cre"),
            email = "Qiang.Hu@roswellpark.org")
-Description: A package to invoke MACS in R.
+Description: The Model-based Analysis of ChIP-Seq (MACS) is a widely
+	     used toolkit for identifying transcript factor binding sites.
+	     This package is an R wrapper of the lastest MACS3.
 License: file LICENSE
 Encoding: UTF-8
 LazyData: true
