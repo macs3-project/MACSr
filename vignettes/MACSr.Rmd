@@ -50,6 +50,26 @@ library(MACSr)
 ```
 
 # Usage
+## MACS3 functions
+There are 13 functions imported from MACS3. Details of each function
+can be checked from its manual.
+	
+| Functions      | Description                                                       |
+|----------------|-------------------------------------------------------------------|
+| `callpeak`     | Main MACS3 Function to call peaks from alignment results.         |
+| `bdgpeakcall`  | Call peaks from bedGraph output.                                  |
+| `bdgbroadcall` | Call broad peaks from bedGraph output.                            |
+| `bdgcmp`       | Comparing two signal tracks in bedGraph format.                   |
+| `bdgopt`       | Operate the score column of bedGraph file.                        |
+| `cmbreps`      | Combine BEDGraphs of scores from replicates.                      |
+| `bdgdiff`      | Differential peak detection based on paired four bedGraph files.  |
+| `filterdup`    | Remove duplicate reads, then save in BED/BEDPE format.            |
+| `predictd`     | Predict d or fragment size from alignment results.                |
+| `pileup`       | Pileup aligned reads (single-end) or fragments (paired-end)       |
+| `randsample`   | Randomly choose a number/percentage of total reads.               |
+| `refinepeak`   | Take raw reads alignment, refine peak summits.                    |
+| `callvar`      | Call variants in given peak regions from the alignment BAM files. |
+
 ## Function `callpeak`
 Here is an example to call narrow and broad peaks on SE bed files.
 ```{r}
@@ -83,7 +103,6 @@ cp4 <- callpeak(CHIPPE, CTRLPE, gsize = 5.2e7, store_bdg = TRUE,
                 broad = TRUE)
 ```
 
-
 ## The `macsList` class
 The `macsList` is designed to contain everything of an execution, including function,
 inputs, outputs and logs, for the purpose of reproducibility. 
@@ -104,6 +123,10 @@ information was given in the log when running.
 ```{r}
 cat(cp1$log)
 ```
+
+# Resources
+More details about `MACS3` can be found: <https://macs3-project.github.io/MACS/>.
+
 
 # SessionInfo
 ```{r}

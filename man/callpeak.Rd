@@ -158,7 +158,7 @@ process information, 3: show debug messages. DEFAULT:2}
 \item{...}{More options for macs2.}
 }
 \description{
-callpeak
+Main MACS3 Function to call peaks from alignment results.
 }
 \examples{
 \dontrun{

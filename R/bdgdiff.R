@@ -43,9 +43,6 @@
 #'     both conditions. Note: mutually exclusive with --o-prefix.
 #' @param outdir The output directory.
 #' @param log Whether to capture logs.
-#' @examples
-#' \dontrun{
-#' }
 bdgdiff <- function(t1bdg, t2bdg, c1bdg, c2bdg,
                     cutoff = 3, minlen = 200L, maxgap = 100L,
                     depth1 = 1, depth2 = 1,
@@ -53,7 +50,6 @@ bdgdiff <- function(t1bdg, t2bdg, c1bdg, c2bdg,
                     oprefix = character(),
                     outputfile = list(),
                     log = TRUE){
-    method <- lapply(method, function(x)match.arg(x, method))
     opts <- .namespace()$Namespace(t1bdg = t1bdg,
                                    t2bdg = t2bdg,
                                    c1bdg = c1bdg,

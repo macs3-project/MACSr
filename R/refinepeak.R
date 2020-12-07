@@ -36,9 +36,6 @@
 #'     write to standard output. REQUIRED.
 #' @param outdir The output directory.
 #' @param log Whether to capture logs.
-#' @examples
-#' \dontrun{
-#' }
 refinepeak <- function(bedfile, ifile,
                        format = c("AUTO","BAM","SAM","BED","ELAND",
                                   "ELANDMULTI","ELANDEXPORT","BOWTIE"),

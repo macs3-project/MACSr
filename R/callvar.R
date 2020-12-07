@@ -59,13 +59,10 @@
 #' @param verbose Set verbose level of runtime message. 0: only show
 #'     critical message, 1: show additional warning message, 2: show
 #'     process information, 3: show debug messages. DEFAULT:2
-#' @param ofile Output VCF file name.
+#' @param outputfile Output VCF file name.
 #' @param outdir The output directory.
 #' @param log Whether to capture logs.
-#' @examples
-#' \dontrun{
-#' }
-callvar <- function(peak, tfile, cfile,
+callvar <- function(peakbed, tfile, cfile,
                     outdir = ".", outputfile = character(),
                     GQCutoffHetero = 0,
                     GQCutoffHomo = 0,
@@ -79,7 +76,7 @@ callvar <- function(peak, tfile, cfile,
                     np = 1L,
                     verbose = verbose,
                     log = log){
-    opts <- .namespace()$Namespace(peak = peak,
+    opts <- .namespace()$Namespace(peakbed = peakbed,
                                    tfile = tfile,
                                    cfile = cfile,
                                    GQCutoffHetero = GQCutoffHetero,

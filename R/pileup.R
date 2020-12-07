@@ -18,14 +18,14 @@
 #'     explicitly. Please note that when the format is BAMPE or BEDPE,
 #'     the -B and --extsize options would be ignored.
 #' @param bothdirection By default, any read will be extended towards
-#'     downstream direction by extension size. So it's [0,size-1]
-#'     (1-based index system) for plus strand read and [-size+1,0] for
+#'     downstream direction by extension size. So it's \[0,size-1\]
+#'     (1-based index system) for plus strand read and \[-size+1,0\] for
 #'     minus strand read where position 0 is 5' end of the aligned
 #'     read. Default behavior can simulate MACS3 way of piling up ChIP
 #'     sample reads where extension size is set as fragment size/d. If
 #'     this option is set as on, aligned reads will be extended in
 #'     both upstream and downstream directions by extension size. It
-#'     means [-size,size] where 0 is the 5' end of a aligned read. It
+#'     means \[-size,size\] where 0 is the 5' end of a aligned read. It
 #'     can partially simulate MACS3 way of piling up control
 #'     reads. However MACS3 local bias is calculated by maximizing the
 #'     expected pileup over a ChIP fragment size/d estimated from
@@ -54,9 +54,6 @@
 #'     write to standard output. REQUIRED.
 #' @param outdir The output directory.
 #' @param log Whether to capture logs.
-#' @examples
-#' \dontrun{
-#' }
 pileup <- function(ifile, outputfile = character(), outdir = ".",
                    format = c("AUTO","BAM","SAM","BED","ELAND","ELANDMULTI",
                        "ELANDEXPORT","BOWTIE","BAMPE","BEDPE"),

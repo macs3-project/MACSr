@@ -40,9 +40,6 @@
 #'     must be the same as for -m.
 #' @param outdir The output directory.
 #' @param log Whether to capture logs.
-#' @examples
-#' \dontrun{
-#' }
 bdgcmp <- function(tfile, cfile, sfactor = 1.0, pseudocount = 0.0,
                    method = c("ppois", "qpois", "subtract", "logFE", "FE", "logLR", "slogLR", "max"),
                    oprefix = character(), outputfile = list(),

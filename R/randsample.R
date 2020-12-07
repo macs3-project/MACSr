@@ -41,9 +41,6 @@
 #'     write to standard output. REQUIRED.
 #' @param outdir The output directory.
 #' @param log Whether to capture logs.
-#' @examples
-#' \dontrun{
-#' }
 randsample <- function(ifile, outdir = ".", outputfile = character(),
                        percentage = numeric(), number = numeric(),
                        seed = -1L, tsize = NULL,
