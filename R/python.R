@@ -74,3 +74,85 @@ def run():
     }
 })
 
+.bdgpeakcall <- local({
+    .bdgpeakcall <- NULL
+    function() {
+        if (is.null(.bdgpeakcall))
+            .bdgpeakcall <<- import("MACS3.Commands.bdgpeakcall_cmd")
+        .bdgpeakcall
+    }
+})
+
+.bdgbroadcall <- local({
+    .bdgbroadcall <- NULL
+    function() {
+        if (is.null(.bdgbroadcall))
+            .bdgbroadcall <<- import("MACS3.Commands.bdgbroadcall_cmd")
+        .bdgbroadcall
+    }
+})
+
+.bdgcmp <- local({
+    .bdgcmp <- NULL
+    function() {
+        if (is.null(.bdgcmp))
+            .bdgcmp <<- import("MACS3.Commands.bdgcmp_cmd")
+        .bdgcmp
+    }
+})
+
+.bdgopt <- local({
+    .bdgopt <- NULL
+    function() {
+        if (is.null(.bdgopt))
+            .bdgopt <<- import("MACS3.Commands.bdgopt_cmd")
+        .bdgopt
+    }
+})
+
+.cmbreps <- local({
+    .cmbreps <- NULL
+    function() {
+        if (is.null(.cmbreps))
+            .cmbreps <<- import("MACS3.Commands.cmbreps_cmd")
+        .cmbreps
+    }
+})
+
+.bdgdiff <- local({
+    .bdgdiff <- NULL
+    function() {
+        if (is.null(.bdgdiff))
+            .bdgdiff <<- import("MACS3.Commands.bdgdiff_cmd")
+        .bdgdiff
+    }
+})
+
+.randsample <- local({
+    .randsample <- NULL
+    function() {
+        if (is.null(.randsample))
+            .randsample <<- import("MACS3.Commands.randsample_cmd")
+        .randsample
+    }
+})
+
+.refinepeak <- local({
+    .refinepeak <- NULL
+    function() {
+        if (is.null(.refinepeak))
+            .refinepeak <<- import("MACS3.Commands.refinepeak_cmd")
+        .refinepeak
+    }
+})
+
+.callvar <- local({
+    .callvar <- NULL
+    function() {
+        if (is.null(.callvar))
+            .callvar <<- import("MACS3.Commands.callvar_cmd")
+        .callvar
+    }
+})
+
+
