@@ -1,6 +1,9 @@
 ---
 title: "MACSr"
-output: rmarkdown::html_vignette
+output:
+  BiocStyle::html_document:
+    toc: true
+    toc_float: true
 vignette: >
   %\VignetteIndexEntry{MACSr}
   %\VignetteEngine{knitr::rmarkdown}
