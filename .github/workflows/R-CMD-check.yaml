@@ -10,8 +10,8 @@ jobs:
     container: bioconductor/bioconductor_docker:devel
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: r-lib/actions/setup-r@master
+      - uses: actions/checkout@v1
+      ##- uses: r-lib/actions/setup-r@master
       - name: Install system dependencies
         run: |
           # pip3 install macs3
