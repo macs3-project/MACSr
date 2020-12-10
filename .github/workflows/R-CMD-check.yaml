@@ -6,15 +6,8 @@ name: R-CMD-check
 
 jobs:
   R-CMD-check:
-    runs-on: ${{ matrix.config.os }}
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
-
-    strategy:
-      fail-fast: false
-      matrix:
-        config:
-          - {os: ubuntu-latest, r: 'devel'}
-          - {os: macOS-latest, r: 'devel'}
+    runs-on: ubuntu-latest
+    container: bioconductor/bioconductor_docker:devel
 
     steps:
       - uses: actions/checkout@v2
@@ -29,8 +22,7 @@ jobs:
           # pip3 install macs3
       - name: Install dependencies
         run: |
-          install.packages(c("remotes", "rcmdcheck", "BiocManager"))
-          BiocManager::install("S4Vectors")
+          install.packages(c("remotes", "rcmdcheck"))
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
       - name: Check
