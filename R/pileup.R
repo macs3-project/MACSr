@@ -64,23 +64,31 @@ pileup <- function(ifile, outputfile = character(), outdir = ".",
     if(is.character(ifile)){
         ifile <- as.list(ifile)
     }
-    opts <- .namespace()$Namespace(ifile = ifile,
-                                   format = format,
-                                   bothdirection = bothdirection,
-                                   extsize = extsize,
-                                   buffer_size = buffer_size,
-                                   verbose = verbose,
-                                   outputfile = outputfile,
-                                   outdir = outdir)
+
+    cl <- basiliskStart(env_macs)
+    on.exit(basiliskStop(cl))
+    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+        opts <- .namespace()$Namespace(ifile = ifile,
+                                       format = format,
+                                       bothdirection = bothdirection,
+                                       extsize = extsize,
+                                       buffer_size = buffer_size,
+                                       verbose = verbose,
+                                       outputfile = outputfile,
+                                       outdir = outdir)
+        .pileup <- reticulate::import("MACS3.Commands.pileup_cmd")
+        if(log){
+            .logging()$run()
+            reticulate::py_capture_output(.pileup$run(opts))
+        }else{
+            .pileup$run(opts)
+        }
+    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
     if(log){
-        .logging()$run()
-        res <- py_capture_output(.pileup()$run(opts))
         message(res)
-    }else{
-        res <- .pileup()$run(opts)
     }
 
     ofile <- file.path(outdir, outputfile)
     args <- as.list(match.call())
-    macsList(fun = args[[1]], arguments = args[-1], outputs = ofile, log = res)
+    macsList(arguments = args, outputs = ofile, log = res)
 }

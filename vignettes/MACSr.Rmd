@@ -99,7 +99,6 @@ inputs, outputs and logs, for the purpose of reproducibility.
 
 For example, we can the function and input arguments.
 ```{r}
-cp1$fun
 cp1$arguments
 ```
 

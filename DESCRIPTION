@@ -15,7 +15,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Depends: R (>= 4.0.0)
-Imports: reticulate, S4Vectors, methods
+Imports: reticulate, S4Vectors, methods, basilisk
 Suggests: 
     testthat,
     knitr,

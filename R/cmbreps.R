@@ -33,20 +33,27 @@ cmbreps <- function(ifiles = list(), weights = 1.0,
                     outputfile = character(),
                     outdir = ".", log = TRUE){
     method <- match.arg(method)
-    opts <- .namespace()$Namespace(ifile = ifiles,
-                                   weights = weights,
-                                   method = method,
-                                   ofile = outputfile,
-                                   outdir = outdir)
+    cl <- basiliskStart(env_macs)
+    on.exit(basiliskStop(cl))
+    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+        opts <- .namespace()$Namespace(ifile = ifiles,
+                                       weights = weights,
+                                       method = method,
+                                       ofile = outputfile,
+                                       outdir = outdir)
+        .cmbreps <- reticulate::import("MACS3.Commands.cmbreps_cmd")
+        if(log){
+            .logging()$run()
+            reticulate::py_capture_output(.cmbreps$run(opts))
+        }else{
+            .cmbreps$run(opts)
+        }
+    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
     if(log){
-        .logging()$run()
-        res <- py_capture_output(.cmbreps()$run(opts))
         message(res)
-    }else{
-        res <- .cmbreps()$run(opts)
     }
 
     ofile <- file.path(outdir, outputfile)
     args <- as.list(match.call())
-    macsList(fun = args[[1]], arguments = args[-1], outputs = ofile, log = res)
+    macsList(arguments = args, outputs = ofile, log = res)
 }

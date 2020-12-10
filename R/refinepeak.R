@@ -46,24 +46,31 @@ refinepeak <- function(bedfile, ifile,
     if(is.character(ifile)){
         ifile <- as.list(ifile)
     }
-    opts <- .namespace()$Namespace(bedfile = bedfile,
-                                   ifile = ifile,
-                                   format = format,
-                                   cutoff = cutoff,
-                                   windowsize = windowsize,
-                                   buffer_size = buffer_size,
-                                   verbose = verbose,
-                                   ofile = outputfile,
-                                   outdir = outdir)
+    cl <- basiliskStart(env_macs)
+    on.exit(basiliskStop(cl))
+    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+        opts <- .namespace()$Namespace(bedfile = bedfile,
+                                       ifile = ifile,
+                                       format = format,
+                                       cutoff = cutoff,
+                                       windowsize = windowsize,
+                                       buffer_size = buffer_size,
+                                       verbose = verbose,
+                                       ofile = outputfile,
+                                       outdir = outdir)
+        .refinepeak <- reticulate::import("MACS3.Commands.refinepeak_cmd")
+        if(log){
+            .logging()$run()
+            reticulate::py_capture_output(.refinepeak$run(opts))
+        }else{
+            .refinepeak$run(opts)
+        }
+    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
     if(log){
-        .logging()$run()
-        res <- py_capture_output(.refinepeak()$run(opts))
         message(res)
-    }else{
-        res <- .refinepeak()$run(opts)
     }
 
     ofile <- file.path(outdir, outputfile)
     args <- as.list(match.call())
-    macsList(fun = args[[1]], arguments = args[-1], outputs = ofile, log = res)
+    macsList(arguments = args, outputs = ofile, log = res)
 }

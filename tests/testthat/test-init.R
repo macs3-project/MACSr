@@ -1,12 +1,13 @@
 context("test filterdup")
 
 datdir <- system.file("extdata", package = "MACSr")
+
 CHIP <- file.path(datdir, "CTCF_SE_ChIP_chr22_50k.bed.gz")
 CTRL <- file.path(datdir, "CTCF_SE_CTRL_chr22_50k.bed.gz")
-## CHIPPE <- file.path(datdir, "CTCF_PE_ChIP_chr22_50k.bam")
-## CTRLPE <- file.path(datdir, "CTCF_PE_CTRL_chr22_50k.bam")
 CHIPBEDPE <- file.path(datdir, "CTCF_PE_ChIP_chr22_50k.bedpe.gz")
 CTRLBEDPE <- file.path(datdir, "CTCF_PE_CTRL_chr22_50k.bedpe.gz")
+## CHIPPE <- file.path(datdir, "CTCF_PE_ChIP_chr22_50k.bam")
+## CTRLPE <- file.path(datdir, "CTCF_PE_CTRL_chr22_50k.bam")
 
 fd <- filterdup(ifile = CHIP,
                 gsize = 5.2e+7, outputfile = "test.bed", outdir = tempdir())
@@ -27,7 +28,7 @@ context("test callpeak")
 
 cp1 <- callpeak(CHIP, CTRL, gsize = 5.2e7, store_bdg = TRUE,
                 name = "run_callpeak_narrow0", outdir = tempdir(),
-                cutoff_analysis = T)
+                cutoff_analysis = T, log = FALSE)
 cp2 <- callpeak(CHIP, CTRL, gsize = 5.2e7, store_bdg = TRUE,
                 name = "run_callpeak_narrow1", outdir = tempdir(),
                 dmin = 15, call_summits = TRUE)

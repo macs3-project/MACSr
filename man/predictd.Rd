@@ -14,7 +14,8 @@ predictd(
   d_min = 20,
   mfold = c(5, 50),
   buffer_size = 1e+05,
-  verbose = 2L
+  verbose = 2L,
+  log = TRUE
 )
 }
 \arguments{
@@ -52,6 +53,8 @@ information. DEFAULT: 100000.}
 \item{verbose}{Set verbose level of runtime message. 0: only show
 critical message, 1: show additional warning message, 2: show
 process information, 3: show debug messages. DEFAULT:2}
+
+\item{log}{Whether to capture log.}
 }
 \description{
 predictd

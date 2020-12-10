@@ -50,24 +50,31 @@ bdgdiff <- function(t1bdg, t2bdg, c1bdg, c2bdg,
                     oprefix = character(),
                     outputfile = list(),
                     log = TRUE){
-    opts <- .namespace()$Namespace(t1bdg = t1bdg,
-                                   t2bdg = t2bdg,
-                                   c1bdg = c1bdg,
-                                   c2bdg = c2bdg,
-                                   cutoff = cutoff,
-                                   minlen = minlen,
-                                   maxgap = maxgap,
-                                   depth1 = depth1,
-                                   depth2 = depth2,
-                                   oprefix = oprefix,
-                                   ofile = outputfile,
-                                   outdir = outdir)
+    cl <- basiliskStart(env_macs)
+    on.exit(basiliskStop(cl))
+    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+        opts <- .namespace()$Namespace(t1bdg = t1bdg,
+                                       t2bdg = t2bdg,
+                                       c1bdg = c1bdg,
+                                       c2bdg = c2bdg,
+                                       cutoff = cutoff,
+                                       minlen = minlen,
+                                       maxgap = maxgap,
+                                       depth1 = depth1,
+                                       depth2 = depth2,
+                                       oprefix = oprefix,
+                                       ofile = outputfile,
+                                       outdir = outdir)
+        .bdgdiff <- reticulate::import("MACS3.Commands.bdgdiff_cmd")
+        if(log){
+            .logging()$run()
+            reticulate::py_capture_output(.bdgdiff$run(opts))
+        }else{
+            .bdgdiff$run(opts)
+        }
+    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
     if(log){
-        .logging()$run()
-        res <- py_capture_output(.bdgdiff()$run(opts))
         message(res)
-    }else{
-        res <- .bdgdiff()$run(opts)
     }
 
     if(length(oprefix) > 0){
@@ -77,5 +84,5 @@ bdgdiff <- function(t1bdg, t2bdg, c1bdg, c2bdg,
     }
 
     args <- as.list(match.call())
-    macsList(fun = args[[1]], arguments = args[-1], outputs = ofile, log = res)
+    macsList(arguments = args, outputs = ofile, log = res)
 }

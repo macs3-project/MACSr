@@ -32,24 +32,30 @@ bdgbroadcall <- function(ifile, cutoffpeak = 2, cutofflink = 1,
                          lvl2maxgap = 800L, trackline = TRUE,
                          outdir = ".", outputfile = character(),
                          log = TRUE){
-    opts <- .namespace()$Namespace(ifile = ifile,
-                                   cutoffpeak = cutoffpeak,
-                                   cutofflink = cutofflink,
-                                   minlen = minlen,
-                                   lvl1maxgap = lvl1maxgap,
-                                   lvl2maxgap = lvl2maxgap,
-                                   trackline = trackline,
-                                   outdir = outdir,
-                                   ofile = outputfile)
+    cl <- basiliskStart(env_macs)
+    on.exit(basiliskStop(cl))
+    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+        opts <- .namespace()$Namespace(ifile = ifile,
+                                       cutoffpeak = cutoffpeak,
+                                       cutofflink = cutofflink,
+                                       minlen = minlen,
+                                       lvl1maxgap = lvl1maxgap,
+                                       lvl2maxgap = lvl2maxgap,
+                                       trackline = trackline,
+                                       outdir = outdir,
+                                       ofile = outputfile)
+        .bdgbroadcall <- reticulate::import("MACS3.Commands.bdgbroadcall_cmd")
+        if(log){
+            .logging()$run()
+            reticulate::py_capture_output(.bdgbroadcall$run(opts))
+        }else{
+            .bdgbroadcall$run(opts)
+        }
+    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
     if(log){
-        .logging()$run()
-        res <- py_capture_output(.bdgbroadcall()$run(opts))
         message(res)
-    }else{
-        res <- .bdgbroadcall()$run(opts)
     }
-
     ofile <- file.path(outdir, outputfile)
     args <- as.list(match.call())
-    macsList(fun = args[[1]], arguments = args[-1], outputs = ofile, log = res)
+    macsList(arguments = args, outputs = ofile, log = res)
 }

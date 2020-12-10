@@ -41,21 +41,28 @@ bdgopt <- function(ifile,
                    outputfile = character(),
                    outdir = ".", log = TRUE){
     method <- match.arg(method)
-    opts <- .namespace()$Namespace(ifile = ifile,
-                                   method = method,
-                                   extraparam = list(extraparam),
-                                   ofile = outputfile,
-                                   outdir = outdir)
+    cl <- basiliskStart(env_macs)
+    on.exit(basiliskStop(cl))
+    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+        opts <- .namespace()$Namespace(ifile = ifile,
+                                       method = method,
+                                       extraparam = list(extraparam),
+                                       ofile = outputfile,
+                                       outdir = outdir)
+        .bdgopt <- reticulate::import("MACS3.Commands.bdgopt_cmd")
+        if(log){
+            .logging()$run()
+            reticulate::py_capture_output(.bdgopt$run(opts))
+        }else{
+            .bdgopt$run(opts)
+        }
+    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
     if(log){
-        .logging()$run()
-        res <- py_capture_output(.bdgopt()$run(opts))
         message(res)
-    }else{
-        res <- .bdgopt()$run(opts)
     }
 
     ofile <- file.path(outdir, outputfile)
     args <- as.list(match.call())
-    macsList(fun = args[[1]], arguments = args[-1], outputs = ofile, log = res)
+    macsList(arguments = args, outputs = ofile, log = res)
 }
 
