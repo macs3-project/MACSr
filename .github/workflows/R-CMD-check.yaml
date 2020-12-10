@@ -17,7 +17,7 @@ jobs:
           # pip3 install macs3
       - name: Install dependencies
         run: |
-          install.packages(c("remotes", "rcmdcheck"))
+          BiocManager::install(c("remotes", "rcmdcheck", "basilisk"))
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
       - name: Check
