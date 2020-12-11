@@ -24,4 +24,3 @@ Suggests:
 PythonRequirements: Python (>= 3.6.0), macs3
 VignetteBuilder: knitr
 biocViews: Software, ChIPSeq, ATACSeq, ImmunoOncology
-StagedInstall: no
