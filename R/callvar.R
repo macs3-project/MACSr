@@ -76,31 +76,38 @@ callvar <- function(peakbed, tfile, cfile,
                     np = 1L,
                     verbose = verbose,
                     log = log){
-    opts <- .namespace()$Namespace(peakbed = peakbed,
-                                   tfile = tfile,
-                                   cfile = cfile,
-                                   GQCutoffHetero = GQCutoffHetero,
-                                   GQCutoffHomo = GQCutoffHomo,
-                                   Q = Q,
-                                   maxDuplicate = maxDuplicate,
-                                   fermi = fermi,
-                                   fermiMinOverlap = fermiMinOverlap,
-                                   top2allelesMinRatio = top2allelesMinRatio,
-                                   altalleleMinCount = altalleleMinCount,
-                                   maxAR = maxAR,
-                                   np = np,
-                                   verbose = verbose,
-                                   ofile = outputfile,
-                                   outdir = outdir)
+    cl <- basiliskStart(env_macs)
+    on.exit(basiliskStop(cl))
+    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+        opts <- .namespace()$Namespace(peakbed = peakbed,
+                                       tfile = file.path(tfile),
+                                       cfile = file.path(cfile),
+                                       GQCutoffHetero = GQCutoffHetero,
+                                       GQCutoffHomo = GQCutoffHomo,
+                                       Q = Q,
+                                       maxDuplicate = maxDuplicate,
+                                       fermi = fermi,
+                                       fermiMinOverlap = fermiMinOverlap,
+                                       top2allelesMinRatio = top2allelesMinRatio,
+                                       altalleleMinCount = altalleleMinCount,
+                                       maxAR = maxAR,
+                                       np = np,
+                                       verbose = verbose,
+                                       ofile = outputfile,
+                                       outdir = outdir)
+        .callvar <- reticulate::import("MACS3.Commands.callvar_cmd")
+        if(log){
+            .logging()$run()
+            reticulate::py_capture_output(.callvar$run(opts))
+        }else{
+            .callvar$run(opts)
+        }
+    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
     if(log){
-        .logging()$run()
-        res <- py_capture_output(.callvar()$run(opts))
         message(res)
-    }else{
-        res <- .callvar()$run(opts)
     }
 
     ofile <- file.path(outdir, outputfile)
     args <- as.list(match.call())
-    macsList(fun = args[[1]], arguments = args[-1], outputs = ofile, log = res)
+    macsList(arguments = args, outputs = ofile, log = res)
 }

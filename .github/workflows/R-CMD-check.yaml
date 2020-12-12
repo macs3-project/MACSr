@@ -7,21 +7,20 @@ name: R-CMD-check
 jobs:
   R-CMD-check:
     runs-on: ubuntu-latest
+    container: bioconductor/bioconductor_docker:devel
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: r-lib/actions/setup-r@master
+      - uses: actions/checkout@v1
+      ##- uses: r-lib/actions/setup-r@master
       - name: Install system dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y python3-setuptools python3-pip
-          pip3 install numpy
-          pip3 install wheel
-          pip3 install cython
-          pip3 install macs3
+          wget --quiet https://repo.anaconda.com/miniconda/Miniconda2-4.5.11-Linux-x86_64.sh -O ~/miniconda.sh && \
+          /bin/bash ~/miniconda.sh -b -p /opt/conda && \
+          rm ~/miniconda.sh && \
+          ln -s /opt/conda/bin/conda /usr/local/bin/
       - name: Install dependencies
         run: |
-          install.packages(c("remotes", "rcmdcheck", "BiocManager"))
-          BiocManager::install("S4Vectors")
+          BiocManager::install(c("remotes", "rcmdcheck", "basilisk"))
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
       - name: Check

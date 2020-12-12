@@ -84,7 +84,6 @@
 #'         "inst/extdata/CTCF_SE_CTRL_chr22_50k.bed.gz",
 #'         gsize = 5.2e7, cutoff_analysis = T)
 #' }
-
 callpeak <- function(tfile, cfile = NULL, gsize = "hs", tsize = NULL, format = "AUTO", keepduplicates = "1",
                      outdir = ".", name = "NA", store_bdg = FALSE, do_SPMR = FALSE, trackline = FALSE,
                      nomodel = FALSE, shift = 0, extsize = 200, bw = 300, d_min = 20,
@@ -95,55 +94,65 @@ callpeak <- function(tfile, cfile = NULL, gsize = "hs", tsize = NULL, format = "
                      cutoff_analysis = FALSE, fecutoff = 0.1, call_summits = FALSE,
                      buffer_size = 100000, verbose = 2L, log = TRUE, ...){
     if(is.character(tfile)){
-        tfile <- as.list(tfile)
+        tfile <- as.list(file.path(tfile))
     }
     if(is.character(cfile)){
-        cfile <- as.list(cfile)
+        cfile <- as.list(file.path(cfile))
     }
-    opts <- .namespace()$Namespace(tfile = tfile,
-                                   cfile = cfile,
-                                   gsize = gsize,
-                                   tsize = tsize,
-                                   format = format,
-                                   keepduplicates = keepduplicates,
-                                   outdir = outdir,
-                                   name = name,
-                                   store_bdg = store_bdg,
-                                   do_SPMR = do_SPMR,
-                                   trackline = trackline,
-                                   nomodel = nomodel,
-                                   shift = shift,
-                                   extsize = extsize,
-                                   bw = bw,
-                                   d_min = d_min,
-                                   mfold = mfold,
-                                   onauto = onauto,
-                                   qvalue = qvalue,
-                                   pvalue = pvalue,
-                                   tempdir = tempdir,
-                                   nolambda = nolambda,
-                                   scaleto = scaleto,
-                                   downsample = downsample,
-                                   smalllocal = slocal,
-                                   largelocal = llocal,
-                                   broad = broad,
-                                   broadcutoff = broadcutoff,
-                                   maxgap = maxgap,
-                                   minlen = minlen,
-                                   cutoff_analysis = cutoff_analysis,
-                                   fecutoff = fecutoff,
-                                   call_summits = call_summits,
-                                   buffer_size = buffer_size,
-                                   verbose = verbose,
-                                   ratio = NA, ...)
+
+    cl <- basiliskStart(env_macs)
+    on.exit(basiliskStop(cl))
+    res <- basiliskRun(cl, function(.logging, .namespace, outdir,
+                                    ...){
+        opts <- .namespace()$Namespace(tfile = tfile,
+                                       cfile = cfile,
+                                       gsize = gsize,
+                                       tsize = tsize,
+                                       format = format,
+                                       keepduplicates = keepduplicates,
+                                       outdir = outdir,
+                                       name = name,
+                                       store_bdg = store_bdg,
+                                       do_SPMR = do_SPMR,
+                                       trackline = trackline,
+                                       nomodel = nomodel,
+                                       shift = shift,
+                                       extsize = extsize,
+                                       bw = bw,
+                                       d_min = d_min,
+                                       mfold = mfold,
+                                       onauto = onauto,
+                                       qvalue = qvalue,
+                                       pvalue = pvalue,
+                                       tempdir = tempdir,
+                                       nolambda = nolambda,
+                                       scaleto = scaleto,
+                                       downsample = downsample,
+                                       smalllocal = slocal,
+                                       largelocal = llocal,
+                                       broad = broad,
+                                       broadcutoff = broadcutoff,
+                                       maxgap = maxgap,
+                                       minlen = minlen,
+                                       cutoff_analysis = cutoff_analysis,
+                                       fecutoff = fecutoff,
+                                       call_summits = call_summits,
+                                       buffer_size = buffer_size,
+                                       verbose = verbose,
+                                       ratio = NA)
+
+        .callpeak <- reticulate::import("MACS3.Commands.callpeak_cmd")
+        if(log){
+            .logging()$run()
+            reticulate::py_capture_output(.callpeak$run(opts))
+        }else{
+            .callpeak$run(opts)
+        }
+    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
     if(log){
-        .logging()$run()
-        res <- py_capture_output(.callpeak()$run(opts))
         message(res)
-    }else{
-        res <- .callpeak()$run(opts)
     }
     outputs <- list.files(path = outdir, pattern = paste0(name, "_.*"), full.names = TRUE)
     args <- as.list(match.call())
-    macsList(fun = args[[1]], arguments = args[-1], outputs = outputs, log = res)
+    macsList(arguments = args, outputs = outputs, log = res)
 }

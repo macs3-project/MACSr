@@ -49,27 +49,35 @@ randsample <- function(ifile, outdir = ".", outputfile = character(),
                        buffer_size = 100000L, verbose = 2L, log =TRUE){
     format <- match.arg(format)
     if(is.character(ifile)){
-        ifile <- as.list(ifile)
+        ifile <- as.list(file.path(ifile))
     }
-    opts <- .namespace()$Namespace(ifile = ifile,
-                                   percentage = percentage,
-                                   number = number,
-                                   seed = seed,
-                                   tsize = tsize,
-                                   format = format,
-                                   buffer_size = buffer_size,
-                                   verbose = verbose,
-                                   outputfile = outputfile,
-                                   outdir = outdir)
+
+    cl <- basiliskStart(env_macs)
+    on.exit(basiliskStop(cl))
+    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+        opts <- .namespace()$Namespace(ifile = ifile,
+                                       percentage = percentage,
+                                       number = number,
+                                       seed = seed,
+                                       tsize = tsize,
+                                       format = format,
+                                       buffer_size = buffer_size,
+                                       verbose = verbose,
+                                       outputfile = outputfile,
+                                       outdir = outdir)
+        .randsample <- reticulate::import("MACS3.Commands.randsample_cmd")
+        if(log){
+            .logging()$run()
+            reticulate::py_capture_output(.randsample$run(opts))
+        }else{
+            .randsample$run(opts)
+        }
+    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
     if(log){
-        .logging()$run()
-        res <- py_capture_output(.randsample()$run(opts))
         message(res)
-    }else{
-        res <- .randsample()$run(opts)
     }
 
     ofile <- file.path(outdir, outputfile)
     args <- as.list(match.call())
-    macsList(fun = args[[1]], arguments = args[-1], outputs = ofile, log = res)
+    macsList(arguments = args, outputs = ofile, log = res)
 }

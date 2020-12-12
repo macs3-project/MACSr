@@ -25,6 +25,7 @@
 #' @param verbose Set verbose level of runtime message. 0: only show
 #'     critical message, 1: show additional warning message, 2: show
 #'     process information, 3: show debug messages. DEFAULT:2
+#' @param log Whether to capture log.
 #' @examples
 #' \dontrun{
 #' predictd("extdata/CTCF_SE_ChIP_chr22_50k.bed.gz", d_min = 10)
@@ -33,24 +34,37 @@
 predictd <- function(ifile, gsize = "hs", format = "AUTO",
                      plot = file.path(tempdir(), "predictd_mode.pdf"),
                      tsize = NULL, bw = 300, d_min = 20, mfold = c(5, 50),
-                     buffer_size = 100000, verbose = 2L){
+                     buffer_size = 100000, verbose = 2L, log = TRUE){
     if(is.character(ifile)){
-        ifile <- as.list(ifile)
+        ifile <- as.list(file.path(ifile))
     }
     rfile <- tempfile()
-    opts <- .namespace()$Namespace(ifile = ifile,
-                                   gsize = gsize,
-                                   format = format,
-                                   tsize = tsize,
-                                   bw = bw,
-                                   d_min = d_min,
-                                   mfold = mfold,
-                                   outdir = dirname(rfile),
-                                   rfile = basename(rfile),
-                                   verbose = verbose,
-                                   buffer_size = buffer_size)
+    cl <- basiliskStart(env_macs)
+    on.exit(basiliskStop(cl))
+    res <- basiliskRun(cl, function(.logging, .namespace, rfile){
+        opts <- .namespace()$Namespace(ifile = ifile,
+                                       gsize = gsize,
+                                       format = format,
+                                       tsize = tsize,
+                                       bw = bw,
+                                       d_min = d_min,
+                                       mfold = mfold,
+                                       outdir = dirname(rfile),
+                                       rfile = basename(rfile),
+                                       verbose = verbose,
+                                       buffer_size = buffer_size)
+        .predictd <- reticulate::import("MACS3.Commands.predictd_cmd")
+        if(log){
+            .logging()$run()
+            reticulate::py_capture_output(.predictd$run(opts))
+        }else{
+            .predictd$run(opts)
+        }
+    }, .logging = .logging, .namespace = .namespace, rfile = rfile)
+    if(log){
+        message(res)
+    }
 
-    res <- .predictd()$run(opts)
     env <- new.env()
     rs <- readLines(rfile)
     rs[grep("^pdf", rs)] <- paste0("pdf('", rfile, "_model.pdf',height=6,width=6)")

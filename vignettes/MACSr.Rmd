@@ -1,6 +1,9 @@
 ---
 title: "MACSr"
-output: rmarkdown::html_vignette
+output:
+  BiocStyle::html_document:
+    toc: true
+    toc_float: true
 vignette: >
   %\VignetteIndexEntry{MACSr}
   %\VignetteEngine{knitr::rmarkdown}
@@ -31,19 +34,14 @@ general peak-caller, MACS can also be applied to any “DNA enrichment
 assays” if the question to be asked is simply: where we can find
 significant reads coverage than the random background.
 
-This package is a wrapper of the MACS toolkit based on `reticulate`.
+This package is a wrapper of the MACS toolkit based on `basilisk`.
 
-# Import the package
-
-The dependent python library `MACS3` can be installed from the
-build-in method.
-
-```{r, eval=FALSE}
-install_MACS()
-```
-
-The library `MACS3` is suggested to be install with `pip` or `conda`
-first. Then we can load the package.
+# Load the package
+The package is built on
+[basilisk](https://bioconductor.org/packages/release/bioc/html/basilisk.html). The
+dependent python library
+[macs3](https://github.com/macs3-project/MACS) will be installed
+automatically inside its conda environment.
 
 ```{r setup}
 library(MACSr)
@@ -71,11 +69,20 @@ can be checked from its manual.
 | `callvar`      | Call variants in given peak regions from the alignment BAM files. |
 
 ## Function `callpeak`
-Here is an example to call narrow and broad peaks on SE bed files.
+We have uploaded multipe test datasets from MACS to a data package
+`MACSdata` in the `ExperimentHub`. For example, Here we download a
+pair of single-end bed files to run the `callpeak` function.
+
 ```{r}
-datdir <- system.file("extdata", package = "MACSr")
-CHIP <- file.path(datdir, "CTCF_SE_ChIP_chr22_50k.bed.gz")
-CTRL <- file.path(datdir, "CTCF_SE_CTRL_chr22_50k.bed.gz")
+eh <- ExperimentHub::ExperimentHub()
+eh <- AnnotationHub::query(eh, "MACSdata")
+CHIP <- eh[["EH4558"]]
+CTRL <- eh[["EH4563"]]
+```
+
+Here is an example to call narrow and broad peaks on the SE bed files.
+
+```{r}
 cp1 <- callpeak(CHIP, CTRL, gsize = 5.2e7, store_bdg = TRUE,
                 name = "run_callpeak_narrow0", outdir = tempdir(),
                 cutoff_analysis = T)
@@ -90,26 +97,13 @@ cp1
 cp2
 ```
 
-An example to call peaks on PE bam files.
-```{r}
-CHIPPE <- file.path(datdir, "CTCF_PE_ChIP_chr22_50k.bam")
-CTRLPE <- file.path(datdir, "CTCF_PE_CTRL_chr22_50k.bam")
-
-cp3 <- callpeak(CHIPPE, CTRLPE, gsize = 5.2e7, store_bdg = TRUE,
-                format = "BAMPE", name = "run_callpeak_bampe_narrow", outdir = tempdir(),
-                call_summits = TRUE)
-cp4 <- callpeak(CHIPPE, CTRLPE, gsize = 5.2e7, store_bdg = TRUE,
-                format = "BAMPE", name = "run_callpeak_bampe_broad", outdir = tempdir(),
-                broad = TRUE)
-```
-
 ## The `macsList` class
-The `macsList` is designed to contain everything of an execution, including function,
-inputs, outputs and logs, for the purpose of reproducibility. 
+The `macsList` is designed to contain everything of an execution,
+including function, inputs, outputs and logs, for the purpose of
+reproducibility.
 
 For example, we can the function and input arguments.
 ```{r}
-cp1$fun
 cp1$arguments
 ```
 

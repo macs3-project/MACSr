@@ -45,20 +45,27 @@ bdgcmp <- function(tfile, cfile, sfactor = 1.0, pseudocount = 0.0,
                    oprefix = character(), outputfile = list(),
                    outdir = ".", log = TRUE){
     method <- lapply(method, function(x)match.arg(x, method))
-    opts <- .namespace()$Namespace(tfile = tfile,
-                                   cfile = cfile,
-                                   sfactor = sfactor,
-                                   pseudocount = pseudocount,
-                                   method = method,
-                                   oprefix = oprefix,
-                                   ofile = outputfile,
-                                   outdir = outdir)
+    cl <- basiliskStart(env_macs)
+    on.exit(basiliskStop(cl))
+    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+        opts <- .namespace()$Namespace(tfile = file.path(tfile),
+                                       cfile = file.path(cfile),
+                                       sfactor = sfactor,
+                                       pseudocount = pseudocount,
+                                       method = method,
+                                       oprefix = oprefix,
+                                       ofile = outputfile,
+                                       outdir = outdir)
+        .bdgcmp <- reticulate::import("MACS3.Commands.bdgcmp_cmd")
+        if(log){
+            .logging()$run()
+            reticulate::py_capture_output(.bdgcmp$run(opts))
+        }else{
+            .bdgcmp$run(opts)
+        }
+    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
     if(log){
-        .logging()$run()
-        res <- py_capture_output(.bdgcmp()$run(opts))
         message(res)
-    }else{
-        res <- .bdgcmp()$run(opts)
     }
 
     if(length(oprefix) > 0){
@@ -68,5 +75,5 @@ bdgcmp <- function(tfile, cfile, sfactor = 1.0, pseudocount = 0.0,
     }
 
     args <- as.list(match.call())
-    macsList(fun = args[[1]], arguments = args[-1], outputs = ofile, log = res)
+    macsList(arguments = args, outputs = ofile, log = res)
 }

@@ -1,15 +1,17 @@
 context("test filterdup")
 
 datdir <- system.file("extdata", package = "MACSr")
-CHIP <- file.path(datdir, "CTCF_SE_ChIP_chr22_50k.bed.gz")
-CTRL <- file.path(datdir, "CTCF_SE_CTRL_chr22_50k.bed.gz")
-CHIPPE <- file.path(datdir, "CTCF_PE_ChIP_chr22_50k.bam")
-CTRLPE <- file.path(datdir, "CTCF_PE_CTRL_chr22_50k.bam")
-CHIPBEDPE <- file.path(datdir, "CTCF_PE_ChIP_chr22_50k.bedpe.gz")
-CTRLBEDPE <- file.path(datdir, "CTCF_PE_CTRL_chr22_50k.bedpe.gz")
+eh <- ExperimentHub::ExperimentHub()
+eh <- AnnotationHub::query(eh, "MACSdata")
+CHIP <- eh[["EH4558"]]
+CTRL <- eh[["EH4563"]]
+CHIPPE <- eh[["EH4559"]]
+CTRLPE <- eh[["EH4564"]]
+CHIPBEDPE <- eh[["EH4560"]]
+CTRLBEDPE <- eh[["EH4565"]]
 
 fd <- filterdup(ifile = CHIP,
-                gsize = 5.2e+7, outputfile = "test.bed", outdir = tempdir())
+                gsize = 5.2e+7, outputfile = "test.bed", outdir = tempdir(), format = "AUTO")
 test_that("test filterdup", {
     expect_identical(readLines(fd$outputs),
                      readLines(file.path(datdir, "run_filterdup_result.bed.gz")))
@@ -27,7 +29,7 @@ context("test callpeak")
 
 cp1 <- callpeak(CHIP, CTRL, gsize = 5.2e7, store_bdg = TRUE,
                 name = "run_callpeak_narrow0", outdir = tempdir(),
-                cutoff_analysis = T)
+                cutoff_analysis = T, log = FALSE, format = "BED")
 cp2 <- callpeak(CHIP, CTRL, gsize = 5.2e7, store_bdg = TRUE,
                 name = "run_callpeak_narrow1", outdir = tempdir(),
                 dmin = 15, call_summits = TRUE)

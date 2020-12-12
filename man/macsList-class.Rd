@@ -5,8 +5,6 @@
 \alias{macsList-class}
 \title{macsList}
 \arguments{
-\item{fun}{The function executed.}
-
 \item{arguments}{The arguments used in the function.}
 
 \item{outputs}{The outputs from the function.}

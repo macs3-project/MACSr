@@ -48,37 +48,43 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' filterdup(ifile =
-#'     list("tests/testthat/CTCF_PE_CTRL_chr22_50k.bedpe.gz"),
-#'     outputfile = "test.bed", outdir = "/tmp"))
+#' filterdup(ifile = list("CTCF_PE_CTRL_chr22_50k.bedpe.gz"),
+#'     outputfile = "test.bed", outdir = "/tmp")
 #' }
 filterdup <- function(ifile, gsize = "hs", format = "AUTO",
                       tsize = NULL, pvalue = 1e-5, keepduplicates = "auto",
                       outputfile = character(), outdir = ".", verbose = 2L,
                       buffer_size = 10000, dryrun = FALSE, log = TRUE){
     if(is.character(ifile)){
-        ifile <- as.list(ifile)
-    }
-    opts <- .namespace()$Namespace(gsize = gsize,
-                                   tsize = tsize,
-                                   pvalue = pvalue,
-                                   format = format,
-                                   keepduplicates = keepduplicates,
-                                   verbose = verbose,
-                                   outputfile = outputfile,
-                                   outdir = outdir,
-                                   ifile = ifile,
-                                   buffer_size = buffer_size,
-                                   dryrun = dryrun)
-    if(log){
-        .logging()$run()
-        res <- py_capture_output(.filterdup()$run(opts))
-        message(res)
-    }else{
-        res <- .filterdup()$run(opts)
+        ifile <- as.list(file.path(ifile))
     }
 
+    cl <- basiliskStart(env_macs)
+    on.exit(basiliskStop(cl))
+    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+        opts <- .namespace()$Namespace(gsize = gsize,
+                                       tsize = tsize,
+                                       pvalue = pvalue,
+                                       format = format,
+                                       keepduplicates = keepduplicates,
+                                       verbose = verbose,
+                                       outputfile = outputfile,
+                                       outdir = outdir,
+                                       ifile = ifile,
+                                       buffer_size = buffer_size,
+                                       dryrun = dryrun)
+        .filterdup <- reticulate::import("MACS3.Commands.filterdup_cmd")
+        if(log){
+            .logging()$run()
+            reticulate::py_capture_output(.filterdup$run(opts))
+        }else{
+            .filterdup$run(opts)
+        }
+    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
+    if(log){
+        message(res)
+    }
     ofile <- file.path(outdir, outputfile)
     args <- as.list(match.call())
-    macsList(fun = args[[1]], arguments = args[-1], outputs = ofile, log = res)
+    macsList(arguments = args, outputs = ofile, log = res)
 }

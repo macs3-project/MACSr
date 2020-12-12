@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MACSr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.5</span>
       </span>
     </div>
 
@@ -140,7 +140,8 @@
   d_min <span class='op'>=</span> <span class='fl'>20</span>,
   mfold <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>50</span><span class='op'>)</span>,
   buffer_size <span class='op'>=</span> <span class='fl'>1e+05</span>,
-  verbose <span class='op'>=</span> <span class='fl'>2L</span>
+  verbose <span class='op'>=</span> <span class='fl'>2L</span>,
+  log <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -200,6 +201,10 @@ information. DEFAULT: 100000.</p></td>
       <td><p>Set verbose level of runtime message. 0: only show
 critical message, 1: show additional warning message, 2: show
 process information, 3: show debug messages. DEFAULT:2</p></td>
+    </tr>
+    <tr>
+      <th>log</th>
+      <td><p>Whether to capture log.</p></td>
     </tr>
     </table>
 

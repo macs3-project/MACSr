@@ -22,7 +22,7 @@ install_MACS <- function(envname = "MACS", method = "conda") {
     }
 
     if (!envname %in% virtualenv_list() | !envname %in% conda_list()$name) {
-        pkgs <- readLines("python_requirements.txt")
+        pkgs <- "macs3"
         if(method == "virtualenv"){
             virtualenv_create(envname)
             virtualenv_install(envname, pkgs)
@@ -36,5 +36,5 @@ install_MACS <- function(envname = "MACS", method = "conda") {
     }else if(method == "virtualenv"){
         use_virtualenv(virtualenv = envname)
     }
-    invisible(.MACS())
+    reticulate::py_module_available("MACS3")
 }

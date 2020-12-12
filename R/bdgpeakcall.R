@@ -33,24 +33,30 @@ bdgpeakcall <- function(ifile, cutoff = 5, minlen = 200L, maxgap = 30L,
                         call_summits = FALSE, cutoff_analysis = FALSE,
                         trackline = TRUE, outdir = ".",
                         outputfile = character(), log = TRUE){
-    opts <- .namespace()$Namespace(ifile = ifile,
-                                   cutoff = cutoff,
-                                   minlen = minlen,
-                                   maxgap = maxgap,
-                                   call_summits = call_summits,
-                                   cutoff_analysis = cutoff_analysis,
-                                   trackline = trackline,
-                                   outdir = outdir,
-                                   ofile = outputfile)
+    cl <- basiliskStart(env_macs)
+    on.exit(basiliskStop(cl))
+    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+        opts <- .namespace()$Namespace(ifile = file.path(ifile),
+                                       cutoff = cutoff,
+                                       minlen = minlen,
+                                       maxgap = maxgap,
+                                       call_summits = call_summits,
+                                       cutoff_analysis = cutoff_analysis,
+                                       trackline = trackline,
+                                       outdir = outdir,
+                                       ofile = outputfile)
+        .bdgpeakcall <- reticulate::import("MACS3.Commands.bdgpeakcall_cmd")
+        if(log){
+            .logging()$run()
+            reticulate::py_capture_output(.bdgpeakcall$run(opts))
+        }else{
+            .bdgpeakcall$run(opts)
+        }
+    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
     if(log){
-        .logging()$run()
-        res <- py_capture_output(.bdgpeakcall()$run(opts))
         message(res)
-    }else{
-        res <- .bdgpeakcall()$run(opts)
     }
-
     ofile <- file.path(outdir, outputfile)
     args <- as.list(match.call())
-    macsList(fun = args[[1]], arguments = args[-1], outputs = ofile, log = res)
+    macsList(arguments = args, outputs = ofile, log = res)
 }
