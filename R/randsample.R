@@ -49,7 +49,7 @@ randsample <- function(ifile, outdir = ".", outputfile = character(),
                        buffer_size = 100000L, verbose = 2L, log =TRUE){
     format <- match.arg(format)
     if(is.character(ifile)){
-        ifile <- as.list(ifile)
+        ifile <- as.list(file.path(ifile))
     }
 
     cl <- basiliskStart(env_macs)

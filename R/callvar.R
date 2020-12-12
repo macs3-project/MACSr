@@ -80,8 +80,8 @@ callvar <- function(peakbed, tfile, cfile,
     on.exit(basiliskStop(cl))
     res <- basiliskRun(cl, function(.logging, .namespace, outdir){
         opts <- .namespace()$Namespace(peakbed = peakbed,
-                                       tfile = tfile,
-                                       cfile = cfile,
+                                       tfile = file.path(tfile),
+                                       cfile = file.path(cfile),
                                        GQCutoffHetero = GQCutoffHetero,
                                        GQCutoffHomo = GQCutoffHomo,
                                        Q = Q,

@@ -48,8 +48,8 @@ bdgcmp <- function(tfile, cfile, sfactor = 1.0, pseudocount = 0.0,
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
     res <- basiliskRun(cl, function(.logging, .namespace, outdir){
-        opts <- .namespace()$Namespace(tfile = tfile,
-                                       cfile = cfile,
+        opts <- .namespace()$Namespace(tfile = file.path(tfile),
+                                       cfile = file.path(cfile),
                                        sfactor = sfactor,
                                        pseudocount = pseudocount,
                                        method = method,

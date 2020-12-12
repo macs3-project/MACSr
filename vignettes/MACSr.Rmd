@@ -74,11 +74,20 @@ can be checked from its manual.
 | `callvar`      | Call variants in given peak regions from the alignment BAM files. |
 
 ## Function `callpeak`
-Here is an example to call narrow and broad peaks on SE bed files.
+We have uploaded multipe test datasets from MACS to a data package
+`MACSdata` in the `ExperimentHub`. For example, Here we download a
+pair of single-end bed files to run the `callpeak` function.
+
 ```{r}
-datdir <- system.file("extdata", package = "MACSr")
-CHIP <- file.path(datdir, "CTCF_SE_ChIP_chr22_50k.bed.gz")
-CTRL <- file.path(datdir, "CTCF_SE_CTRL_chr22_50k.bed.gz")
+eh <- ExperimentHub::ExperimentHub()
+eh <- AnnotationHub::query(eh, "MACSdata")
+CHIP <- eh[["EH4558"]]
+CTRL <- eh[["EH4563"]]
+```
+
+Here is an example to call narrow and broad peaks on the SE bed files.
+
+```{r}
 cp1 <- callpeak(CHIP, CTRL, gsize = 5.2e7, store_bdg = TRUE,
                 name = "run_callpeak_narrow0", outdir = tempdir(),
                 cutoff_analysis = T)
@@ -94,8 +103,9 @@ cp2
 ```
 
 ## The `macsList` class
-The `macsList` is designed to contain everything of an execution, including function,
-inputs, outputs and logs, for the purpose of reproducibility. 
+The `macsList` is designed to contain everything of an execution,
+including function, inputs, outputs and logs, for the purpose of
+reproducibility.
 
 For example, we can the function and input arguments.
 ```{r}

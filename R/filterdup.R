@@ -57,7 +57,7 @@ filterdup <- function(ifile, gsize = "hs", format = "AUTO",
                       outputfile = character(), outdir = ".", verbose = 2L,
                       buffer_size = 10000, dryrun = FALSE, log = TRUE){
     if(is.character(ifile)){
-        ifile <- as.list(ifile)
+        ifile <- as.list(file.path(ifile))
     }
 
     cl <- basiliskStart(env_macs)

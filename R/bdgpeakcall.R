@@ -36,7 +36,7 @@ bdgpeakcall <- function(ifile, cutoff = 5, minlen = 200L, maxgap = 30L,
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
     res <- basiliskRun(cl, function(.logging, .namespace, outdir){
-        opts <- .namespace()$Namespace(ifile = ifile,
+        opts <- .namespace()$Namespace(ifile = file.path(ifile),
                                        cutoff = cutoff,
                                        minlen = minlen,
                                        maxgap = maxgap,

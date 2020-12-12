@@ -94,10 +94,10 @@ callpeak <- function(tfile, cfile = NULL, gsize = "hs", tsize = NULL, format = "
                      cutoff_analysis = FALSE, fecutoff = 0.1, call_summits = FALSE,
                      buffer_size = 100000, verbose = 2L, log = TRUE, ...){
     if(is.character(tfile)){
-        tfile <- as.list(tfile)
+        tfile <- as.list(file.path(tfile))
     }
     if(is.character(cfile)){
-        cfile <- as.list(cfile)
+        cfile <- as.list(file.path(cfile))
     }
 
     cl <- basiliskStart(env_macs)

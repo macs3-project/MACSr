@@ -36,7 +36,7 @@ predictd <- function(ifile, gsize = "hs", format = "AUTO",
                      tsize = NULL, bw = 300, d_min = 20, mfold = c(5, 50),
                      buffer_size = 100000, verbose = 2L, log = TRUE){
     if(is.character(ifile)){
-        ifile <- as.list(ifile)
+        ifile <- as.list(file.path(ifile))
     }
     rfile <- tempfile()
     cl <- basiliskStart(env_macs)

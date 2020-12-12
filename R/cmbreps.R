@@ -33,6 +33,7 @@ cmbreps <- function(ifiles = list(), weights = 1.0,
                     outputfile = character(),
                     outdir = ".", log = TRUE){
     method <- match.arg(method)
+    names(ifiles) <- NULL
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
     res <- basiliskRun(cl, function(.logging, .namespace, outdir){

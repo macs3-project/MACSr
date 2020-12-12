@@ -53,10 +53,10 @@ bdgdiff <- function(t1bdg, t2bdg, c1bdg, c2bdg,
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
     res <- basiliskRun(cl, function(.logging, .namespace, outdir){
-        opts <- .namespace()$Namespace(t1bdg = t1bdg,
-                                       t2bdg = t2bdg,
-                                       c1bdg = c1bdg,
-                                       c2bdg = c2bdg,
+        opts <- .namespace()$Namespace(t1bdg = file.path(t1bdg),
+                                       t2bdg = file.path(t2bdg),
+                                       c1bdg = file.path(c1bdg),
+                                       c2bdg = file.path(c2bdg),
                                        cutoff = cutoff,
                                        minlen = minlen,
                                        maxgap = maxgap,

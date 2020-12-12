@@ -62,7 +62,7 @@ pileup <- function(ifile, outputfile = character(), outdir = ".",
                    log = TRUE){
     format <- match.arg(format)
     if(is.character(ifile)){
-        ifile <- as.list(ifile)
+        ifile <- as.list(file.path(ifile))
     }
 
     cl <- basiliskStart(env_macs)

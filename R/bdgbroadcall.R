@@ -35,7 +35,7 @@ bdgbroadcall <- function(ifile, cutoffpeak = 2, cutofflink = 1,
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
     res <- basiliskRun(cl, function(.logging, .namespace, outdir){
-        opts <- .namespace()$Namespace(ifile = ifile,
+        opts <- .namespace()$Namespace(ifile = file.path(ifile),
                                        cutoffpeak = cutoffpeak,
                                        cutofflink = cutofflink,
                                        minlen = minlen,
