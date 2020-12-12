@@ -1,7 +1,5 @@
 context("test filterdup")
 
-datdir <- system.file("extdata", package = "MACSr")
-
 eh <- ExperimentHub::ExperimentHub()
 eh <- AnnotationHub::query(eh, "MACSdata")
 CHIP <- eh[["EH4558"]]
@@ -10,13 +8,6 @@ CHIPPE <- eh[["EH4559"]]
 CTRLPE <- eh[["EH4564"]]
 CHIPBEDPE <- eh[["EH4560"]]
 CTRLBEDPE <- eh[["EH4565"]]
-
-## CHIP <- file.path(datdir, "CTCF_SE_ChIP_chr22_50k.bed.gz")
-## CTRL <- file.path(datdir, "CTCF_SE_CTRL_chr22_50k.bed.gz")
-## CHIPBEDPE <- file.path(datdir, "CTCF_PE_ChIP_chr22_50k.bedpe.gz")
-## CTRLBEDPE <- file.path(datdir, "CTCF_PE_CTRL_chr22_50k.bedpe.gz")
-## CHIPPE <- file.path(datdir, "CTCF_PE_ChIP_chr22_50k.bam")
-## CTRLPE <- file.path(datdir, "CTCF_PE_CTRL_chr22_50k.bam")
 
 fd <- filterdup(ifile = CHIP,
                 gsize = 5.2e+7, outputfile = "test.bed", outdir = tempdir(), format = "AUTO")
