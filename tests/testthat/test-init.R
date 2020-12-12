@@ -1,5 +1,6 @@
 context("test filterdup")
 
+datdir <- system.file("extdata", package = "MACSr")
 eh <- ExperimentHub::ExperimentHub()
 eh <- AnnotationHub::query(eh, "MACSdata")
 CHIP <- eh[["EH4558"]]
