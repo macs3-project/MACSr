@@ -34,19 +34,14 @@ general peak-caller, MACS can also be applied to any “DNA enrichment
 assays” if the question to be asked is simply: where we can find
 significant reads coverage than the random background.
 
-This package is a wrapper of the MACS toolkit based on `reticulate`.
+This package is a wrapper of the MACS toolkit based on `basilisk`.
 
-# Import the package
-
-The dependent python library `MACS3` can be installed from the
-build-in method.
-
-```{r, eval=FALSE}
-install_MACS()
-```
-
-The library `MACS3` is suggested to be install with `pip` or `conda`
-first. Then we can load the package.
+# Load the package
+The package is built on
+[basilisk](https://bioconductor.org/packages/release/bioc/html/basilisk.html). The
+dependent python library
+[macs3](https://github.com/macs3-project/MACS) will be installed
+automatically inside its conda environment.
 
 ```{r setup}
 library(MACSr)

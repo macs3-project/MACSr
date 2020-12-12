@@ -81,8 +81,7 @@ filterdup
 }
 \examples{
 \dontrun{
-filterdup(ifile =
-    list("tests/testthat/CTCF_PE_CTRL_chr22_50k.bedpe.gz"),
-    outputfile = "test.bed", outdir = "/tmp"))
+filterdup(ifile = list("CTCF_PE_CTRL_chr22_50k.bedpe.gz"),
+    outputfile = "test.bed", outdir = "/tmp")
 }
 }
