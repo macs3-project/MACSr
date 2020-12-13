@@ -30,21 +30,28 @@
 #'     must be the same as for -m.
 #' @param outdir The output directory.
 #' @param log Whether to capture logs.
+#' @return `macsList` object.
+#' @export
 #' @examples
-#' \dontrun{
-#' bdgopt("run_callpeak_narrow0_treat_pileup.bdg",
-#' method = "min", extraparam = 10, outdir = "/tmp", outputfile = "bdgopt_min.bdg")
-#' }
+#' eh <- ExperimentHub::ExperimentHub()
+#' CHIP <- eh[["EH4558"]]
+#' CTRL <- eh[["EH4563"]]
+#' c1 <- callpeak(CHIP, CTRL, gsize = 5.2e7, cutoff_analysis = TRUE,
+#' outdir = tempdir(), name = "callpeak_narrow0", store_bdg = TRUE)
+#' cfile <- grep("treat_pileup.bdg", c1$outputs, value = TRUE)
+#' bdgopt(cfile, method = "min", extraparam = 10,
+#' outdir = tempdir(), outputfile = "bdgopt_min.bdg")
 bdgopt <- function(ifile,
                    method = c("multiply", "add", "p2q", "max", "min"),
                    extraparam = numeric(),
                    outputfile = character(),
                    outdir = ".", log = TRUE){
     method <- match.arg(method)
+    ifile <- file.path(ifile)
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
     res <- basiliskRun(cl, function(.logging, .namespace, outdir){
-        opts <- .namespace()$Namespace(ifile = file.path(ifile),
+        opts <- .namespace()$Namespace(ifile = ifile,
                                        method = method,
                                        extraparam = list(extraparam),
                                        ofile = outputfile,

@@ -76,12 +76,14 @@ not set.}
 
 \item{log}{Whether to capture logs.}
 }
+\value{
+\code{macsList} object.
+}
 \description{
 filterdup
 }
 \examples{
-\dontrun{
-filterdup(ifile = list("CTCF_PE_CTRL_chr22_50k.bedpe.gz"),
-    outputfile = "test.bed", outdir = "/tmp")
-}
+eh <- ExperimentHub::ExperimentHub()
+CHIP <- eh[["EH4558"]]
+filterdup(ifile = CHIP, outputfile = "test.bed", outdir = tempdir())
 }

@@ -102,6 +102,9 @@ process information, 3: show debug messages. DEFAULT:2}
 
 \item{log}{Whether to capture logs.}
 }
+\value{
+\code{macsList} object.
+}
 \description{
 Call variants in given peak regions from the alignment BAM files.
 }

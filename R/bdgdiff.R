@@ -43,6 +43,22 @@
 #'     both conditions. Note: mutually exclusive with --o-prefix.
 #' @param outdir The output directory.
 #' @param log Whether to capture logs.
+#' @return `macsList` object.
+#' @export
+#' @examples
+#' eh <- ExperimentHub::ExperimentHub()
+#' CHIP <- eh[["EH4558"]]
+#' CTRL <- eh[["EH4563"]]
+#' c1 <- callpeak(CHIP, CTRL, gsize = 5.2e7, cutoff_analysis = TRUE,
+#' outdir = tempdir(), name = "callpeak_narrow0", store_bdg = TRUE)
+#' c2 <- callpeak(CHIP, CTRL, gsize = 1e7, nomodel = TRUE, extsize = 250,
+#' outdir = tempdir(), name = "callpeak_narrow_revert", store_bdg = TRUE)
+#' t1bdg <- grep("treat_pileup", c1$outputs, value = TRUE)
+#' c1bdg <- grep("control_lambda", c1$outputs, value = TRUE)
+#' t2bdg <- grep("treat_pileup", c2$outputs, value = TRUE)
+#' c2bdg <- grep("control_lambda", c2$outputs, value = TRUE)
+#' bdgdiff(t1bdg, t2bdg, c1bdg, c2bdg,
+#' outdir = tempdir(), oprefix = "bdgdiff")
 bdgdiff <- function(t1bdg, t2bdg, c1bdg, c2bdg,
                     cutoff = 3, minlen = 200L, maxgap = 100L,
                     depth1 = 1, depth2 = 1,
@@ -50,13 +66,18 @@ bdgdiff <- function(t1bdg, t2bdg, c1bdg, c2bdg,
                     oprefix = character(),
                     outputfile = list(),
                     log = TRUE){
+    t1bdg <- file.path(t1bdg)
+    t2bdg <- file.path(t2bdg)
+    c1bdg <- file.path(c1bdg)
+    c2bdg <- file.path(c2bdg)
+                                       
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
     res <- basiliskRun(cl, function(.logging, .namespace, outdir){
-        opts <- .namespace()$Namespace(t1bdg = file.path(t1bdg),
-                                       t2bdg = file.path(t2bdg),
-                                       c1bdg = file.path(c1bdg),
-                                       c2bdg = file.path(c2bdg),
+        opts <- .namespace()$Namespace(t1bdg = t1bdg,
+                                       t2bdg = t2bdg,
+                                       c1bdg = c1bdg,
+                                       c2bdg = c2bdg,
                                        cutoff = cutoff,
                                        minlen = minlen,
                                        maxgap = maxgap,

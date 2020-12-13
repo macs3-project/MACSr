@@ -77,13 +77,14 @@
 #' @param log Whether to capture logs.
 #' @param ... More options for macs2.
 #' @importFrom reticulate py_capture_output
+#' @return `macsList` object.
 #' @export
 #' @examples
-#' \dontrun{
-#' callpeak("inst/extdata/CTCF_SE_ChIP_chr22_50k.bed.gz",
-#'         "inst/extdata/CTCF_SE_CTRL_chr22_50k.bed.gz",
-#'         gsize = 5.2e7, cutoff_analysis = T)
-#' }
+#' eh <- ExperimentHub::ExperimentHub()
+#' CHIP <- eh[["EH4558"]]
+#' CTRL <- eh[["EH4563"]]
+#' callpeak(CHIP, CTRL, gsize = 5.2e7, cutoff_analysis = TRUE,
+#' outdir = tempdir(), name = "callpeak_narrow0")
 callpeak <- function(tfile, cfile = NULL, gsize = "hs", tsize = NULL, format = "AUTO", keepduplicates = "1",
                      outdir = ".", name = "NA", store_bdg = FALSE, do_SPMR = FALSE, trackline = FALSE,
                      nomodel = FALSE, shift = 0, extsize = 200, bw = 300, d_min = 20,

@@ -36,6 +36,16 @@
 #'     write to standard output. REQUIRED.
 #' @param outdir The output directory.
 #' @param log Whether to capture logs.
+#' @return `macsList` object.
+#' @export
+#' @examples
+#' eh <- ExperimentHub::ExperimentHub()
+#' CHIP <- eh[["EH4558"]]
+#' CTRL <- eh[["EH4563"]]
+#' res <- callpeak(CHIP, CTRL, gsize = 5.2e7, cutoff_analysis = TRUE,
+#' outdir = tempdir(), name = "callpeak_narrow0")
+#' refinepeak(grep("narrowPeak", res$outputs, value = TRUE), CHIP,
+#' outdir = tempdir(), outputfile = "refine")
 refinepeak <- function(bedfile, ifile,
                        format = c("AUTO","BAM","SAM","BED","ELAND",
                                   "ELANDMULTI","ELANDEXPORT","BOWTIE"),

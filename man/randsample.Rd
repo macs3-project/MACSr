@@ -69,6 +69,14 @@ duplicate reads, use 3. DEFAULT:2}
 
 \item{log}{Whether to capture logs.}
 }
+\value{
+\code{macsList} object.
+}
 \description{
 Randomly sample number/percentage of total reads.
+}
+\examples{
+eh <- ExperimentHub::ExperimentHub()
+CHIP <- eh[["EH4558"]]
+randsample(CHIP, number = 1000, outdir = tempdir(), outputfile = "randsample.bed")
 }

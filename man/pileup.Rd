@@ -76,9 +76,17 @@ duplicate reads, use 3. DEFAULT:2}
 
 \item{log}{Whether to capture logs.}
 }
+\value{
+\code{macsList} object.
+}
 \description{
 Pileup aligned reads with a given extension size (fragment size or
 d in MACS language). Note there will be no step for duplicate reads
 filtering or sequencing depth scaling, so you may need to do
 certain pre/post-processing.
+}
+\examples{
+eh <- ExperimentHub::ExperimentHub()
+CHIP <- eh[["EH4558"]]
+pileup(CHIP, outdir = tempdir(), outputfile = "pileup_bed.bdg", format = "BED")
 }

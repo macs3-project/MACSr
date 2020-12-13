@@ -22,12 +22,16 @@
 #'     must be the same as for -m.
 #' @param outdir The output directory.
 #' @param log Whether to capture logs.
+#' @return `macsList` object.
+#' @export
 #' @examples
-#' \dontrun{
-#' bdgopt("run_callpeak_narrow0_treat_pileup.bdg",
-#' method = "min", extraparam = 10, outdir = "/tmp", outputfile = "bdgopt_min.bdg")
-#' }
-
+#' eh <- ExperimentHub::ExperimentHub()
+#' CHIP <- eh[["EH4558"]]
+#' CTRL <- eh[["EH4563"]]
+#' c1 <- callpeak(CHIP, CTRL, gsize = 5.2e7, cutoff_analysis = TRUE,
+#' outdir = tempdir(), name = "callpeak_narrow0", store_bdg = TRUE)
+#' cmbreps(ifiles = list(c1$outputs[1], c1$outputs[7]),
+#' method = "max", outdir = tempdir(), outputfile = "cmbreps")
 cmbreps <- function(ifiles = list(), weights = 1.0,
                     method = c("fisher", "max", "mean"),
                     outputfile = character(),

@@ -1,5 +1,9 @@
 #' predictd
 #' 
+#' Predict d or fragment size from alignment results. In case of PE
+#' data, report the average insertion/fragment size from all
+#' pairs. *Will NOT filter duplicates*
+#' 
 #' @param ifile Input file(s).
 #' @param gsize Effective genome size. It can be 1.0e+9 or 1000000000,
 #'     or shortcuts:'hs' for human (2.7e9), 'mm' for mouse (1.87e9),
@@ -26,11 +30,12 @@
 #'     critical message, 1: show additional warning message, 2: show
 #'     process information, 3: show debug messages. DEFAULT:2
 #' @param log Whether to capture log.
+#' @return predicted fragment sizes.
+#' @export
 #' @examples
-#' \dontrun{
-#' predictd("extdata/CTCF_SE_ChIP_chr22_50k.bed.gz", d_min = 10)
-#' }
-
+#' eh <- ExperimentHub::ExperimentHub()
+#' CHIP <- eh[["EH4558"]]
+#' predictd(CHIP, d_min = 10, gsize=5.2e+7, plot = NULL)
 predictd <- function(ifile, gsize = "hs", format = "AUTO",
                      plot = file.path(tempdir(), "predictd_mode.pdf"),
                      tsize = NULL, bw = 300, d_min = 20, mfold = c(5, 50),

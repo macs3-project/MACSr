@@ -49,13 +49,26 @@ files. The trackline is required by UCSC.}
 
 \item{log}{Whether to capture logs.}
 }
+\value{
+\code{macsList} object.
+}
 \description{
 Call peaks from bedGraph output. Note: All regions on the same
 chromosome in the bedGraph file should be continuous so only
 bedGraph files from MACS3 are accpetable.
 }
 \examples{
-\dontrun{
-bdgpeakcall("run_bdgcmp_FE.bdg", cutoff = 2)
+\donttest{
+eh <- ExperimentHub::ExperimentHub()
+CHIP <- eh[["EH4558"]]
+CTRL <- eh[["EH4563"]]
+p1 <- pileup(CHIP, outdir = tempdir(),
+outputfile = "pileup_ChIP_bed.bdg", format = "BED")
+p2 <- pileup(CTRL, outdir = tempdir(),
+outputfile = "pileup_CTRL_bed.bdg", format = "BED")
+c1 <- bdgcmp(p1$outputs, p2$outputs, outdir = tempdir(),
+oprefix = "bdgcmp", pseudocount = 1, method = "FE")
+bdgpeakcall(c1$outputs, cutoff = 2,
+outdir = tempdir(), outputfile = "bdgpeakcall")
 }
 }

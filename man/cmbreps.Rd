@@ -38,14 +38,20 @@ must be the same as for -m.}
 
 \item{log}{Whether to capture logs.}
 }
+\value{
+\code{macsList} object.
+}
 \description{
 Combine BEDGraphs of scores from replicates. Note: All regions on
 the same chromosome in the bedGraph file should be continuous so
 only bedGraph files from MACS3 are accpetable.
 }
 \examples{
-\dontrun{
-bdgopt("run_callpeak_narrow0_treat_pileup.bdg",
-method = "min", extraparam = 10, outdir = "/tmp", outputfile = "bdgopt_min.bdg")
-}
+eh <- ExperimentHub::ExperimentHub()
+CHIP <- eh[["EH4558"]]
+CTRL <- eh[["EH4563"]]
+c1 <- callpeak(CHIP, CTRL, gsize = 5.2e7, cutoff_analysis = TRUE,
+outdir = tempdir(), name = "callpeak_narrow0", store_bdg = TRUE)
+cmbreps(ifiles = list(c1$outputs[1], c1$outputs[7]),
+method = "max", outdir = tempdir(), outputfile = "cmbreps")
 }
