@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   MACSr: MACSr.html
-last_built: 2020-12-12T05:39Z
+last_built: 2020-12-13T19:22Z
 urls:
   reference: https://macs3-project.github.io/MACSr/reference
   article: https://macs3-project.github.io/MACSr/articles

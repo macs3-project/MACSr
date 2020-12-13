@@ -84,7 +84,7 @@ only bedGraph files from MACS3 are accpetable." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MACSr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.9</span>
       </span>
     </div>
 
@@ -184,13 +184,79 @@ must be the same as for -m.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p><code>macsList</code> object.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='fu'><a href='bdgopt.html'>bdgopt</a></span><span class='op'>(</span><span class='st'>"run_callpeak_narrow0_treat_pileup.bdg"</span>,
-method <span class='op'>=</span> <span class='st'>"min"</span>, extraparam <span class='op'>=</span> <span class='fl'>10</span>, outdir <span class='op'>=</span> <span class='st'>"/tmp"</span>, outputfile <span class='op'>=</span> <span class='st'>"bdgopt_min.bdg"</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><div class='input'><span class='va'>eh</span> <span class='op'>&lt;-</span> <span class='fu'>ExperimentHub</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ExperimentHub/man/ExperimentHub-class.html'>ExperimentHub</a></span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>snapshotDate(): 2020-12-09</span></div><div class='input'><span class='va'>CHIP</span> <span class='op'>&lt;-</span> <span class='va'>eh</span><span class='op'>[[</span><span class='st'>"EH4558"</span><span class='op'>]</span><span class='op'>]</span>
+</div><div class='output co'>#&gt; <span class='message'>see ?MACSdata and browseVignettes('MACSdata') for documentation</span></div><div class='output co'>#&gt; <span class='message'>loading from cache</span></div><div class='input'><span class='va'>CTRL</span> <span class='op'>&lt;-</span> <span class='va'>eh</span><span class='op'>[[</span><span class='st'>"EH4563"</span><span class='op'>]</span><span class='op'>]</span>
+</div><div class='output co'>#&gt; <span class='message'>see ?MACSdata and browseVignettes('MACSdata') for documentation</span></div><div class='output co'>#&gt; <span class='message'>loading from cache</span></div><div class='input'><span class='va'>c1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='callpeak.html'>callpeak</a></span><span class='op'>(</span><span class='va'>CHIP</span>, <span class='va'>CTRL</span>, gsize <span class='op'>=</span> <span class='fl'>5.2e7</span>, cutoff_analysis <span class='op'>=</span> <span class='cn'>TRUE</span>,
+outdir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, name <span class='op'>=</span> <span class='st'>"callpeak_narrow0"</span>, store_bdg <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:22: </span>
+#&gt; <span class='message'># Command line: </span>
+#&gt; <span class='message'># ARGUMENTS LIST:</span>
+#&gt; <span class='message'># name = callpeak_narrow0</span>
+#&gt; <span class='message'># format = AUTO</span>
+#&gt; <span class='message'># ChIP-seq file = ['/Users/qi28068/Library/Caches/ExperimentHub/3f8c68423d6b_4601']</span>
+#&gt; <span class='message'># control file = ['/Users/qi28068/Library/Caches/ExperimentHub/3f8c54ce7146_4606']</span>
+#&gt; <span class='message'># effective genome size = 5.20e+07</span>
+#&gt; <span class='message'># band width = 300</span>
+#&gt; <span class='message'># model fold = [5.0, 50.0]</span>
+#&gt; <span class='message'># qvalue cutoff = 5.00e-02</span>
+#&gt; <span class='message'># The maximum gap between significant sites is assigned as the read length/tag size.</span>
+#&gt; <span class='message'># The minimum length of peaks is assigned as the predicted fragment length "d".</span>
+#&gt; <span class='message'># Larger dataset will be scaled towards smaller dataset.</span>
+#&gt; <span class='message'># Range for calculating regional lambda is: 1000 bps and 10000 bps</span>
+#&gt; <span class='message'># Broad region calling is off</span>
+#&gt; <span class='message'># Additional cutoff on fold-enrichment is: 0.10</span>
+#&gt; <span class='message'># Paired-End mode is off</span>
+#&gt; <span class='message'> </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:22: #1 read tag files... </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:22: #1 read treatment tags... </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: Detected format is: BED </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: * Input file is gzipped. </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #1.2 read input tags... </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: Detected format is: BED </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: * Input file is gzipped. </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #1 tag size is determined as 101 bps </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #1 tag size = 101.0 </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #1  total tags in treatment: 49622 </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #1 user defined the maximum tags... </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #1  tags after filtering in treatment: 48047 </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #1  Redundant rate of treatment: 0.03 </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #1  total tags in control: 50837 </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #1 user defined the maximum tags... </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #1  tags after filtering in control: 50783 </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #1  Redundant rate of control: 0.00 </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #1 finished! </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #2 Build Peak Model... </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #2 looking for paired plus/minus strand peaks... </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #2 Total number of paired peaks: 1036 </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #2 Model building with cross-correlation: Done </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #2 finished! </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #2 predicted fragment length is 230 bps </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #2 alternative fragment length(s) may be 230,238 bps </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #2.2 Generate R script for model : /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpsaYg38/callpeak_narrow0_model.r </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #3 Call peaks... </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #3 Pre-compute pvalue-qvalue table... </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #3 Cutoff vs peaks called will be analyzed! </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #3 Analysis of cutoff vs num of peaks or total length has been saved in b'/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpsaYg38/callpeak_narrow0_cutoff_analysis.txt' </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #3 In the peak calling step, the following will be performed simultaneously: </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #3   Write bedGraph files for treatment pileup (after scaling if necessary)... callpeak_narrow0_treat_pileup.bdg </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #3   Write bedGraph files for control lambda (after scaling if necessary)... callpeak_narrow0_control_lambda.bdg </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #3   Pileup will be based on sequencing depth in treatment. </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #3 Call peaks for each chromosome... </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #4 Write output xls file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpsaYg38/callpeak_narrow0_peaks.xls </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #4 Write peak in narrowPeak format file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpsaYg38/callpeak_narrow0_peaks.narrowPeak </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: #4 Write summits bed file... /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpsaYg38/callpeak_narrow0_summits.bed </span>
+#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:23: Done! </span>
+#&gt; <span class='message'></span></div><div class='output co'>#&gt; <span class='error'>Error in .setupMethodsTables(fdef, initialize = TRUE): trying to get slot "group" from an object of a basic class ("NULL") with no slots</span></div><div class='input'><span class='fu'>cmbreps</span><span class='op'>(</span>ifiles <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>c1</span><span class='op'>$</span><span class='va'>outputs</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, <span class='va'>c1</span><span class='op'>$</span><span class='va'>outputs</span><span class='op'>[</span><span class='fl'>7</span><span class='op'>]</span><span class='op'>)</span>,
+method <span class='op'>=</span> <span class='st'>"max"</span>, outdir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>, outputfile <span class='op'>=</span> <span class='st'>"cmbreps"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in cmbreps(ifiles = list(c1$outputs[1], c1$outputs[7]), method = "max",     outdir = tempdir(), outputfile = "cmbreps"): object 'c1' not found</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
