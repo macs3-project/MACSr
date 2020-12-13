@@ -219,32 +219,16 @@ must be the same as for -m.</p></td>
     <p><code>macsList</code> object.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>eh</span> <span class='op'>&lt;-</span> <span class='fu'>ExperimentHub</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ExperimentHub/man/ExperimentHub-class.html'>ExperimentHub</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>snapshotDate(): 2020-12-09</span></div><div class='input'><span class='va'>CHIP</span> <span class='op'>&lt;-</span> <span class='va'>eh</span><span class='op'>[[</span><span class='st'>"EH4558"</span><span class='op'>]</span><span class='op'>]</span>
-</div><div class='output co'>#&gt; <span class='message'>see ?MACSdata and browseVignettes('MACSdata') for documentation</span></div><div class='output co'>#&gt; <span class='message'>loading from cache</span></div><div class='input'><span class='va'>CTRL</span> <span class='op'>&lt;-</span> <span class='va'>eh</span><span class='op'>[[</span><span class='st'>"EH4563"</span><span class='op'>]</span><span class='op'>]</span>
-</div><div class='output co'>#&gt; <span class='message'>see ?MACSdata and browseVignettes('MACSdata') for documentation</span></div><div class='output co'>#&gt; <span class='message'>loading from cache</span></div><div class='input'><span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='pileup.html'>pileup</a></span><span class='op'>(</span><span class='va'>CHIP</span>, outdir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>,
+    <pre class="examples"><span class='va'>eh</span> <span class='op'>&lt;-</span> <span class='fu'>ExperimentHub</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ExperimentHub/man/ExperimentHub-class.html'>ExperimentHub</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>CHIP</span> <span class='op'>&lt;-</span> <span class='va'>eh</span><span class='op'>[[</span><span class='st'>"EH4558"</span><span class='op'>]</span><span class='op'>]</span>
+<span class='va'>CTRL</span> <span class='op'>&lt;-</span> <span class='va'>eh</span><span class='op'>[[</span><span class='st'>"EH4563"</span><span class='op'>]</span><span class='op'>]</span>
+<span class='va'>p1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='pileup.html'>pileup</a></span><span class='op'>(</span><span class='va'>CHIP</span>, outdir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>,
 outputfile <span class='op'>=</span> <span class='st'>"pileup_ChIP_bed.bdg"</span>, format <span class='op'>=</span> <span class='st'>"BED"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:00: # Existing file b'/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpsaYg38/pileup_ChIP_bed.bdg' will be replaced! </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:00: # read alignment files... </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:00: # read treatment tags... </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:00: tag size is determined as 101 bps </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:00: # tag size = 101 </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:00: # total tags in alignment file: 49622 </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:00: # Pileup alignment file, extend each read towards downstream direction with 200 bps </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:00: # Done! Check pileup_ChIP_bed.bdg </span>
-#&gt; <span class='message'></span></div><div class='output co'>#&gt; <span class='error'>Error in .setupMethodsTables(fdef, initialize = TRUE): trying to get slot "group" from an object of a basic class ("NULL") with no slots</span></div><div class='input'><span class='va'>p2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='pileup.html'>pileup</a></span><span class='op'>(</span><span class='va'>CTRL</span>, outdir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>,
+<span class='va'>p2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='pileup.html'>pileup</a></span><span class='op'>(</span><span class='va'>CTRL</span>, outdir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>,
 outputfile <span class='op'>=</span> <span class='st'>"pileup_CTRL_bed.bdg"</span>, format <span class='op'>=</span> <span class='st'>"BED"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:00: # Existing file b'/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpsaYg38/pileup_CTRL_bed.bdg' will be replaced! </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:00: # read alignment files... </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:00: # read treatment tags... </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:00: tag size is determined as 101 bps </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:00: # tag size = 101 </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:00: # total tags in alignment file: 50837 </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:00: # Pileup alignment file, extend each read towards downstream direction with 200 bps </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:00: # Done! Check pileup_CTRL_bed.bdg </span>
-#&gt; <span class='message'></span></div><div class='output co'>#&gt; <span class='error'>Error in .setupMethodsTables(fdef, initialize = TRUE): trying to get slot "group" from an object of a basic class ("NULL") with no slots</span></div><div class='input'><span class='va'>c1</span> <span class='op'>&lt;-</span> <span class='fu'>bdgcmp</span><span class='op'>(</span><span class='va'>p1</span><span class='op'>$</span><span class='va'>outputs</span>, <span class='va'>p2</span><span class='op'>$</span><span class='va'>outputs</span>, outdir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>,
+<span class='va'>c1</span> <span class='op'>&lt;-</span> <span class='fu'>bdgcmp</span><span class='op'>(</span><span class='va'>p1</span><span class='op'>$</span><span class='va'>outputs</span>, <span class='va'>p2</span><span class='op'>$</span><span class='va'>outputs</span>, outdir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>,
 oprefix <span class='op'>=</span> <span class='st'>"bdgcmp"</span>, pseudocount <span class='op'>=</span> <span class='fl'>1</span>, method <span class='op'>=</span> <span class='st'>"FE"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in file.path(tfile): object 'p1' not found</span></div></pre>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

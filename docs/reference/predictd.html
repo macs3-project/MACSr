@@ -217,25 +217,10 @@ process information, 3: show debug messages. DEFAULT:2</p></td>
     <p>predicted fragment sizes.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>eh</span> <span class='op'>&lt;-</span> <span class='fu'>ExperimentHub</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ExperimentHub/man/ExperimentHub-class.html'>ExperimentHub</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>snapshotDate(): 2020-12-09</span></div><div class='input'><span class='va'>CHIP</span> <span class='op'>&lt;-</span> <span class='va'>eh</span><span class='op'>[[</span><span class='st'>"EH4558"</span><span class='op'>]</span><span class='op'>]</span>
-</div><div class='output co'>#&gt; <span class='message'>see ?MACSdata and browseVignettes('MACSdata') for documentation</span></div><div class='output co'>#&gt; <span class='message'>loading from cache</span></div><div class='input'><span class='fu'>predictd</span><span class='op'>(</span><span class='va'>CHIP</span>, d_min <span class='op'>=</span> <span class='fl'>10</span>, gsize<span class='op'>=</span><span class='fl'>5.2e+7</span>, plot <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:31: # read alignment files... </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:31: # read treatment tags... </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:31: Detected format is: BED </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:31: * Input file is gzipped. </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:31: tag size is determined as 101 bps </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:31: # tag size = 101 </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:31: # total tags in alignment file: 49622 </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:31: # Build Peak Model... </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:31: #2 looking for paired plus/minus strand peaks... </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:31: #2 Total number of paired peaks: 1031 </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:31: #2 Model building with cross-correlation: Done </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:31: # finished! </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:31: # predicted fragment length is 239 bps </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:31: # alternative fragment length(s) may be 230,239 bps </span>
-#&gt; <span class='message'>INFO  @ Sun, 13 Dec 2020 14:23:31: # Generate R script for model : /var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpsaYg38/filefe1c28ba40bf </span>
-#&gt; <span class='message'></span></div><div class='output co'>#&gt; <span class='error'>Error in pdf("/var/folders/pv/qm6yts0j7hdgggvq53hrzfr0vfyhvv/T//RtmpsaYg38/filefe1c28ba40bf_model.pdf",     height = 6, width = 6): could not find function "pdf"</span></div></pre>
+    <pre class="examples"><span class='va'>eh</span> <span class='op'>&lt;-</span> <span class='fu'>ExperimentHub</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ExperimentHub/man/ExperimentHub-class.html'>ExperimentHub</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>CHIP</span> <span class='op'>&lt;-</span> <span class='va'>eh</span><span class='op'>[[</span><span class='st'>"EH4558"</span><span class='op'>]</span><span class='op'>]</span>
+<span class='fu'>predictd</span><span class='op'>(</span><span class='va'>CHIP</span>, d_min <span class='op'>=</span> <span class='fl'>10</span>, gsize<span class='op'>=</span><span class='fl'>5.2e+7</span>, plot <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
