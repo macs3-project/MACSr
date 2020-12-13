@@ -60,10 +60,17 @@
 #'     critical message, 1: show additional warning message, 2: show
 #'     process information, 3: show debug messages. DEFAULT:2
 #' @param outputfile Output VCF file name.
-#' @param outdir The output directory.
 #' @param log Whether to capture logs.
 #' @export
 #' @return `macsList` object.
+#' @examples
+#' \dontrun{
+#' callvar(
+#' "PEsample_peaks_sorted.bed",
+#' "PEsample_peaks_sorted.bam",
+#' "PEcontrol_peaks_sorted.bam",
+#' "/tmp/test.vcf")
+#' }
 callvar <- function(peakbed, tfile, cfile,
                     outputfile = character(),
                     GQCutoffHetero = 0,
