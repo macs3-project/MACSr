@@ -60,8 +60,20 @@ write to standard output. REQUIRED.}
 
 \item{log}{Whether to capture logs.}
 }
+\value{
+\code{macsList} object.
+}
 \description{
 (Experimental) Take raw reads alignment, refine peak summits and
 give scores measuring balance of waston/crick tags. Inspired by
 SPP.
+}
+\examples{
+eh <- ExperimentHub::ExperimentHub()
+CHIP <- eh[["EH4558"]]
+CTRL <- eh[["EH4563"]]
+res <- callpeak(CHIP, CTRL, gsize = 5.2e7, cutoff_analysis = TRUE,
+outdir = tempdir(), name = "callpeak_narrow0")
+refinepeak(grep("narrowPeak", res$outputs, value = TRUE), CHIP,
+outdir = tempdir(), outputfile = "refine")
 }

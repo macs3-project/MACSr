@@ -4,6 +4,9 @@
     <loc>https://macs3-project.github.io/MACSr/index.html</loc>
   </url>
   <url>
+    <loc>https://macs3-project.github.io/MACSr/reference/MACSr.html</loc>
+  </url>
+  <url>
     <loc>https://macs3-project.github.io/MACSr/reference/bdgbroadcall.html</loc>
   </url>
   <url>
@@ -29,9 +32,6 @@
   </url>
   <url>
     <loc>https://macs3-project.github.io/MACSr/reference/filterdup.html</loc>
-  </url>
-  <url>
-    <loc>https://macs3-project.github.io/MACSr/reference/install_MACS.html</loc>
   </url>
   <url>
     <loc>https://macs3-project.github.io/MACSr/reference/macsList-class.html</loc>

@@ -157,13 +157,16 @@ process information, 3: show debug messages. DEFAULT:2}
 
 \item{...}{More options for macs2.}
 }
+\value{
+\code{macsList} object.
+}
 \description{
 Main MACS3 Function to call peaks from alignment results.
 }
 \examples{
-\dontrun{
-callpeak("inst/extdata/CTCF_SE_ChIP_chr22_50k.bed.gz",
-        "inst/extdata/CTCF_SE_CTRL_chr22_50k.bed.gz",
-        gsize = 5.2e7, cutoff_analysis = T)
-}
+eh <- ExperimentHub::ExperimentHub()
+CHIP <- eh[["EH4558"]]
+CTRL <- eh[["EH4563"]]
+callpeak(CHIP, CTRL, gsize = 5.2e7, cutoff_analysis = TRUE,
+outdir = tempdir(), name = "callpeak_narrow0")
 }

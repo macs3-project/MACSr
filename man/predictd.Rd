@@ -56,11 +56,16 @@ process information, 3: show debug messages. DEFAULT:2}
 
 \item{log}{Whether to capture log.}
 }
+\value{
+predicted fragment sizes.
+}
 \description{
-predictd
+Predict d or fragment size from alignment results. In case of PE
+data, report the average insertion/fragment size from all
+pairs. \emph{Will NOT filter duplicates}
 }
 \examples{
-\dontrun{
-predictd("extdata/CTCF_SE_ChIP_chr22_50k.bed.gz", d_min = 10)
-}
+eh <- ExperimentHub::ExperimentHub()
+CHIP <- eh[["EH4558"]]
+predictd(CHIP, d_min = 10, gsize=5.2e+7, plot = NULL)
 }

@@ -41,6 +41,12 @@
 #'     write to standard output. REQUIRED.
 #' @param outdir The output directory.
 #' @param log Whether to capture logs.
+#' @return `macsList` object.
+#' @export
+#' @examples
+#' eh <- ExperimentHub::ExperimentHub()
+#' CHIP <- eh[["EH4558"]]
+#' randsample(CHIP, number = 1000, outdir = tempdir(), outputfile = "randsample.bed")
 randsample <- function(ifile, outdir = ".", outputfile = character(),
                        percentage = numeric(), number = numeric(),
                        seed = -1L, tsize = NULL,

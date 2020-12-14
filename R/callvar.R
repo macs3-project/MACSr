@@ -60,10 +60,19 @@
 #'     critical message, 1: show additional warning message, 2: show
 #'     process information, 3: show debug messages. DEFAULT:2
 #' @param outputfile Output VCF file name.
-#' @param outdir The output directory.
 #' @param log Whether to capture logs.
+#' @export
+#' @return `macsList` object.
+#' @examples
+#' \dontrun{
+#' callvar(
+#' "PEsample_peaks_sorted.bed",
+#' "PEsample_peaks_sorted.bam",
+#' "PEcontrol_peaks_sorted.bam",
+#' "/tmp/test.vcf")
+#' }
 callvar <- function(peakbed, tfile, cfile,
-                    outdir = ".", outputfile = character(),
+                    outputfile = character(),
                     GQCutoffHetero = 0,
                     GQCutoffHomo = 0,
                     Q = 20,
@@ -74,14 +83,17 @@ callvar <- function(peakbed, tfile, cfile,
                     altalleleMinCount = 2L,
                     maxAR = 0.95,
                     np = 1L,
-                    verbose = verbose,
-                    log = log){
+                    verbose = 2L,
+                    log = TRUE){
+    peakbed <- file.path(peakbed)
+    tfile <- file.path(tfile)
+    cfile <- file.path(cfile)
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
-    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+    res <- basiliskRun(cl, function(.logging, .namespace){
         opts <- .namespace()$Namespace(peakbed = peakbed,
-                                       tfile = file.path(tfile),
-                                       cfile = file.path(cfile),
+                                       tfile = tfile,
+                                       cfile = cfile,
                                        GQCutoffHetero = GQCutoffHetero,
                                        GQCutoffHomo = GQCutoffHomo,
                                        Q = Q,
@@ -93,8 +105,7 @@ callvar <- function(peakbed, tfile, cfile,
                                        maxAR = maxAR,
                                        np = np,
                                        verbose = verbose,
-                                       ofile = outputfile,
-                                       outdir = outdir)
+                                       ofile = outputfile)
         .callvar <- reticulate::import("MACS3.Commands.callvar_cmd")
         if(log){
             .logging()$run()
@@ -102,12 +113,12 @@ callvar <- function(peakbed, tfile, cfile,
         }else{
             .callvar$run(opts)
         }
-    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
+    }, .logging = .logging, .namespace = .namespace)
     if(log){
         message(res)
     }
 
-    ofile <- file.path(outdir, outputfile)
+    ofile <- file.path(outputfile)
     args <- as.list(match.call())
     macsList(arguments = args, outputs = ofile, log = res)
 }

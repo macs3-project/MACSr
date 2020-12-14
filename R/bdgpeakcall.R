@@ -25,18 +25,31 @@
 #' @param outputfile The output file.
 #' @param outdir The output directory.
 #' @param log Whether to capture logs.
+#' @return `macsList` object.
+#' @export
 #' @examples
-#' \dontrun{
-#' bdgpeakcall("run_bdgcmp_FE.bdg", cutoff = 2)
+#' \donttest{
+#' eh <- ExperimentHub::ExperimentHub()
+#' CHIP <- eh[["EH4558"]]
+#' CTRL <- eh[["EH4563"]]
+#' p1 <- pileup(CHIP, outdir = tempdir(),
+#' outputfile = "pileup_ChIP_bed.bdg", format = "BED")
+#' p2 <- pileup(CTRL, outdir = tempdir(),
+#' outputfile = "pileup_CTRL_bed.bdg", format = "BED")
+#' c1 <- bdgcmp(p1$outputs, p2$outputs, outdir = tempdir(),
+#' oprefix = "bdgcmp", pseudocount = 1, method = "FE")
+#' bdgpeakcall(c1$outputs, cutoff = 2,
+#' outdir = tempdir(), outputfile = "bdgpeakcall")
 #' }
 bdgpeakcall <- function(ifile, cutoff = 5, minlen = 200L, maxgap = 30L,
                         call_summits = FALSE, cutoff_analysis = FALSE,
                         trackline = TRUE, outdir = ".",
                         outputfile = character(), log = TRUE){
     cl <- basiliskStart(env_macs)
+    ifile = file.path(ifile)
     on.exit(basiliskStop(cl))
     res <- basiliskRun(cl, function(.logging, .namespace, outdir){
-        opts <- .namespace()$Namespace(ifile = file.path(ifile),
+        opts <- .namespace()$Namespace(ifile = ifile,
                                        cutoff = cutoff,
                                        minlen = minlen,
                                        maxgap = maxgap,

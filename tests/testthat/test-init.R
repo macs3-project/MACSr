@@ -29,7 +29,7 @@ context("test callpeak")
 
 cp1 <- callpeak(CHIP, CTRL, gsize = 5.2e7, store_bdg = TRUE,
                 name = "run_callpeak_narrow0", outdir = tempdir(),
-                cutoff_analysis = T, log = FALSE, format = "BED")
+                cutoff_analysis = TRUE, log = FALSE, format = "BED")
 cp2 <- callpeak(CHIP, CTRL, gsize = 5.2e7, store_bdg = TRUE,
                 name = "run_callpeak_narrow1", outdir = tempdir(),
                 dmin = 15, call_summits = TRUE)

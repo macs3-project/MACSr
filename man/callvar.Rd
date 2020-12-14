@@ -8,7 +8,6 @@ callvar(
   peakbed,
   tfile,
   cfile,
-  outdir = ".",
   outputfile = character(),
   GQCutoffHetero = 0,
   GQCutoffHomo = 0,
@@ -20,8 +19,8 @@ callvar(
   altalleleMinCount = 2L,
   maxAR = 0.95,
   np = 1L,
-  verbose = verbose,
-  log = log
+  verbose = 2L,
+  log = TRUE
 )
 }
 \arguments{
@@ -36,8 +35,6 @@ samtools. REQUIRED.}
 \item{cfile}{Control file in BAM format, containing only records in
 peak regions, sorted by coordinates. Check instruction on how
 to make the file using samtools.}
-
-\item{outdir}{The output directory.}
 
 \item{outputfile}{Output VCF file name.}
 
@@ -102,6 +99,18 @@ process information, 3: show debug messages. DEFAULT:2}
 
 \item{log}{Whether to capture logs.}
 }
+\value{
+\code{macsList} object.
+}
 \description{
 Call variants in given peak regions from the alignment BAM files.
+}
+\examples{
+\dontrun{
+callvar(
+"PEsample_peaks_sorted.bed",
+"PEsample_peaks_sorted.bam",
+"PEcontrol_peaks_sorted.bam",
+"/tmp/test.vcf")
+}
 }

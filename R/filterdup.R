@@ -45,12 +45,12 @@
 #'     not set.
 #' @param log Whether to capture logs.
 #' @importFrom utils read.table
+#' @return `macsList` object.
 #' @export
 #' @examples
-#' \dontrun{
-#' filterdup(ifile = list("CTCF_PE_CTRL_chr22_50k.bedpe.gz"),
-#'     outputfile = "test.bed", outdir = "/tmp")
-#' }
+#' eh <- ExperimentHub::ExperimentHub()
+#' CHIP <- eh[["EH4558"]]
+#' filterdup(ifile = CHIP, outputfile = "test.bed", outdir = tempdir())
 filterdup <- function(ifile, gsize = "hs", format = "AUTO",
                       tsize = NULL, pvalue = 1e-5, keepduplicates = "auto",
                       outputfile = character(), outdir = ".", verbose = 2L,
