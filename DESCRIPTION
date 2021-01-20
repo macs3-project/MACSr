@@ -1,6 +1,6 @@
 Package: MACSr
 Title: MACS: Model-based Analysis for ChIP-Seq
-Version: 0.99.9
+Version: 0.99.10
 Authors@R: 
     person(given = "Qiang",
            family = "Hu",
@@ -9,7 +9,7 @@ Authors@R:
 Description: The Model-based Analysis of ChIP-Seq (MACS) is a widely
 	     used toolkit for identifying transcript factor binding sites.
 	     This package is an R wrapper of the lastest MACS3.
-License: file LICENSE
+License: BSD_3_clause + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
@@ -24,3 +24,4 @@ Suggests:
 PythonRequirements: Python (>= 3.6.0), macs3
 VignetteBuilder: knitr
 biocViews: Software, ChIPSeq, ATACSeq, ImmunoOncology
+StagedInstall: no
