@@ -37,11 +37,11 @@
 #' CHIP <- eh[["EH4558"]]
 #' predictd(CHIP, d_min = 10, gsize=5.2e+7, plot = NULL)
 predictd <- function(ifile, gsize = "hs", format = "AUTO",
-                     plot = file.path(tempdir(), "predictd_mode.pdf"),
+                     plot = normalizePath(tempdir(), "predictd_mode.pdf"),
                      tsize = NULL, bw = 300, d_min = 20, mfold = c(5, 50),
                      buffer_size = 100000, verbose = 2L, log = TRUE){
     if(is.character(ifile)){
-        ifile <- as.list(file.path(ifile))
+        ifile <- as.list(normalizePath(ifile))
     }
     rfile <- tempfile()
     cl <- basiliskStart(env_macs)

@@ -88,5 +88,5 @@ certain pre/post-processing.
 \examples{
 eh <- ExperimentHub::ExperimentHub()
 CHIP <- eh[["EH4558"]]
-pileup(CHIP, outdir = tempdir(), outputfile = "pileup_bed.bdg", format = "BED")
+p <- pileup(CHIP, outdir = tempdir(), outputfile = "pileup_bed.bdg", format = "BED")
 }

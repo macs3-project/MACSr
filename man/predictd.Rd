@@ -8,7 +8,7 @@ predictd(
   ifile,
   gsize = "hs",
   format = "AUTO",
-  plot = file.path(tempdir(), "predictd_mode.pdf"),
+  plot = normalizePath(tempdir(), "predictd_mode.pdf"),
   tsize = NULL,
   bw = 300,
   d_min = 20,

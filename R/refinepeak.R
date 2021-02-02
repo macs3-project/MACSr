@@ -43,9 +43,9 @@
 #' CHIP <- eh[["EH4558"]]
 #' CTRL <- eh[["EH4563"]]
 #' res <- callpeak(CHIP, CTRL, gsize = 5.2e7, cutoff_analysis = TRUE,
-#' outdir = tempdir(), name = "callpeak_narrow0")
+#'                 outdir = tempdir(), name = "callpeak_narrow0")
 #' refinepeak(grep("narrowPeak", res$outputs, value = TRUE), CHIP,
-#' outdir = tempdir(), outputfile = "refine")
+#'            outdir = tempdir(), outputfile = "refine")
 refinepeak <- function(bedfile, ifile,
                        format = c("AUTO","BAM","SAM","BED","ELAND",
                                   "ELANDMULTI","ELANDEXPORT","BOWTIE"),
@@ -54,7 +54,7 @@ refinepeak <- function(bedfile, ifile,
                        outdir = "./", outputfile = character(), log =TRUE){
     format <- match.arg(format)
     if(is.character(ifile)){
-        ifile <- as.list(file.path(ifile))
+        ifile <- as.list(normalizePath(ifile))
     }
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))

@@ -59,7 +59,7 @@
 #' @examples
 #' eh <- ExperimentHub::ExperimentHub()
 #' CHIP <- eh[["EH4558"]]
-#' pileup(CHIP, outdir = tempdir(), outputfile = "pileup_bed.bdg", format = "BED")
+#' p <- pileup(CHIP, outdir = tempdir(), outputfile = "pileup_bed.bdg", format = "BED")
 pileup <- function(ifile, outputfile = character(), outdir = ".",
                    format = c("AUTO","BAM","SAM","BED","ELAND","ELANDMULTI",
                        "ELANDEXPORT","BOWTIE","BAMPE","BEDPE"),
@@ -68,7 +68,7 @@ pileup <- function(ifile, outputfile = character(), outdir = ".",
                    log = TRUE){
     format <- match.arg(format)
     if(is.character(ifile)){
-        ifile <- as.list(file.path(ifile))
+        ifile <- as.list(normalizePath(ifile))
     }
 
     cl <- basiliskStart(env_macs)

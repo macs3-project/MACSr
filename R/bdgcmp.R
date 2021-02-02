@@ -47,18 +47,18 @@
 #' CHIP <- eh[["EH4558"]]
 #' CTRL <- eh[["EH4563"]]
 #' p1 <- pileup(CHIP, outdir = tempdir(),
-#' outputfile = "pileup_ChIP_bed.bdg", format = "BED")
+#'              outputfile = "pileup_ChIP_bed.bdg", format = "BED")
 #' p2 <- pileup(CTRL, outdir = tempdir(),
-#' outputfile = "pileup_CTRL_bed.bdg", format = "BED")
+#'              outputfile = "pileup_CTRL_bed.bdg", format = "BED")
 #' c1 <- bdgcmp(p1$outputs, p2$outputs, outdir = tempdir(),
-#' oprefix = "bdgcmp", pseudocount = 1, method = "FE")
+#'              oprefix = "bdgcmp", pseudocount = 1, method = "FE")
 bdgcmp <- function(tfile, cfile, sfactor = 1.0, pseudocount = 0.0,
                    method = c("ppois", "qpois", "subtract", "logFE", "FE", "logLR", "slogLR", "max"),
                    oprefix = character(), outputfile = list(),
                    outdir = ".", log = TRUE){
     method <- lapply(method, function(x)match.arg(x, method))
-    tf <- file.path(tfile)
-    cf <- file.path(cfile)
+    tf <- normalizePath(tfile)
+    cf <- normalizePath(cfile)
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
     res <- basiliskRun(cl, function(.logging, .namespace, outdir){

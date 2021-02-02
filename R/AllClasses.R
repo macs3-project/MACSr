@@ -15,8 +15,24 @@ setClass("macsList",
 
 macsList <- function(arguments = list(),
                      outputs = list(), log = character()){
+    if(length(log) > 0){
+        log <- unlist(strsplit(log, split = "\n"))
+    }
     new("macsList",
         SimpleList(arguments = arguments,
                    outputs = outputs,
                    log = log))
 }
+
+setMethod("show", "macsList", function(object){
+    cat("macsList class\n")
+    cat("$outputs:\n", paste(object$outputs, collapse = "\n "), "\n")
+    cat("$arguments:", paste0(names(object$arguments[-1]),
+                              collapse = ", "), "\n")
+    cat("$log:\n ")
+    cat(paste
+    (head(object$log, 5), collapse = "\n "))
+    if(length(object$log) > 5){
+        cat("\n...\n")
+    }
+})

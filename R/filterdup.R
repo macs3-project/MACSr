@@ -50,13 +50,13 @@
 #' @examples
 #' eh <- ExperimentHub::ExperimentHub()
 #' CHIP <- eh[["EH4558"]]
-#' filterdup(ifile = CHIP, outputfile = "test.bed", outdir = tempdir())
+#' res <- filterdup(ifile = CHIP, outputfile = "test.bed", outdir = tempdir())
 filterdup <- function(ifile, gsize = "hs", format = "AUTO",
                       tsize = NULL, pvalue = 1e-5, keepduplicates = "auto",
                       outputfile = character(), outdir = ".", verbose = 2L,
                       buffer_size = 10000, dryrun = FALSE, log = TRUE){
     if(is.character(ifile)){
-        ifile <- as.list(file.path(ifile))
+        ifile <- as.list(normalizePath(ifile))
     }
 
     cl <- basiliskStart(env_macs)

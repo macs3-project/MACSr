@@ -1,6 +1,6 @@
 Package: MACSr
 Title: MACS: Model-based Analysis for ChIP-Seq
-Version: 0.99.10
+Version: 0.99.12
 Authors@R: 
     person(given = "Qiang",
            family = "Hu",
@@ -20,7 +20,8 @@ Suggests:
     testthat,
     knitr,
     rmarkdown,
-    BiocStyle
+    BiocStyle,
+    MACSdata
 PythonRequirements: Python (>= 3.6.0), macs3
 VignetteBuilder: knitr
 biocViews: Software, ChIPSeq, ATACSeq, ImmunoOncology
