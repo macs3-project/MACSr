@@ -60,11 +60,11 @@ eh <- ExperimentHub::ExperimentHub()
 CHIP <- eh[["EH4558"]]
 CTRL <- eh[["EH4563"]]
 p1 <- pileup(CHIP, outdir = tempdir(),
-outputfile = "pileup_ChIP_bed.bdg", format = "BED")
+             outputfile = "pileup_ChIP_bed.bdg", format = "BED")
 p2 <- pileup(CTRL, outdir = tempdir(),
-outputfile = "pileup_CTRL_bed.bdg", format = "BED")
+             outputfile = "pileup_CTRL_bed.bdg", format = "BED")
 c1 <- bdgcmp(p1$outputs, p2$outputs, outdir = tempdir(),
-oprefix = "bdgcmp", pseudocount = 1, method = "FE")
+             oprefix = "bdgcmp", pseudocount = 1, method = "FE")
 bdgbroadcall(c1$outputs, cutoffpeak = 2, cutofflink = 1.5,
-outdir = tempdir(), outputfile = "bdgbroadcall")
+             outdir = tempdir(), outputfile = "bdgbroadcall")
 }

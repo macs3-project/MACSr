@@ -37,17 +37,18 @@
 #' CHIP <- eh[["EH4558"]]
 #' CTRL <- eh[["EH4563"]]
 #' c1 <- callpeak(CHIP, CTRL, gsize = 5.2e7, cutoff_analysis = TRUE,
-#' outdir = tempdir(), name = "callpeak_narrow0", store_bdg = TRUE)
+#'                outdir = tempdir(), name = "callpeak_narrow0",
+#'                store_bdg = TRUE)
 #' cfile <- grep("treat_pileup.bdg", c1$outputs, value = TRUE)
 #' bdgopt(cfile, method = "min", extraparam = 10,
-#' outdir = tempdir(), outputfile = "bdgopt_min.bdg")
+#'        outdir = tempdir(), outputfile = "bdgopt_min.bdg")
 bdgopt <- function(ifile,
                    method = c("multiply", "add", "p2q", "max", "min"),
                    extraparam = numeric(),
                    outputfile = character(),
                    outdir = ".", log = TRUE){
     method <- match.arg(method)
-    ifile <- file.path(ifile)
+    ifile <- normalizePath(ifile)
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
     res <- basiliskRun(cl, function(.logging, .namespace, outdir){

@@ -85,9 +85,9 @@ callvar <- function(peakbed, tfile, cfile,
                     np = 1L,
                     verbose = 2L,
                     log = TRUE){
-    peakbed <- file.path(peakbed)
-    tfile <- file.path(tfile)
-    cfile <- file.path(cfile)
+    peakbed <- normalizePath(peakbed)
+    tfile <- normalizePath(tfile)
+    cfile <- normalizePath(cfile)
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
     res <- basiliskRun(cl, function(.logging, .namespace){
@@ -118,7 +118,7 @@ callvar <- function(peakbed, tfile, cfile,
         message(res)
     }
 
-    ofile <- file.path(outputfile)
+    ofile <- normalizePath(outputfile)
     args <- as.list(match.call())
     macsList(arguments = args, outputs = ofile, log = res)
 }

@@ -85,13 +85,13 @@ eh <- ExperimentHub::ExperimentHub()
 CHIP <- eh[["EH4558"]]
 CTRL <- eh[["EH4563"]]
 c1 <- callpeak(CHIP, CTRL, gsize = 5.2e7, cutoff_analysis = TRUE,
-outdir = tempdir(), name = "callpeak_narrow0", store_bdg = TRUE)
+               outdir = tempdir(), name = "callpeak_narrow0", store_bdg = TRUE)
 c2 <- callpeak(CHIP, CTRL, gsize = 1e7, nomodel = TRUE, extsize = 250,
-outdir = tempdir(), name = "callpeak_narrow_revert", store_bdg = TRUE)
+               outdir = tempdir(), name = "callpeak_narrow_revert", store_bdg = TRUE)
 t1bdg <- grep("treat_pileup", c1$outputs, value = TRUE)
 c1bdg <- grep("control_lambda", c1$outputs, value = TRUE)
 t2bdg <- grep("treat_pileup", c2$outputs, value = TRUE)
 c2bdg <- grep("control_lambda", c2$outputs, value = TRUE)
 bdgdiff(t1bdg, t2bdg, c1bdg, c2bdg,
-outdir = tempdir(), oprefix = "bdgdiff")
+        outdir = tempdir(), oprefix = "bdgdiff")
 }

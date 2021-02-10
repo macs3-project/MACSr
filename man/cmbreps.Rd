@@ -51,7 +51,8 @@ eh <- ExperimentHub::ExperimentHub()
 CHIP <- eh[["EH4558"]]
 CTRL <- eh[["EH4563"]]
 c1 <- callpeak(CHIP, CTRL, gsize = 5.2e7, cutoff_analysis = TRUE,
-outdir = tempdir(), name = "callpeak_narrow0", store_bdg = TRUE)
+               outdir = tempdir(), name = "callpeak_narrow0",
+               store_bdg = TRUE)
 cmbreps(ifiles = list(c1$outputs[1], c1$outputs[7]),
-method = "max", outdir = tempdir(), outputfile = "cmbreps")
+        method = "max", outdir = tempdir(), outputfile = "cmbreps")
 }

@@ -85,5 +85,5 @@ filterdup
 \examples{
 eh <- ExperimentHub::ExperimentHub()
 CHIP <- eh[["EH4558"]]
-filterdup(ifile = CHIP, outputfile = "test.bed", outdir = tempdir())
+res <- filterdup(ifile = CHIP, outputfile = "test.bed", outdir = tempdir())
 }

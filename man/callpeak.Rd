@@ -167,6 +167,8 @@ Main MACS3 Function to call peaks from alignment results.
 eh <- ExperimentHub::ExperimentHub()
 CHIP <- eh[["EH4558"]]
 CTRL <- eh[["EH4563"]]
-callpeak(CHIP, CTRL, gsize = 5.2e7, cutoff_analysis = TRUE,
-outdir = tempdir(), name = "callpeak_narrow0")
+res <- callpeak(CHIP, CTRL, gsize = 5.2e7,
+                cutoff_analysis = TRUE,
+                outdir = tempdir(),
+                name = "callpeak_narrow0")
 }

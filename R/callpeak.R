@@ -83,8 +83,10 @@
 #' eh <- ExperimentHub::ExperimentHub()
 #' CHIP <- eh[["EH4558"]]
 #' CTRL <- eh[["EH4563"]]
-#' callpeak(CHIP, CTRL, gsize = 5.2e7, cutoff_analysis = TRUE,
-#' outdir = tempdir(), name = "callpeak_narrow0")
+#' res <- callpeak(CHIP, CTRL, gsize = 5.2e7,
+#'                 cutoff_analysis = TRUE,
+#'                 outdir = tempdir(),
+#'                 name = "callpeak_narrow0")
 callpeak <- function(tfile, cfile = NULL, gsize = "hs", tsize = NULL, format = "AUTO", keepduplicates = "1",
                      outdir = ".", name = "NA", store_bdg = FALSE, do_SPMR = FALSE, trackline = FALSE,
                      nomodel = FALSE, shift = 0, extsize = 200, bw = 300, d_min = 20,
@@ -95,10 +97,10 @@ callpeak <- function(tfile, cfile = NULL, gsize = "hs", tsize = NULL, format = "
                      cutoff_analysis = FALSE, fecutoff = 0.1, call_summits = FALSE,
                      buffer_size = 100000, verbose = 2L, log = TRUE, ...){
     if(is.character(tfile)){
-        tfile <- as.list(file.path(tfile))
+        tfile <- as.list(normalizePath(tfile))
     }
     if(is.character(cfile)){
-        cfile <- as.list(file.path(cfile))
+        cfile <- as.list(normalizePath(cfile))
     }
 
     cl <- basiliskStart(env_macs)
