@@ -20,7 +20,6 @@ jobs:
       - name: Install dependencies
         run: |
           BiocManager::install(c("remotes", "rcmdcheck", "basilisk"))
-          BiocManager::install("hubentu/MACSdata")
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
       - name: Check
