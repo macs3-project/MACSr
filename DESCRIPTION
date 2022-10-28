@@ -1,6 +1,6 @@
 Package: MACSr
 Title: MACS: Model-based Analysis for ChIP-Seq
-Version: 0.99.15
+Version: 1.5.2
 Authors@R: 
     person(given = "Qiang",
            family = "Hu",
@@ -13,7 +13,7 @@ License: BSD_3_clause + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.0
 Depends: R (>= 4.1.0)
 Imports: utils, reticulate, S4Vectors, methods, basilisk, ExperimentHub, AnnotationHub
 Suggests: 
