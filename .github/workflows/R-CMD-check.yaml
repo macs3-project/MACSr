@@ -17,9 +17,15 @@ jobs:
           /bin/bash ~/miniconda.sh -b -p /opt/conda && \
           rm ~/miniconda.sh && \
           ln -s /opt/conda/bin/conda /usr/local/bin/
+      - name: Fix blas bug
+        run: |
+          ARCH=$(uname -m)
+          update-alternatives --set "libblas.so.3-${ARCH}-linux-gnu" "/usr/lib/${ARCH}-linux-gnu/blas/libblas.so.3"
+          update-alternatives --set "liblapack.so.3-${ARCH}-linux-gnu" "/usr/lib/${ARCH}-linux-gnu/lapack/liblapack.so.3"
       - name: Install dependencies
         run: |
-          BiocManager::install(c("remotes", "rcmdcheck", "basilisk"))
+          BiocManager::install("AnVIL")
+          AnVIL::install(c("remotes", "rcmdcheck", "basilisk", "reticulate", "S4Vectors", "ExperimentHub", "AnnotationHub"))
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
       - name: Check
