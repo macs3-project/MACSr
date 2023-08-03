@@ -23,6 +23,9 @@
 #' @param outputfile The output file.
 #' @param outdir The output directory.
 #' @param log Whether to capture logs.
+#' @param verbose Set verbose level of runtime message. 0: only show
+#'     critical message, 1: show additional warning message, 2: show
+#'     process information, 3: show debug messages. DEFAULT:2
 #' @return `macsList` object.
 #' @export
 #' @examples
@@ -41,7 +44,7 @@ bdgbroadcall <- function(ifile, cutoffpeak = 2, cutofflink = 1,
                          minlen = 200L, lvl1maxgap = 30L,
                          lvl2maxgap = 800L, trackline = TRUE,
                          outdir = ".", outputfile = character(),
-                         log = TRUE){
+                         log = TRUE, verbose = 2L){
     ifile <- normalizePath(ifile)
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
@@ -54,7 +57,8 @@ bdgbroadcall <- function(ifile, cutoffpeak = 2, cutofflink = 1,
                                        lvl2maxgap = lvl2maxgap,
                                        trackline = trackline,
                                        outdir = outdir,
-                                       ofile = outputfile)
+                                       ofile = outputfile,
+                                       verbose = verbose)
         .bdgbroadcall <- reticulate::import("MACS3.Commands.bdgbroadcall_cmd")
         if(log){
             .logging()$run()

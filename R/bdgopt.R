@@ -30,6 +30,9 @@
 #'     must be the same as for -m.
 #' @param outdir The output directory.
 #' @param log Whether to capture logs.
+#' @param verbose Set verbose level of runtime message. 0: only show
+#'     critical message, 1: show additional warning message, 2: show
+#'     process information, 3: show debug messages. DEFAULT:2
 #' @return `macsList` object.
 #' @export
 #' @examples
@@ -46,7 +49,7 @@ bdgopt <- function(ifile,
                    method = c("multiply", "add", "p2q", "max", "min"),
                    extraparam = numeric(),
                    outputfile = character(),
-                   outdir = ".", log = TRUE){
+                   outdir = ".", log = TRUE, verbose = 2L){
     method <- match.arg(method)
     ifile <- normalizePath(ifile)
     cl <- basiliskStart(env_macs)
@@ -56,7 +59,8 @@ bdgopt <- function(ifile,
                                        method = method,
                                        extraparam = list(extraparam),
                                        ofile = outputfile,
-                                       outdir = outdir)
+                                       outdir = outdir,
+                                       verbose = verbose)
         .bdgopt <- reticulate::import("MACS3.Commands.bdgopt_cmd")
         if(log){
             .logging()$run()

@@ -12,8 +12,8 @@ randsample(
   number = numeric(),
   seed = -1L,
   tsize = NULL,
-  format = c("AUTO", "BAM", "SAM", "BED", "ELAND", "ELANDMULTI", "ELANDEXPORT",
-    "BOWTIE", "BAMPE", "BEDPE"),
+  format = c("AUTO", "BAM", "SAM", "BED", "ELAND", "ELANDMULTI", "ELANDEXPORT", "BOWTIE",
+    "BAMPE", "BEDPE"),
   buffer_size = 100000L,
   verbose = 2L,
   log = TRUE

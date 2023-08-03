@@ -10,7 +10,8 @@ bdgopt(
   extraparam = numeric(),
   outputfile = character(),
   outdir = ".",
-  log = TRUE
+  log = TRUE,
+  verbose = 2L
 )
 }
 \arguments{
@@ -44,6 +45,10 @@ must be the same as for -m.}
 \item{outdir}{The output directory.}
 
 \item{log}{Whether to capture logs.}
+
+\item{verbose}{Set verbose level of runtime message. 0: only show
+critical message, 1: show additional warning message, 2: show
+process information, 3: show debug messages. DEFAULT:2}
 }
 \value{
 \code{macsList} object.

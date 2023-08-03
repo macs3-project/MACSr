@@ -25,6 +25,9 @@
 #' @param outputfile The output file.
 #' @param outdir The output directory.
 #' @param log Whether to capture logs.
+#' @param verbose Set verbose level of runtime message. 0: only show
+#'     critical message, 1: show additional warning message, 2: show
+#'     process information, 3: show debug messages. DEFAULT:2
 #' @return `macsList` object.
 #' @export
 #' @examples
@@ -44,7 +47,8 @@
 bdgpeakcall <- function(ifile, cutoff = 5, minlen = 200L, maxgap = 30L,
                         call_summits = FALSE, cutoff_analysis = FALSE,
                         trackline = TRUE, outdir = ".",
-                        outputfile = character(), log = TRUE){
+                        outputfile = character(),
+                        log = TRUE, verbose = 2L){
     cl <- basiliskStart(env_macs)
     ifile = normalizePath(ifile)
     on.exit(basiliskStop(cl))
@@ -57,7 +61,8 @@ bdgpeakcall <- function(ifile, cutoff = 5, minlen = 200L, maxgap = 30L,
                                        cutoff_analysis = cutoff_analysis,
                                        trackline = trackline,
                                        outdir = outdir,
-                                       ofile = outputfile)
+                                       ofile = outputfile,
+                                       verbose = verbose)
         .bdgpeakcall <- reticulate::import("MACS3.Commands.bdgpeakcall_cmd")
         if(log){
             .logging()$run()

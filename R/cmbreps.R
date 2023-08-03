@@ -22,6 +22,9 @@
 #'     must be the same as for -m.
 #' @param outdir The output directory.
 #' @param log Whether to capture logs.
+#' @param verbose Set verbose level of runtime message. 0: only show
+#'     critical message, 1: show additional warning message, 2: show
+#'     process information, 3: show debug messages. DEFAULT:2
 #' @return `macsList` object.
 #' @export
 #' @examples
@@ -36,7 +39,7 @@
 cmbreps <- function(ifiles = list(), weights = 1.0,
                     method = c("fisher", "max", "mean"),
                     outputfile = character(),
-                    outdir = ".", log = TRUE){
+                    outdir = ".", log = TRUE, verbose = 2L){
     method <- match.arg(method)
     names(ifiles) <- NULL
     cl <- basiliskStart(env_macs)
@@ -46,7 +49,8 @@ cmbreps <- function(ifiles = list(), weights = 1.0,
                                        weights = weights,
                                        method = method,
                                        ofile = outputfile,
-                                       outdir = outdir)
+                                       outdir = outdir,
+                                       verbose = verbose)
         .cmbreps <- reticulate::import("MACS3.Commands.cmbreps_cmd")
         if(log){
             .logging()$run()

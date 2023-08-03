@@ -14,7 +14,8 @@ bdgpeakcall(
   trackline = TRUE,
   outdir = ".",
   outputfile = character(),
-  log = TRUE
+  log = TRUE,
+  verbose = 2L
 )
 }
 \arguments{
@@ -48,6 +49,10 @@ files. The trackline is required by UCSC.}
 \item{outputfile}{The output file.}
 
 \item{log}{Whether to capture logs.}
+
+\item{verbose}{Set verbose level of runtime message. 0: only show
+critical message, 1: show additional warning message, 2: show
+process information, 3: show debug messages. DEFAULT:2}
 }
 \value{
 \code{macsList} object.

@@ -7,8 +7,7 @@
 refinepeak(
   bedfile,
   ifile,
-  format = c("AUTO", "BAM", "SAM", "BED", "ELAND", "ELANDMULTI", "ELANDEXPORT",
-    "BOWTIE"),
+  format = c("AUTO", "BAM", "SAM", "BED", "ELAND", "ELANDMULTI", "ELANDEXPORT", "BOWTIE"),
   cutoff = 5,
   windowsize = 200L,
   buffer_size = 100000L,

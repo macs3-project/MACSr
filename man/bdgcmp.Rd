@@ -13,7 +13,8 @@ bdgcmp(
   oprefix = character(),
   outputfile = list(),
   outdir = ".",
-  log = TRUE
+  log = TRUE,
+  verbose = 2L
 )
 }
 \arguments{
@@ -61,6 +62,11 @@ must be the same as for -m.}
 \item{outdir}{The output directory.}
 
 \item{log}{Whether to capture logs.}
+
+\item{verbose}{Set verbose level. 0: only show critical message, 1:
+show additional warning message, 2: show process information,
+3: show debug messages. If you want to know where are the
+duplicate reads, use 3. DEFAULT:2}
 }
 \value{
 \code{macsList} object.

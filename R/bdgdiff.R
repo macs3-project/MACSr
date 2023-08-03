@@ -43,6 +43,9 @@
 #'     both conditions. Note: mutually exclusive with --o-prefix.
 #' @param outdir The output directory.
 #' @param log Whether to capture logs.
+#' @param verbose Set verbose level of runtime message. 0: only show
+#'     critical message, 1: show additional warning message, 2: show
+#'     process information, 3: show debug messages. DEFAULT:2
 #' @return `macsList` object.
 #' @export
 #' @examples
@@ -65,7 +68,7 @@ bdgdiff <- function(t1bdg, t2bdg, c1bdg, c2bdg,
                     outdir = ".",
                     oprefix = character(),
                     outputfile = list(),
-                    log = TRUE){
+                    log = TRUE, verbose = 2L){
     t1bdg <- normalizePath(t1bdg)
     t2bdg <- normalizePath(t2bdg)
     c1bdg <- normalizePath(c1bdg)
@@ -85,7 +88,8 @@ bdgdiff <- function(t1bdg, t2bdg, c1bdg, c2bdg,
                                        depth2 = depth2,
                                        oprefix = oprefix,
                                        ofile = outputfile,
-                                       outdir = outdir)
+                                       outdir = outdir,
+                                       verbose = verbose)
         .bdgdiff <- reticulate::import("MACS3.Commands.bdgdiff_cmd")
         if(log){
             .logging()$run()

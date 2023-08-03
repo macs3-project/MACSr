@@ -40,6 +40,10 @@
 #'     must be the same as for -m.
 #' @param outdir The output directory.
 #' @param log Whether to capture logs.
+#' @param verbose Set verbose level. 0: only show critical message, 1:
+#'     show additional warning message, 2: show process information,
+#'     3: show debug messages. If you want to know where are the
+#'     duplicate reads, use 3. DEFAULT:2
 #' @return `macsList` object.
 #' @export
 #' @examples
@@ -55,7 +59,7 @@
 bdgcmp <- function(tfile, cfile, sfactor = 1.0, pseudocount = 0.0,
                    method = c("ppois", "qpois", "subtract", "logFE", "FE", "logLR", "slogLR", "max"),
                    oprefix = character(), outputfile = list(),
-                   outdir = ".", log = TRUE){
+                   outdir = ".", log = TRUE, verbose = 2L){
     method <- lapply(method, function(x)match.arg(x, method))
     tf <- normalizePath(tfile)
     cf <- normalizePath(cfile)
@@ -69,7 +73,8 @@ bdgcmp <- function(tfile, cfile, sfactor = 1.0, pseudocount = 0.0,
                                        method = method,
                                        oprefix = oprefix,
                                        ofile = outputfile,
-                                       outdir = outdir)
+                                       outdir = outdir,
+                                       verbose = verbose)
         .bdgcmp <- reticulate::import("MACS3.Commands.bdgcmp_cmd")
         if(log){
             .logging()$run()
