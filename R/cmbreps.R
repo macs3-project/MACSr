@@ -44,7 +44,7 @@ cmbreps <- function(ifiles = list(), weights = 1.0,
     names(ifiles) <- NULL
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
-    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+    res <- basiliskRun(cl, function(.namespace, outdir){
         opts <- .namespace()$Namespace(ifile = ifiles,
                                        weights = weights,
                                        method = method,
@@ -53,12 +53,11 @@ cmbreps <- function(ifiles = list(), weights = 1.0,
                                        verbose = verbose)
         .cmbreps <- reticulate::import("MACS3.Commands.cmbreps_cmd")
         if(log){
-            .logging()$run()
             reticulate::py_capture_output(.cmbreps$run(opts))
         }else{
             .cmbreps$run(opts)
         }
-    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
+    }, .namespace = .namespace, outdir = outdir)
     if(log){
         message(res)
     }

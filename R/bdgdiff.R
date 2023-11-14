@@ -76,7 +76,7 @@ bdgdiff <- function(t1bdg, t2bdg, c1bdg, c2bdg,
                                        
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
-    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+    res <- basiliskRun(cl, function(.namespace, outdir){
         opts <- .namespace()$Namespace(t1bdg = t1bdg,
                                        t2bdg = t2bdg,
                                        c1bdg = c1bdg,
@@ -92,12 +92,11 @@ bdgdiff <- function(t1bdg, t2bdg, c1bdg, c2bdg,
                                        verbose = verbose)
         .bdgdiff <- reticulate::import("MACS3.Commands.bdgdiff_cmd")
         if(log){
-            .logging()$run()
             reticulate::py_capture_output(.bdgdiff$run(opts))
         }else{
             .bdgdiff$run(opts)
         }
-    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
+    }, .namespace = .namespace, outdir = outdir)
     if(log){
         message(res)
     }

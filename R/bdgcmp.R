@@ -65,7 +65,7 @@ bdgcmp <- function(tfile, cfile, sfactor = 1.0, pseudocount = 0.0,
     cf <- normalizePath(cfile)
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
-    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+    res <- basiliskRun(cl, function(.namespace, outdir){
         opts <- .namespace()$Namespace(tfile = tf,
                                        cfile = cf,
                                        sfactor = sfactor,
@@ -77,12 +77,11 @@ bdgcmp <- function(tfile, cfile, sfactor = 1.0, pseudocount = 0.0,
                                        verbose = verbose)
         .bdgcmp <- reticulate::import("MACS3.Commands.bdgcmp_cmd")
         if(log){
-            .logging()$run()
             reticulate::py_capture_output(.bdgcmp$run(opts))
         }else{
             .bdgcmp$run(opts)
         }
-    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
+    }, .namespace = .namespace, outdir = outdir)
     if(log){
         message(res)
     }

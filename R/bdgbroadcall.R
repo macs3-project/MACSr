@@ -48,7 +48,7 @@ bdgbroadcall <- function(ifile, cutoffpeak = 2, cutofflink = 1,
     ifile <- normalizePath(ifile)
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
-    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+    res <- basiliskRun(cl, function(.namespace, outdir){
         opts <- .namespace()$Namespace(ifile = ifile,
                                        cutoffpeak = cutoffpeak,
                                        cutofflink = cutofflink,
@@ -61,12 +61,11 @@ bdgbroadcall <- function(ifile, cutoffpeak = 2, cutofflink = 1,
                                        verbose = verbose)
         .bdgbroadcall <- reticulate::import("MACS3.Commands.bdgbroadcall_cmd")
         if(log){
-            .logging()$run()
             reticulate::py_capture_output(.bdgbroadcall$run(opts))
         }else{
             .bdgbroadcall$run(opts)
         }
-    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
+    }, .namespace = .namespace, outdir = outdir)
     if(log){
         message(res)
     }

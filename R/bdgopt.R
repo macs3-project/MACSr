@@ -54,7 +54,7 @@ bdgopt <- function(ifile,
     ifile <- normalizePath(ifile)
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
-    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+    res <- basiliskRun(cl, function(.namespace, outdir){
         opts <- .namespace()$Namespace(ifile = ifile,
                                        method = method,
                                        extraparam = list(extraparam),
@@ -63,12 +63,11 @@ bdgopt <- function(ifile,
                                        verbose = verbose)
         .bdgopt <- reticulate::import("MACS3.Commands.bdgopt_cmd")
         if(log){
-            .logging()$run()
             reticulate::py_capture_output(.bdgopt$run(opts))
         }else{
             .bdgopt$run(opts)
         }
-    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
+    }, .namespace = .namespace, outdir = outdir)
     if(log){
         message(res)
     }

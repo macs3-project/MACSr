@@ -13,6 +13,7 @@ class Namespace:
     }
 })
 
+## legency
 .logging <- local({
     .logging <- NULL
     function() {

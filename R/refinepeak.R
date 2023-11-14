@@ -58,7 +58,7 @@ refinepeak <- function(bedfile, ifile,
     }
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
-    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+    res <- basiliskRun(cl, function(.namespace, outdir){
         opts <- .namespace()$Namespace(bedfile = bedfile,
                                        ifile = ifile,
                                        format = format,
@@ -70,12 +70,11 @@ refinepeak <- function(bedfile, ifile,
                                        outdir = outdir)
         .refinepeak <- reticulate::import("MACS3.Commands.refinepeak_cmd")
         if(log){
-            .logging()$run()
             reticulate::py_capture_output(.refinepeak$run(opts))
         }else{
             .refinepeak$run(opts)
         }
-    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
+    }, .namespace = .namespace, outdir = outdir)
     if(log){
         message(res)
     }

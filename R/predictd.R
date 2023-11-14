@@ -46,7 +46,7 @@ predictd <- function(ifile, gsize = "hs", format = "AUTO",
     rfile <- tempfile()
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
-    res <- basiliskRun(cl, function(.logging, .namespace, rfile){
+    res <- basiliskRun(cl, function(.namespace, rfile){
         opts <- .namespace()$Namespace(ifile = ifile,
                                        gsize = gsize,
                                        format = format,
@@ -60,12 +60,11 @@ predictd <- function(ifile, gsize = "hs", format = "AUTO",
                                        buffer_size = buffer_size)
         .predictd <- reticulate::import("MACS3.Commands.predictd_cmd")
         if(log){
-            .logging()$run()
             reticulate::py_capture_output(.predictd$run(opts))
         }else{
             .predictd$run(opts)
         }
-    }, .logging = .logging, .namespace = .namespace, rfile = rfile)
+    }, .namespace = .namespace, rfile = rfile)
     if(log){
         message(res)
     }

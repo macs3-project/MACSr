@@ -52,7 +52,7 @@ bdgpeakcall <- function(ifile, cutoff = 5, minlen = 200L, maxgap = 30L,
     cl <- basiliskStart(env_macs)
     ifile = normalizePath(ifile)
     on.exit(basiliskStop(cl))
-    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+    res <- basiliskRun(cl, function(.namespace, outdir){
         opts <- .namespace()$Namespace(ifile = ifile,
                                        cutoff = cutoff,
                                        minlen = minlen,
@@ -65,12 +65,11 @@ bdgpeakcall <- function(ifile, cutoff = 5, minlen = 200L, maxgap = 30L,
                                        verbose = verbose)
         .bdgpeakcall <- reticulate::import("MACS3.Commands.bdgpeakcall_cmd")
         if(log){
-            .logging()$run()
             reticulate::py_capture_output(.bdgpeakcall$run(opts))
         }else{
             .bdgpeakcall$run(opts)
         }
-    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
+    }, .namespace = .namespace, outdir = outdir)
     if(log){
         message(res)
     }

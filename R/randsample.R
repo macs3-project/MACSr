@@ -60,7 +60,7 @@ randsample <- function(ifile, outdir = ".", outputfile = character(),
 
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
-    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+    res <- basiliskRun(cl, function(.namespace, outdir){
         opts <- .namespace()$Namespace(ifile = ifile,
                                        percentage = percentage,
                                        number = number,
@@ -73,12 +73,11 @@ randsample <- function(ifile, outdir = ".", outputfile = character(),
                                        outdir = outdir)
         .randsample <- reticulate::import("MACS3.Commands.randsample_cmd")
         if(log){
-            .logging()$run()
             reticulate::py_capture_output(.randsample$run(opts))
         }else{
             .randsample$run(opts)
         }
-    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
+    }, .namespace = .namespace, outdir = outdir)
     if(log){
         message(res)
     }

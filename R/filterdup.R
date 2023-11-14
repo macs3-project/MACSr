@@ -61,7 +61,7 @@ filterdup <- function(ifile, gsize = "hs", format = "AUTO",
 
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
-    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+    res <- basiliskRun(cl, function(.namespace, outdir){
         opts <- .namespace()$Namespace(gsize = gsize,
                                        tsize = tsize,
                                        pvalue = pvalue,
@@ -75,12 +75,11 @@ filterdup <- function(ifile, gsize = "hs", format = "AUTO",
                                        dryrun = dryrun)
         .filterdup <- reticulate::import("MACS3.Commands.filterdup_cmd")
         if(log){
-            .logging()$run()
             reticulate::py_capture_output(.filterdup$run(opts))
         }else{
             .filterdup$run(opts)
         }
-    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
+    }, .namespace = .namespace, outdir = outdir)
     if(log){
         message(res)
     }

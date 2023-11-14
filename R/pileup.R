@@ -73,7 +73,7 @@ pileup <- function(ifile, outputfile = character(), outdir = ".",
 
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
-    res <- basiliskRun(cl, function(.logging, .namespace, outdir){
+    res <- basiliskRun(cl, function(.namespace, outdir){
         opts <- .namespace()$Namespace(ifile = ifile,
                                        format = format,
                                        bothdirection = bothdirection,
@@ -84,12 +84,11 @@ pileup <- function(ifile, outputfile = character(), outdir = ".",
                                        outdir = outdir)
         .pileup <- reticulate::import("MACS3.Commands.pileup_cmd")
         if(log){
-            .logging()$run()
             reticulate::py_capture_output(.pileup$run(opts))
         }else{
             .pileup$run(opts)
         }
-    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
+    }, .namespace = .namespace, outdir = outdir)
     if(log){
         message(res)
     }

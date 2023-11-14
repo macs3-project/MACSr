@@ -105,7 +105,7 @@ callpeak <- function(tfile, cfile = NULL, gsize = "hs", tsize = NULL, format = "
 
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
-    res <- basiliskRun(cl, function(.logging, .namespace, outdir,
+    res <- basiliskRun(cl, function(.namespace, outdir,
                                     ...){
         opts <- .namespace()$Namespace(tfile = tfile,
                                        cfile = cfile,
@@ -146,12 +146,11 @@ callpeak <- function(tfile, cfile = NULL, gsize = "hs", tsize = NULL, format = "
 
         .callpeak <- reticulate::import("MACS3.Commands.callpeak_cmd")
         if(log){
-            .logging()$run()
             reticulate::py_capture_output(.callpeak$run(opts))
         }else{
             .callpeak$run(opts)
         }
-    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
+    }, .namespace = .namespace, outdir = outdir)
     if(log){
         message(res)
     }

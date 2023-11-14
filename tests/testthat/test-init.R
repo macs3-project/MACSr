@@ -1,4 +1,3 @@
-context("test filterdup")
 
 datdir <- system.file("extdata", package = "MACSr")
 eh <- ExperimentHub::ExperimentHub()
@@ -10,22 +9,8 @@ CTRLPE <- eh[["EH4564"]]
 CHIPBEDPE <- eh[["EH4560"]]
 CTRLBEDPE <- eh[["EH4565"]]
 
-fd <- filterdup(ifile = CHIP,
-                gsize = 5.2e+7, outputfile = "test.bed", outdir = tempdir(), format = "AUTO")
-test_that("test filterdup", {
-    expect_identical(readLines(fd$outputs),
-                     readLines(file.path(datdir, "run_filterdup_result.bed.gz")))
-})
 
-context("test predictd")
-
-flen <- predictd(ifile = CHIP,
-                 d_min=10, gsize=5.2e+7, plot = NULL)
-test_that("test predictd", {
-    expect_equal(flen, 229)
-})
-
-context("test callpeak")
+context("1. test callpeak")
 
 cp1 <- callpeak(CHIP, CTRL, gsize = 5.2e7, store_bdg = TRUE,
                 name = "run_callpeak_narrow0", outdir = tempdir(),
@@ -98,4 +83,34 @@ test_that("test callpeak on PE broad", {
     expect_identical(readLines(grep("broadPeak", cp12$outputs, value = TRUE)),
                      readLines(file.path(datdir, "run_callpeak_bedpe_broad_peaks.broadPeak")))
 })
+
+context("2. test predictd")
+flen <- predictd(ifile = CHIP,
+                 d_min=10, gsize=5.2e+7, plot = NULL)
+test_that("test predictd", {
+    expect_equal(flen, 229)
+})
+
+
+context("3. test filterdup")
+fd <- filterdup(ifile = CHIP,
+                gsize = 5.2e+7, outputfile = "test.bed", outdir = tempdir(), format = "AUTO")
+test_that("test filterdup", {
+    expect_identical(readLines(fd$outputs),
+                     readLines(file.path(datdir, "run_filterdup_result.bed.gz")))
+})
+
+## ## test callvar
+## if(file.exists(system.file(package="Rsamtools"))){
+##     Rsamtools::indexBam(CHIPPE)
+##     Rsamtools::indexBam(CTRLPE)
+##     callvarpeak <- file.path(datdir, "callvar_testing.narrowPeak")
+##     cv1 <- callvar(peakbed=callvarpeak, tfile=CHIPPE, cfile=CTRLPE, outputfile="PEsample.vcf")
+##     test_that("callvar", {
+##         expect_equal(nrow(read.table(cv1$outputs, sep="\t")), 16)
+##     })
+## }
+
+
+## atac <- hmmratac(bam=ATACSEQBAM, outdir="/tmp/atac", name="hmmratac_yeast500k", save_train=TRUE)
 

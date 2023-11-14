@@ -13,6 +13,13 @@
 #'     critical message, 1: show additional warning message, 2: show
 #'     process information, 3: show debug messages. DEFAULT:2
 #' @param log Whether to capture logs.
+#' @param cutoff_analysis_only Only run the cutoff analysis and output
+#'     a report.  After generating the report, the process will stop.
+#'     The report will help user decide the three crucial parameters
+#'     for `-l`, `-u`, and `-c`. So it's highly recommanded to run
+#'     this first! Please read the report and instructions in `Choices
+#'     of cutoff values` on how to decide the three crucial
+#'     parameters.
 #' @param em_skip Do not perform EM training on the fragment
 #'     distribution. If set, EM_MEANS and EM.STDDEVS will be used
 #'     instead. Default: False
@@ -22,6 +29,18 @@
 #' @param em_stddevs Comma separated list of initial standard
 #'     deviation values for fragment distribution for short fragments,
 #'     mono-, di-, and tri-nucleosomal fragments. Default: 20 20 20 20
+#' @param min_frag_p We will exclude the abnormal fragments that can't
+#'     be assigned to any of the four signal tracks. After we use EM
+#'     to find the means and stddevs of the four distributions, we
+#'     will calculate the likelihood that a given fragment length fit
+#'     any of the four using normal distribution. The criteria we will
+#'     use is that if a fragment length has less than MIN_FRAG_P
+#'     probability to be like either of short, mono, di, or tri-nuc
+#'     fragment, we will exclude it while generating the four signal
+#'     tracks for later HMM training and prediction.  The value should
+#'     be between 0 and 1. Larger the value, more abnormal fragments
+#'     will be allowed. So if you want to include more 'ideal'
+#'     fragments, make this value smaller. Default = 0.001
 #' @param hmm_binsize Size of the bins to split the pileup signals for
 #'     training and decoding with Hidden Markov Model. Must >=
 #'     1. Smaller the binsize, higher the resolution of the results,
@@ -38,8 +57,14 @@
 #' @param hmm_file A JSON file generated from previous HMMRATAC run to
 #'     use instead of creating new one. When provided, HMM training
 #'     will be skipped. Default: NA
+#' @param hmm_training_regions Filename of training regions
+#'     (previously was BED_file) to use for training HMM, instead of
+#'     using foldchange settings to select. Default: NA
 #' @param hmm_randomSeed Seed to set for random sampling of training
 #'     regions. Default: 10151
+#' @param hmm_modelonly Stop the program after generating model. Use
+#'     this option to generate HMM model ONLY, which can be later
+#'     applied with `--model`. Default: False
 #' @param prescan_cutoff The fold change cutoff for prescanning
 #'     candidate regions in the whole dataset. Then we will use HMM to
 #'     predict states on these candidate regions. Higher the prescan
@@ -51,6 +76,13 @@
 #'     called. Please note that, when bin size is small, setting a too
 #'     small OPENREGION_MINLEN will bring a lot of false
 #'     positives. Default: 100
+#' @param pileup_short By default, HMMRATAC will pileup all fragments
+#'     in order to identify regions for training and candidate regions
+#'     for decoding. When this option is on, it will pileup only the
+#'     short fragments to do so. Although it sounds a good idea since
+#'     we assume that open region should have a lot of short
+#'     fragments, it may be possible that the overall short fragments
+#'     are too few to be useful. Default: False
 #' @param keepduplicates Keep duplicate reads from analysis. By
 #'     default, duplicate reads will be removed. Default: False
 #' @param blacklist Filename of blacklisted regions to exclude
@@ -86,19 +118,24 @@
 #' @param ... More options for macs2.
 #' @export
 hmmratac <- function(bam, outdir = ".", name = "NA", verbose = 2L, log = TRUE,
+                     cutoff_analysis_only = FALSE,
                      em_skip = FALSE,
                      em_means = list(50, 200, 400, 600),
                      em_stddevs = list(20, 20, 20, 20),
+                     min_frag_p = 0.001,
                      hmm_binsize = 10L,
                      hmm_lower = 10L,
                      hmm_upper = 20L,
                      hmm_maxTrain = 1000,
                      hmm_training_flanking = 1000,
                      hmm_file = NULL,
+                     hmm_training_regions = NULL,
                      hmm_randomSeed = 10151,
+                     hmm_modelonly = FALSE,
                      prescan_cutoff = 1.2,
                      openregion_minlen = 100,
-                     keepduplicates = "1",
+                     pileup_short = FALSE,
+                     keepduplicates = FALSE,
                      blacklist = NULL,
                      save_digested = FALSE,
                      save_likelihoods = FALSE,
@@ -110,17 +147,19 @@ hmmratac <- function(bam, outdir = ".", name = "NA", verbose = 2L, log = TRUE,
     if(is.character(bam)){
         bam_file <- as.list(normalizePath(bam))
     }
-
+    dir.create(outdir, recursive = TRUE, showWarnings = FALSE)
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
-    res <- basiliskRun(cl, function(.logging, .namespace, outdir,
+    res <- basiliskRun(cl, function(.namespace, outdir,
                                     ...){
         opts <- .namespace()$Namespace(bam_file = bam_file,
                                        name = name,
                                        outdir = outdir,
+                                       cutoff_analysis_only = cutoff_analysis_only,
                                        em_skip = em_skip,
                                        em_means = em_means,
                                        em_stddevs = em_stddevs,
+                                       min_frag_p = min_frag_p,
                                        hmm_binsize = hmm_binsize,
                                        hmm_lower = hmm_lower,
                                        hmm_upper = hmm_upper,
@@ -128,8 +167,11 @@ hmmratac <- function(bam, outdir = ".", name = "NA", verbose = 2L, log = TRUE,
                                        hmm_randomSeed = hmm_randomSeed,
                                        hmm_training_flanking = hmm_training_flanking,
                                        hmm_file = hmm_file,
+                                       hmm_training_regions = hmm_training_regions,
+                                       hmm_modelonly = hmm_modelonly,
                                        prescan_cutoff = prescan_cutoff,
                                        openregion_minlen = openregion_minlen,
+                                       pileup_short = pileup_short,
                                        misc_keep_duplicates = keepduplicates,
                                        blacklist = blacklist,
                                        save_likelihoods = save_likelihoods,
@@ -143,12 +185,11 @@ hmmratac <- function(bam, outdir = ".", name = "NA", verbose = 2L, log = TRUE,
 
         .hmmratac <- reticulate::import("MACS3.Commands.hmmratac_cmd")
         if(log){
-            .logging()$run()
             reticulate::py_capture_output(.hmmratac$run(opts))
         }else{
             .hmmratac$run(opts)
         }
-    }, .logging = .logging, .namespace = .namespace, outdir = outdir)
+    }, .namespace = .namespace, outdir = outdir)
 
     if(log){
         message(res)

@@ -90,7 +90,7 @@ callvar <- function(peakbed, tfile, cfile,
     cfile <- normalizePath(cfile)
     cl <- basiliskStart(env_macs)
     on.exit(basiliskStop(cl))
-    res <- basiliskRun(cl, function(.logging, .namespace){
+    res <- basiliskRun(cl, function(.namespace){
         opts <- .namespace()$Namespace(peakbed = peakbed,
                                        tfile = tfile,
                                        cfile = cfile,
@@ -108,12 +108,11 @@ callvar <- function(peakbed, tfile, cfile,
                                        ofile = outputfile)
         .callvar <- reticulate::import("MACS3.Commands.callvar_cmd")
         if(log){
-            .logging()$run()
             reticulate::py_capture_output(.callvar$run(opts))
         }else{
             .callvar$run(opts)
         }
-    }, .logging = .logging, .namespace = .namespace)
+    }, .namespace = .namespace)
     if(log){
         message(res)
     }
