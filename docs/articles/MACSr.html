@@ -121,8 +121,8 @@ automatically inside its conda environment.</p>
 can be checked from its manual.</p>
 <table class="table">
 <colgroup>
-<col width="19%">
-<col width="80%">
+<col width="18%">
+<col width="81%">
 </colgroup>
 <thead><tr class="header">
 <th>Functions</th>
@@ -183,6 +183,11 @@ files.</td>
 <td>Call variants in given peak regions from the alignment BAM
 files.</td>
 </tr>
+<tr class="even">
+<td><code>hmmratac</code></td>
+<td>Dedicated peak calling based on Hidden Markov Model for ATAC-seq
+data.</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -208,7 +213,7 @@ files.</p>
 <code class="sourceCode R"><span><span class="va">cp1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/callpeak.html">callpeak</a></span><span class="op">(</span><span class="va">CHIP</span>, <span class="va">CTRL</span>, gsize <span class="op">=</span> <span class="fl">5.2e7</span>, store_bdg <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                name <span class="op">=</span> <span class="st">"run_callpeak_narrow0"</span>, outdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>                cutoff_analysis <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [635 MB] </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [635 MB] </span></span>
 <span><span class="co">#&gt; # Command line: </span></span>
 <span><span class="co">#&gt; # ARGUMENTS LIST:</span></span>
 <span><span class="co">#&gt; # name = run_callpeak_narrow0</span></span>
@@ -227,51 +232,51 @@ files.</p>
 <span><span class="co">#&gt; # Additional cutoff on fold-enrichment is: 0.10</span></span>
 <span><span class="co">#&gt; # Paired-End mode is off</span></span>
 <span><span class="co">#&gt;  </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [635 MB] #1 read tag files... </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [635 MB] #1 read treatment tags... </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [638 MB] Detected format is: BED </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [638 MB] * Input file is gzipped. </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [642 MB] #1.2 read input tags... </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [642 MB] Detected format is: BED </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [642 MB] * Input file is gzipped. </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1 tag size is determined as 101 bps </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1 tag size = 101.0 </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1  total tags in treatment: 49622 </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1 user defined the maximum tags... </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1  tags after filtering in treatment: 48047 </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1  Redundant rate of treatment: 0.03 </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1  total tags in control: 50837 </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1 user defined the maximum tags... </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1  tags after filtering in control: 50783 </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1  Redundant rate of control: 0.00 </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1 finished! </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #2 Build Peak Model... </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #2 looking for paired plus/minus strand peaks... </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #2 Total number of paired peaks: 469 </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #2 Model building with cross-correlation: Done </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #2 finished! </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #2 predicted fragment length is 228 bps </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #2 alternative fragment length(s) may be 228 bps </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #2.2 Generate R script for model : /tmp/Rtmp4jg3ab/run_callpeak_narrow0_model.r </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #3 Call peaks... </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #3 Pre-compute pvalue-qvalue table... </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [643 MB] #3 Cutoff vs peaks called will be analyzed! </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [663 MB] #3 Analysis of cutoff vs num of peaks or total length has been saved in b'/tmp/Rtmp4jg3ab/run_callpeak_narrow0_cutoff_analysis.txt' </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [663 MB] #3 In the peak calling step, the following will be performed simultaneously: </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [663 MB] #3   Write bedGraph files for treatment pileup (after scaling if necessary)... run_callpeak_narrow0_treat_pileup.bdg </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [663 MB] #3   Write bedGraph files for control lambda (after scaling if necessary)... run_callpeak_narrow0_control_lambda.bdg </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [663 MB] #3   Pileup will be based on sequencing depth in treatment. </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [663 MB] #3 Call peaks for each chromosome... </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #4 Write output xls file... /tmp/Rtmp4jg3ab/run_callpeak_narrow0_peaks.xls </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #4 Write peak in narrowPeak format file... /tmp/Rtmp4jg3ab/run_callpeak_narrow0_peaks.narrowPeak </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #4 Write summits bed file... /tmp/Rtmp4jg3ab/run_callpeak_narrow0_summits.bed </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] Done!</span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [635 MB] #1 read tag files... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [635 MB] #1 read treatment tags... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [638 MB] Detected format is: BED </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [638 MB] * Input file is gzipped. </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [642 MB] #1.2 read input tags... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [642 MB] Detected format is: BED </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [642 MB] * Input file is gzipped. </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1 tag size is determined as 101 bps </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1 tag size = 101.0 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1  total tags in treatment: 49622 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1 user defined the maximum tags... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1  tags after filtering in treatment: 48047 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1  Redundant rate of treatment: 0.03 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1  total tags in control: 50837 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1 user defined the maximum tags... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1  tags after filtering in control: 50783 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1  Redundant rate of control: 0.00 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1 finished! </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #2 Build Peak Model... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #2 looking for paired plus/minus strand peaks... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [643 MB] #2 Total number of paired peaks: 469 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [643 MB] #2 Model building with cross-correlation: Done </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [643 MB] #2 finished! </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [643 MB] #2 predicted fragment length is 228 bps </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [643 MB] #2 alternative fragment length(s) may be 228 bps </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [643 MB] #2.2 Generate R script for model : /tmp/RtmpIUsM2o/run_callpeak_narrow0_model.r </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [643 MB] #3 Call peaks... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [643 MB] #3 Pre-compute pvalue-qvalue table... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [643 MB] #3 Cutoff vs peaks called will be analyzed! </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [661 MB] #3 Analysis of cutoff vs num of peaks or total length has been saved in b'/tmp/RtmpIUsM2o/run_callpeak_narrow0_cutoff_analysis.txt' </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [661 MB] #3 In the peak calling step, the following will be performed simultaneously: </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [661 MB] #3   Write bedGraph files for treatment pileup (after scaling if necessary)... run_callpeak_narrow0_treat_pileup.bdg </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [661 MB] #3   Write bedGraph files for control lambda (after scaling if necessary)... run_callpeak_narrow0_control_lambda.bdg </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [661 MB] #3   Pileup will be based on sequencing depth in treatment. </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [661 MB] #3 Call peaks for each chromosome... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #4 Write output xls file... /tmp/RtmpIUsM2o/run_callpeak_narrow0_peaks.xls </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #4 Write peak in narrowPeak format file... /tmp/RtmpIUsM2o/run_callpeak_narrow0_peaks.narrowPeak </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #4 Write summits bed file... /tmp/RtmpIUsM2o/run_callpeak_narrow0_summits.bed </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] Done!</span></span>
 <span><span class="va">cp2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/callpeak.html">callpeak</a></span><span class="op">(</span><span class="va">CHIP</span>, <span class="va">CTRL</span>, gsize <span class="op">=</span> <span class="fl">5.2e7</span>, store_bdg <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                name <span class="op">=</span> <span class="st">"run_callpeak_broad"</span>, outdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>                broad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] </span></span>
 <span><span class="co">#&gt; # Command line: </span></span>
 <span><span class="co">#&gt; # ARGUMENTS LIST:</span></span>
 <span><span class="co">#&gt; # name = run_callpeak_broad</span></span>
@@ -291,60 +296,60 @@ files.</p>
 <span><span class="co">#&gt; # Additional cutoff on fold-enrichment is: 0.10</span></span>
 <span><span class="co">#&gt; # Paired-End mode is off</span></span>
 <span><span class="co">#&gt;  </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #1 read tag files... </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #1 read treatment tags... </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] Detected format is: BED </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] * Input file is gzipped. </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #1.2 read input tags... </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] Detected format is: BED </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] * Input file is gzipped. </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #1 tag size is determined as 101 bps </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #1 tag size = 101.0 </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #1  total tags in treatment: 49622 </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #1 user defined the maximum tags... </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #1  tags after filtering in treatment: 48047 </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #1  Redundant rate of treatment: 0.03 </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #1  total tags in control: 50837 </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #1 user defined the maximum tags... </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #1  tags after filtering in control: 50783 </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #1  Redundant rate of control: 0.00 </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #1 finished! </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #2 Build Peak Model... </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #2 looking for paired plus/minus strand peaks... </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #2 Total number of paired peaks: 469 </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #2 Model building with cross-correlation: Done </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #2 finished! </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #2 predicted fragment length is 228 bps </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #2 alternative fragment length(s) may be 228 bps </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #2.2 Generate R script for model : /tmp/Rtmp4jg3ab/run_callpeak_broad_model.r </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #3 Call peaks... </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #3 Call broad peaks with given level1 -log10qvalue cutoff and level2: 1.301030, 1.000000... </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [664 MB] #3 Pre-compute pvalue-qvalue table... </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:34: [664 MB] #3 In the peak calling step, the following will be performed simultaneously: </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:34: [664 MB] #3   Write bedGraph files for treatment pileup (after scaling if necessary)... run_callpeak_broad_treat_pileup.bdg </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:34: [664 MB] #3   Write bedGraph files for control lambda (after scaling if necessary)... run_callpeak_broad_control_lambda.bdg </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:34: [664 MB] #3 Call peaks for each chromosome... </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:34: [664 MB] #4 Write output xls file... /tmp/Rtmp4jg3ab/run_callpeak_broad_peaks.xls </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:34: [664 MB] #4 Write broad peak in broadPeak format file... /tmp/Rtmp4jg3ab/run_callpeak_broad_peaks.broadPeak </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:34: [664 MB] #4 Write broad peak in bed12/gappedPeak format file... /tmp/Rtmp4jg3ab/run_callpeak_broad_peaks.gappedPeak </span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:34: [664 MB] Done!</span></span></code></pre></div>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #1 read tag files... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #1 read treatment tags... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] Detected format is: BED </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] * Input file is gzipped. </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #1.2 read input tags... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] Detected format is: BED </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] * Input file is gzipped. </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #1 tag size is determined as 101 bps </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #1 tag size = 101.0 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #1  total tags in treatment: 49622 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #1 user defined the maximum tags... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #1  tags after filtering in treatment: 48047 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #1  Redundant rate of treatment: 0.03 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #1  total tags in control: 50837 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #1 user defined the maximum tags... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #1  tags after filtering in control: 50783 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #1  Redundant rate of control: 0.00 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #1 finished! </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #2 Build Peak Model... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #2 looking for paired plus/minus strand peaks... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #2 Total number of paired peaks: 469 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #2 Model building with cross-correlation: Done </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #2 finished! </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #2 predicted fragment length is 228 bps </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #2 alternative fragment length(s) may be 228 bps </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #2.2 Generate R script for model : /tmp/RtmpIUsM2o/run_callpeak_broad_model.r </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #3 Call peaks... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #3 Call broad peaks with given level1 -log10qvalue cutoff and level2: 1.301030, 1.000000... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #3 Pre-compute pvalue-qvalue table... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:24: [663 MB] #3 In the peak calling step, the following will be performed simultaneously: </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:24: [663 MB] #3   Write bedGraph files for treatment pileup (after scaling if necessary)... run_callpeak_broad_treat_pileup.bdg </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:24: [663 MB] #3   Write bedGraph files for control lambda (after scaling if necessary)... run_callpeak_broad_control_lambda.bdg </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:24: [663 MB] #3 Call peaks for each chromosome... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:24: [664 MB] #4 Write output xls file... /tmp/RtmpIUsM2o/run_callpeak_broad_peaks.xls </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:24: [664 MB] #4 Write broad peak in broadPeak format file... /tmp/RtmpIUsM2o/run_callpeak_broad_peaks.broadPeak </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:24: [664 MB] #4 Write broad peak in bed12/gappedPeak format file... /tmp/RtmpIUsM2o/run_callpeak_broad_peaks.gappedPeak </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:24: [664 MB] Done!</span></span></code></pre></div>
 <p>Here are the outputs.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cp1</span></span>
 <span><span class="co">#&gt; macsList class</span></span>
 <span><span class="co">#&gt; $outputs:</span></span>
-<span><span class="co">#&gt;  /tmp/Rtmp4jg3ab/run_callpeak_narrow0_control_lambda.bdg</span></span>
-<span><span class="co">#&gt;  /tmp/Rtmp4jg3ab/run_callpeak_narrow0_cutoff_analysis.txt</span></span>
-<span><span class="co">#&gt;  /tmp/Rtmp4jg3ab/run_callpeak_narrow0_model.r</span></span>
-<span><span class="co">#&gt;  /tmp/Rtmp4jg3ab/run_callpeak_narrow0_peaks.narrowPeak</span></span>
-<span><span class="co">#&gt;  /tmp/Rtmp4jg3ab/run_callpeak_narrow0_peaks.xls</span></span>
-<span><span class="co">#&gt;  /tmp/Rtmp4jg3ab/run_callpeak_narrow0_summits.bed</span></span>
-<span><span class="co">#&gt;  /tmp/Rtmp4jg3ab/run_callpeak_narrow0_treat_pileup.bdg </span></span>
+<span><span class="co">#&gt;  /tmp/RtmpIUsM2o/run_callpeak_narrow0_control_lambda.bdg</span></span>
+<span><span class="co">#&gt;  /tmp/RtmpIUsM2o/run_callpeak_narrow0_cutoff_analysis.txt</span></span>
+<span><span class="co">#&gt;  /tmp/RtmpIUsM2o/run_callpeak_narrow0_model.r</span></span>
+<span><span class="co">#&gt;  /tmp/RtmpIUsM2o/run_callpeak_narrow0_peaks.narrowPeak</span></span>
+<span><span class="co">#&gt;  /tmp/RtmpIUsM2o/run_callpeak_narrow0_peaks.xls</span></span>
+<span><span class="co">#&gt;  /tmp/RtmpIUsM2o/run_callpeak_narrow0_summits.bed</span></span>
+<span><span class="co">#&gt;  /tmp/RtmpIUsM2o/run_callpeak_narrow0_treat_pileup.bdg </span></span>
 <span><span class="co">#&gt; $arguments: tfile, cfile, gsize, outdir, name, store_bdg, cutoff_analysis </span></span>
 <span><span class="co">#&gt; $log:</span></span>
-<span><span class="co">#&gt;  INFO  @ 17 Nov 2023 12:43:33: [635 MB] </span></span>
+<span><span class="co">#&gt;  INFO  @ 17 Nov 2023 14:29:22: [635 MB] </span></span>
 <span><span class="co">#&gt;  # Command line: </span></span>
 <span><span class="co">#&gt;  # ARGUMENTS LIST:</span></span>
 <span><span class="co">#&gt;  # name = run_callpeak_narrow0</span></span>
@@ -353,15 +358,15 @@ files.</p>
 <span><span class="va">cp2</span></span>
 <span><span class="co">#&gt; macsList class</span></span>
 <span><span class="co">#&gt; $outputs:</span></span>
-<span><span class="co">#&gt;  /tmp/Rtmp4jg3ab/run_callpeak_broad_control_lambda.bdg</span></span>
-<span><span class="co">#&gt;  /tmp/Rtmp4jg3ab/run_callpeak_broad_model.r</span></span>
-<span><span class="co">#&gt;  /tmp/Rtmp4jg3ab/run_callpeak_broad_peaks.broadPeak</span></span>
-<span><span class="co">#&gt;  /tmp/Rtmp4jg3ab/run_callpeak_broad_peaks.gappedPeak</span></span>
-<span><span class="co">#&gt;  /tmp/Rtmp4jg3ab/run_callpeak_broad_peaks.xls</span></span>
-<span><span class="co">#&gt;  /tmp/Rtmp4jg3ab/run_callpeak_broad_treat_pileup.bdg </span></span>
+<span><span class="co">#&gt;  /tmp/RtmpIUsM2o/run_callpeak_broad_control_lambda.bdg</span></span>
+<span><span class="co">#&gt;  /tmp/RtmpIUsM2o/run_callpeak_broad_model.r</span></span>
+<span><span class="co">#&gt;  /tmp/RtmpIUsM2o/run_callpeak_broad_peaks.broadPeak</span></span>
+<span><span class="co">#&gt;  /tmp/RtmpIUsM2o/run_callpeak_broad_peaks.gappedPeak</span></span>
+<span><span class="co">#&gt;  /tmp/RtmpIUsM2o/run_callpeak_broad_peaks.xls</span></span>
+<span><span class="co">#&gt;  /tmp/RtmpIUsM2o/run_callpeak_broad_treat_pileup.bdg </span></span>
 <span><span class="co">#&gt; $arguments: tfile, cfile, gsize, outdir, name, store_bdg, broad </span></span>
 <span><span class="co">#&gt; $log:</span></span>
-<span><span class="co">#&gt;  INFO  @ 17 Nov 2023 12:43:33: [664 MB] </span></span>
+<span><span class="co">#&gt;  INFO  @ 17 Nov 2023 14:29:23: [662 MB] </span></span>
 <span><span class="co">#&gt;  # Command line: </span></span>
 <span><span class="co">#&gt;  # ARGUMENTS LIST:</span></span>
 <span><span class="co">#&gt;  # name = run_callpeak_broad</span></span>
@@ -403,18 +408,77 @@ of reproducibility.</p>
 <p>The files of all the outputs are collected.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cp1</span><span class="op">$</span><span class="va">outputs</span></span>
-<span><span class="co">#&gt; [1] "/tmp/Rtmp4jg3ab/run_callpeak_narrow0_control_lambda.bdg" </span></span>
-<span><span class="co">#&gt; [2] "/tmp/Rtmp4jg3ab/run_callpeak_narrow0_cutoff_analysis.txt"</span></span>
-<span><span class="co">#&gt; [3] "/tmp/Rtmp4jg3ab/run_callpeak_narrow0_model.r"            </span></span>
-<span><span class="co">#&gt; [4] "/tmp/Rtmp4jg3ab/run_callpeak_narrow0_peaks.narrowPeak"   </span></span>
-<span><span class="co">#&gt; [5] "/tmp/Rtmp4jg3ab/run_callpeak_narrow0_peaks.xls"          </span></span>
-<span><span class="co">#&gt; [6] "/tmp/Rtmp4jg3ab/run_callpeak_narrow0_summits.bed"        </span></span>
-<span><span class="co">#&gt; [7] "/tmp/Rtmp4jg3ab/run_callpeak_narrow0_treat_pileup.bdg"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "/tmp/RtmpIUsM2o/run_callpeak_narrow0_control_lambda.bdg" </span></span>
+<span><span class="co">#&gt; [2] "/tmp/RtmpIUsM2o/run_callpeak_narrow0_cutoff_analysis.txt"</span></span>
+<span><span class="co">#&gt; [3] "/tmp/RtmpIUsM2o/run_callpeak_narrow0_model.r"            </span></span>
+<span><span class="co">#&gt; [4] "/tmp/RtmpIUsM2o/run_callpeak_narrow0_peaks.narrowPeak"   </span></span>
+<span><span class="co">#&gt; [5] "/tmp/RtmpIUsM2o/run_callpeak_narrow0_peaks.xls"          </span></span>
+<span><span class="co">#&gt; [6] "/tmp/RtmpIUsM2o/run_callpeak_narrow0_summits.bed"        </span></span>
+<span><span class="co">#&gt; [7] "/tmp/RtmpIUsM2o/run_callpeak_narrow0_treat_pileup.bdg"</span></span></code></pre></div>
 <p>The <code>log</code> is especially important for <code>MACS</code> to
 check. Detailed information was given in the log when running.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">cp1</span><span class="op">$</span><span class="va">log</span><span class="op">)</span></span>
-<span><span class="co">#&gt; INFO  @ 17 Nov 2023 12:43:33: [635 MB]  # Command line:  # ARGUMENTS LIST: # name = run_callpeak_narrow0 # format = AUTO # ChIP-seq file = ['/home/qhu/.cache/R/ExperimentHub/1071e4528bfa6_4601'] # control file = ['/home/qhu/.cache/R/ExperimentHub/1071e71fe08e5_4606'] # effective genome size = 5.20e+07 # band width = 300 # model fold = [5.0, 50.0] # qvalue cutoff = 5.00e-02 # The maximum gap between significant sites is assigned as the read length/tag size. # The minimum length of peaks is assigned as the predicted fragment length "d". # Larger dataset will be scaled towards smaller dataset. # Range for calculating regional lambda is: 1000 bps and 10000 bps # Broad region calling is off # Additional cutoff on fold-enrichment is: 0.10 # Paired-End mode is off   INFO  @ 17 Nov 2023 12:43:33: [635 MB] #1 read tag files...  INFO  @ 17 Nov 2023 12:43:33: [635 MB] #1 read treatment tags...  INFO  @ 17 Nov 2023 12:43:33: [638 MB] Detected format is: BED  INFO  @ 17 Nov 2023 12:43:33: [638 MB] * Input file is gzipped.  INFO  @ 17 Nov 2023 12:43:33: [642 MB] #1.2 read input tags...  INFO  @ 17 Nov 2023 12:43:33: [642 MB] Detected format is: BED  INFO  @ 17 Nov 2023 12:43:33: [642 MB] * Input file is gzipped.  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1 tag size is determined as 101 bps  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1 tag size = 101.0  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1  total tags in treatment: 49622  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1 user defined the maximum tags...  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s)  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1  tags after filtering in treatment: 48047  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1  Redundant rate of treatment: 0.03  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1  total tags in control: 50837  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1 user defined the maximum tags...  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s)  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1  tags after filtering in control: 50783  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1  Redundant rate of control: 0.00  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #1 finished!  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #2 Build Peak Model...  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #2 looking for paired plus/minus strand peaks...  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #2 Total number of paired peaks: 469  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #2 Model building with cross-correlation: Done  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #2 finished!  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #2 predicted fragment length is 228 bps  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #2 alternative fragment length(s) may be 228 bps  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #2.2 Generate R script for model : /tmp/Rtmp4jg3ab/run_callpeak_narrow0_model.r  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #3 Call peaks...  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #3 Pre-compute pvalue-qvalue table...  INFO  @ 17 Nov 2023 12:43:33: [643 MB] #3 Cutoff vs peaks called will be analyzed!  INFO  @ 17 Nov 2023 12:43:33: [663 MB] #3 Analysis of cutoff vs num of peaks or total length has been saved in b'/tmp/Rtmp4jg3ab/run_callpeak_narrow0_cutoff_analysis.txt'  INFO  @ 17 Nov 2023 12:43:33: [663 MB] #3 In the peak calling step, the following will be performed simultaneously:  INFO  @ 17 Nov 2023 12:43:33: [663 MB] #3   Write bedGraph files for treatment pileup (after scaling if necessary)... run_callpeak_narrow0_treat_pileup.bdg  INFO  @ 17 Nov 2023 12:43:33: [663 MB] #3   Write bedGraph files for control lambda (after scaling if necessary)... run_callpeak_narrow0_control_lambda.bdg  INFO  @ 17 Nov 2023 12:43:33: [663 MB] #3   Pileup will be based on sequencing depth in treatment.  INFO  @ 17 Nov 2023 12:43:33: [663 MB] #3 Call peaks for each chromosome...  INFO  @ 17 Nov 2023 12:43:33: [664 MB] #4 Write output xls file... /tmp/Rtmp4jg3ab/run_callpeak_narrow0_peaks.xls  INFO  @ 17 Nov 2023 12:43:33: [664 MB] #4 Write peak in narrowPeak format file... /tmp/Rtmp4jg3ab/run_callpeak_narrow0_peaks.narrowPeak  INFO  @ 17 Nov 2023 12:43:33: [664 MB] #4 Write summits bed file... /tmp/Rtmp4jg3ab/run_callpeak_narrow0_summits.bed  INFO  @ 17 Nov 2023 12:43:33: [664 MB] Done!</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">cp1</span><span class="op">$</span><span class="va">log</span>, collapse<span class="op">=</span><span class="st">"\n"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [635 MB] </span></span>
+<span><span class="co">#&gt; # Command line: </span></span>
+<span><span class="co">#&gt; # ARGUMENTS LIST:</span></span>
+<span><span class="co">#&gt; # name = run_callpeak_narrow0</span></span>
+<span><span class="co">#&gt; # format = AUTO</span></span>
+<span><span class="co">#&gt; # ChIP-seq file = ['/home/qhu/.cache/R/ExperimentHub/1071e4528bfa6_4601']</span></span>
+<span><span class="co">#&gt; # control file = ['/home/qhu/.cache/R/ExperimentHub/1071e71fe08e5_4606']</span></span>
+<span><span class="co">#&gt; # effective genome size = 5.20e+07</span></span>
+<span><span class="co">#&gt; # band width = 300</span></span>
+<span><span class="co">#&gt; # model fold = [5.0, 50.0]</span></span>
+<span><span class="co">#&gt; # qvalue cutoff = 5.00e-02</span></span>
+<span><span class="co">#&gt; # The maximum gap between significant sites is assigned as the read length/tag size.</span></span>
+<span><span class="co">#&gt; # The minimum length of peaks is assigned as the predicted fragment length "d".</span></span>
+<span><span class="co">#&gt; # Larger dataset will be scaled towards smaller dataset.</span></span>
+<span><span class="co">#&gt; # Range for calculating regional lambda is: 1000 bps and 10000 bps</span></span>
+<span><span class="co">#&gt; # Broad region calling is off</span></span>
+<span><span class="co">#&gt; # Additional cutoff on fold-enrichment is: 0.10</span></span>
+<span><span class="co">#&gt; # Paired-End mode is off</span></span>
+<span><span class="co">#&gt;  </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [635 MB] #1 read tag files... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [635 MB] #1 read treatment tags... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [638 MB] Detected format is: BED </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [638 MB] * Input file is gzipped. </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [642 MB] #1.2 read input tags... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [642 MB] Detected format is: BED </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [642 MB] * Input file is gzipped. </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1 tag size is determined as 101 bps </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1 tag size = 101.0 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1  total tags in treatment: 49622 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1 user defined the maximum tags... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1  tags after filtering in treatment: 48047 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1  Redundant rate of treatment: 0.03 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1  total tags in control: 50837 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1 user defined the maximum tags... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1  tags after filtering in control: 50783 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1  Redundant rate of control: 0.00 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #1 finished! </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #2 Build Peak Model... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:22: [643 MB] #2 looking for paired plus/minus strand peaks... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [643 MB] #2 Total number of paired peaks: 469 </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [643 MB] #2 Model building with cross-correlation: Done </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [643 MB] #2 finished! </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [643 MB] #2 predicted fragment length is 228 bps </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [643 MB] #2 alternative fragment length(s) may be 228 bps </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [643 MB] #2.2 Generate R script for model : /tmp/RtmpIUsM2o/run_callpeak_narrow0_model.r </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [643 MB] #3 Call peaks... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [643 MB] #3 Pre-compute pvalue-qvalue table... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [643 MB] #3 Cutoff vs peaks called will be analyzed! </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [661 MB] #3 Analysis of cutoff vs num of peaks or total length has been saved in b'/tmp/RtmpIUsM2o/run_callpeak_narrow0_cutoff_analysis.txt' </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [661 MB] #3 In the peak calling step, the following will be performed simultaneously: </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [661 MB] #3   Write bedGraph files for treatment pileup (after scaling if necessary)... run_callpeak_narrow0_treat_pileup.bdg </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [661 MB] #3   Write bedGraph files for control lambda (after scaling if necessary)... run_callpeak_narrow0_control_lambda.bdg </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [661 MB] #3   Pileup will be based on sequencing depth in treatment. </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [661 MB] #3 Call peaks for each chromosome... </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #4 Write output xls file... /tmp/RtmpIUsM2o/run_callpeak_narrow0_peaks.xls </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #4 Write peak in narrowPeak format file... /tmp/RtmpIUsM2o/run_callpeak_narrow0_peaks.narrowPeak </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] #4 Write summits bed file... /tmp/RtmpIUsM2o/run_callpeak_narrow0_summits.bed </span></span>
+<span><span class="co">#&gt; INFO  @ 17 Nov 2023 14:29:23: [662 MB] Done!</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">

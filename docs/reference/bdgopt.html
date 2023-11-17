@@ -144,7 +144,7 @@ process information, 3: show debug messages. DEFAULT:2</p></dd>
 <span class="r-in"><span><span class="va">c1</span> <span class="op">&lt;-</span> <span class="fu"><a href="callpeak.html">callpeak</a></span><span class="op">(</span><span class="va">CHIP</span>, <span class="va">CTRL</span>, gsize <span class="op">=</span> <span class="fl">5.2e7</span>, cutoff_analysis <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>               outdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"callpeak_narrow0"</span>,</span></span>
 <span class="r-in"><span>               store_bdg <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:16: [757 MB] </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> # Command line: </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> # ARGUMENTS LIST:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> # name = callpeak_narrow0</span>
@@ -163,65 +163,65 @@ process information, 3: show debug messages. DEFAULT:2</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> # Additional cutoff on fold-enrichment is: 0.10</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> # Paired-End mode is off</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:16: [757 MB] #1 read tag files... </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:16: [757 MB] #1 read treatment tags... </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] Detected format is: BED </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] * Input file is gzipped. </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #1.2 read input tags... </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] Detected format is: BED </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] * Input file is gzipped. </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #1 tag size is determined as 101 bps </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #1 tag size = 101.0 </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #1  total tags in treatment: 49622 </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #1 user defined the maximum tags... </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #1  tags after filtering in treatment: 48047 </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #1  Redundant rate of treatment: 0.03 </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #1  total tags in control: 50837 </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #1 user defined the maximum tags... </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #1  tags after filtering in control: 50783 </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #1  Redundant rate of control: 0.00 </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #1 finished! </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #2 Build Peak Model... </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #2 looking for paired plus/minus strand peaks... </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #2 Total number of paired peaks: 469 </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #2 Model building with cross-correlation: Done </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #2 finished! </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #2 predicted fragment length is 228 bps </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #2 alternative fragment length(s) may be 228 bps </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #2.2 Generate R script for model : /tmp/RtmpeMHyqk/callpeak_narrow0_model.r </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #3 Call peaks... </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #3 Pre-compute pvalue-qvalue table... </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [757 MB] #3 Cutoff vs peaks called will be analyzed! </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [758 MB] #3 Analysis of cutoff vs num of peaks or total length has been saved in b'/tmp/RtmpeMHyqk/callpeak_narrow0_cutoff_analysis.txt' </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [758 MB] #3 In the peak calling step, the following will be performed simultaneously: </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [758 MB] #3   Write bedGraph files for treatment pileup (after scaling if necessary)... callpeak_narrow0_treat_pileup.bdg </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [758 MB] #3   Write bedGraph files for control lambda (after scaling if necessary)... callpeak_narrow0_control_lambda.bdg </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [758 MB] #3   Pileup will be based on sequencing depth in treatment. </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:17: [758 MB] #3 Call peaks for each chromosome... </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:18: [758 MB] #4 Write output xls file... /tmp/RtmpeMHyqk/callpeak_narrow0_peaks.xls </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:18: [758 MB] #4 Write peak in narrowPeak format file... /tmp/RtmpeMHyqk/callpeak_narrow0_peaks.narrowPeak </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:18: [758 MB] #4 Write summits bed file... /tmp/RtmpeMHyqk/callpeak_narrow0_summits.bed </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:18: [758 MB] Done! </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #1 read tag files... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #1 read treatment tags... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] Detected format is: BED </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] * Input file is gzipped. </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #1.2 read input tags... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] Detected format is: BED </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] * Input file is gzipped. </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #1 tag size is determined as 101 bps </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #1 tag size = 101.0 </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #1  total tags in treatment: 49622 </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #1 user defined the maximum tags... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #1  tags after filtering in treatment: 48047 </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #1  Redundant rate of treatment: 0.03 </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #1  total tags in control: 50837 </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #1 user defined the maximum tags... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #1 filter out redundant tags at the same location and the same strand by allowing at most 1 tag(s) </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #1  tags after filtering in control: 50783 </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #1  Redundant rate of control: 0.00 </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #1 finished! </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #2 Build Peak Model... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #2 looking for paired plus/minus strand peaks... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #2 Total number of paired peaks: 469 </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #2 Model building with cross-correlation: Done </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #2 finished! </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #2 predicted fragment length is 228 bps </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #2 alternative fragment length(s) may be 228 bps </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #2.2 Generate R script for model : /tmp/RtmpEPj3Vo/callpeak_narrow0_model.r </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #3 Call peaks... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #3 Pre-compute pvalue-qvalue table... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:18: [758 MB] #3 Cutoff vs peaks called will be analyzed! </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:19: [758 MB] #3 Analysis of cutoff vs num of peaks or total length has been saved in b'/tmp/RtmpEPj3Vo/callpeak_narrow0_cutoff_analysis.txt' </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:19: [758 MB] #3 In the peak calling step, the following will be performed simultaneously: </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:19: [758 MB] #3   Write bedGraph files for treatment pileup (after scaling if necessary)... callpeak_narrow0_treat_pileup.bdg </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:19: [758 MB] #3   Write bedGraph files for control lambda (after scaling if necessary)... callpeak_narrow0_control_lambda.bdg </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:19: [758 MB] #3   Pileup will be based on sequencing depth in treatment. </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:19: [758 MB] #3 Call peaks for each chromosome... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:19: [758 MB] #4 Write output xls file... /tmp/RtmpEPj3Vo/callpeak_narrow0_peaks.xls </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:19: [758 MB] #4 Write peak in narrowPeak format file... /tmp/RtmpEPj3Vo/callpeak_narrow0_peaks.narrowPeak </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:19: [758 MB] #4 Write summits bed file... /tmp/RtmpEPj3Vo/callpeak_narrow0_summits.bed </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:19: [758 MB] Done! </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="va">cfile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"treat_pileup.bdg"</span>, <span class="va">c1</span><span class="op">$</span><span class="va">outputs</span>, value <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">bdgopt</span><span class="op">(</span><span class="va">cfile</span>, method <span class="op">=</span> <span class="st">"min"</span>, extraparam <span class="op">=</span> <span class="fl">10</span>,</span></span>
 <span class="r-in"><span>       outdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, outputfile <span class="op">=</span> <span class="st">"bdgopt_min.bdg"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:18: [758 MB] Read and build bedGraph... </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:18: [758 MB] Modify bedGraph... </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:18: [758 MB] Write bedGraph of modified scores... </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 12:41:18: [758 MB] Finished 'min'! Please check '/tmp/RtmpeMHyqk/bdgopt_min.bdg'! </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:19: [758 MB] Read and build bedGraph... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:19: [758 MB] Modify bedGraph... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:19: [758 MB] Write bedGraph of modified scores... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> INFO  @ 17 Nov 2023 13:42:19: [758 MB] Finished 'min'! Please check '/tmp/RtmpEPj3Vo/bdgopt_min.bdg'! </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> macsList class</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $outputs:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  /tmp/RtmpeMHyqk/bdgopt_min.bdg </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  /tmp/RtmpEPj3Vo/bdgopt_min.bdg </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $arguments: ifile, method, extraparam, outputfile, outdir </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $log:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  INFO  @ 17 Nov 2023 12:41:18: [758 MB] Read and build bedGraph... </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  INFO  @ 17 Nov 2023 12:41:18: [758 MB] Modify bedGraph... </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  INFO  @ 17 Nov 2023 12:41:18: [758 MB] Write bedGraph of modified scores... </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  INFO  @ 17 Nov 2023 12:41:18: [758 MB] Finished 'min'! Please check '/tmp/RtmpeMHyqk/bdgopt_min.bdg'! </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  INFO  @ 17 Nov 2023 13:42:19: [758 MB] Read and build bedGraph... </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  INFO  @ 17 Nov 2023 13:42:19: [758 MB] Modify bedGraph... </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  INFO  @ 17 Nov 2023 13:42:19: [758 MB] Write bedGraph of modified scores... </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  INFO  @ 17 Nov 2023 13:42:19: [758 MB] Finished 'min'! Please check '/tmp/RtmpEPj3Vo/bdgopt_min.bdg'! </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 </code></pre></div>
     </div>
