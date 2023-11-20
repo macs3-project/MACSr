@@ -52,21 +52,23 @@ library(MACSr)
 There are 13 functions imported from MACS3. Details of each function
 can be checked from its manual.
 	
-| Functions      | Description                                                       |
-|----------------|-------------------------------------------------------------------|
-| `callpeak`     | Main MACS3 Function to call peaks from alignment results.         |
-| `bdgpeakcall`  | Call peaks from bedGraph output.                                  |
-| `bdgbroadcall` | Call broad peaks from bedGraph output.                            |
-| `bdgcmp`       | Comparing two signal tracks in bedGraph format.                   |
-| `bdgopt`       | Operate the score column of bedGraph file.                        |
-| `cmbreps`      | Combine BEDGraphs of scores from replicates.                      |
-| `bdgdiff`      | Differential peak detection based on paired four bedGraph files.  |
-| `filterdup`    | Remove duplicate reads, then save in BED/BEDPE format.            |
-| `predictd`     | Predict d or fragment size from alignment results.                |
-| `pileup`       | Pileup aligned reads (single-end) or fragments (paired-end)       |
-| `randsample`   | Randomly choose a number/percentage of total reads.               |
-| `refinepeak`   | Take raw reads alignment, refine peak summits.                    |
-| `callvar`      | Call variants in given peak regions from the alignment BAM files. |
+| Functions      | Description                                                            |
+|----------------|------------------------------------------------------------------------|
+| `callpeak`     | Main MACS3 Function to call peaks from alignment results.              |
+| `bdgpeakcall`  | Call peaks from bedGraph output.                                       |
+| `bdgbroadcall` | Call broad peaks from bedGraph output.                                 |
+| `bdgcmp`       | Comparing two signal tracks in bedGraph format.                        |
+| `bdgopt`       | Operate the score column of bedGraph file.                             |
+| `cmbreps`      | Combine BEDGraphs of scores from replicates.                           |
+| `bdgdiff`      | Differential peak detection based on paired four bedGraph files.       |
+| `filterdup`    | Remove duplicate reads, then save in BED/BEDPE format.                 |
+| `predictd`     | Predict d or fragment size from alignment results.                     |
+| `pileup`       | Pileup aligned reads (single-end) or fragments (paired-end)            |
+| `randsample`   | Randomly choose a number/percentage of total reads.                    |
+| `refinepeak`   | Take raw reads alignment, refine peak summits.                         |
+| `callvar`      | Call variants in given peak regions from the alignment BAM files.      |
+| `hmmratac`     | Dedicated peak calling based on Hidden Markov Model for ATAC-seq data. |
+
 
 ## Function `callpeak`
 We have uploaded multipe test datasets from MACS to a data package
@@ -115,7 +117,7 @@ cp1$outputs
 The `log` is especially important for `MACS` to check. Detailed
 information was given in the log when running.
 ```{r}
-cat(cp1$log)
+cat(paste(cp1$log, collapse="\n"))
 ```
 
 # Resources
