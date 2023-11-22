@@ -4,8 +4,15 @@
 MACS3 R/BioC wrapper
 
 ## Installation
-```{r}
+``` r
 devtools::install_github("macs3-project/MACSr")
+```
+
+From Bioconductor:
+``` r
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("MACSr")
 ```
 
 The package is built on
