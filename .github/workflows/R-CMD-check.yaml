@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: |
           BiocManager::install("AnVIL")
-          AnVIL::install(c("remotes", "rcmdcheck", "basilisk", "reticulate", "S4Vectors", "ExperimentHub", "AnnotationHub"))
+          BiocManager::install(c("remotes", "rcmdcheck", "basilisk", "reticulate", "S4Vectors", "ExperimentHub", "AnnotationHub"))
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
       - name: Check
