@@ -20,6 +20,9 @@
 #'     this first! Please read the report and instructions in `Choices
 #'     of cutoff values` on how to decide the three crucial
 #'     parameters.
+#' @param cutoff_analysis_max The maximum cutoff score for performing cutoff analysis. Together with --cutoff-analysis-steps, the resolution in the final report can be controlled. Please check the description in --cutoff-analysis-steps for detail. DEFAULT: 100
+#' @param cutoff_analysis_steps Steps for performing cutoff analysis. It will be used to decide which cutoff value should be included in the final report. Larger the value, higher resolution the cutoff analysis can be. The cutoff analysis function will first find the smallest (at least 0) and the largest (controlled by --cutoff-analysis-max) foldchange score in the data, then break the range of foldchange score into `CUTOFF_ANALYSIS_STEPS` intervals. It will then use each foldchange score as cutoff to call peaks and calculate the total number of candidate peaks, the total basepairs of peaks, and the average length of peak in basepair. Please note that the final report ideally should include `CUTOFF_ANALYSIS_STEPS` rows, but in practice, if the foldchange cutoff yield zero peak, the row for that foldchange value won't be included.  DEFAULT: 100
+#' @param format Format of input files, \"BAMPE\" or \"BEDPE\". If there are multiple files, they should be in the same format -- either BAMPE or BEDPE. Please check the definition in README. Also please note that the BEDPE only contains three columns -- chromosome, left position of the whole pair, right position of the whole pair-- and is NOT the same BEDPE format used by BEDTOOLS. To convert BAMPE to BEDPE, you can use this command `macs3 filterdup --keep-dup all -f BAMPE -i input.bam -o output.bedpe`. DEFAULT: \"BAMPE\"
 #' @param em_skip Do not perform EM training on the fragment
 #'     distribution. If set, EM_MEANS and EM.STDDEVS will be used
 #'     instead. Default: False
@@ -65,6 +68,7 @@
 #' @param hmm_modelonly Stop the program after generating model. Use
 #'     this option to generate HMM model ONLY, which can be later
 #'     applied with `--model`. Default: False
+#' @param hmm_type Use --hmm-type to select a Gaussian ('gaussian') or Poisson ('poisson') model for the hidden markov model in HMMRATAC. Default: 'gaussian'.
 #' @param prescan_cutoff The fold change cutoff for prescanning
 #'     candidate regions in the whole dataset. Then we will use HMM to
 #'     predict states on these candidate regions. Higher the prescan
@@ -119,6 +123,9 @@
 #' @export
 hmmratac <- function(bam, outdir = ".", name = "NA", verbose = 2L, log = TRUE,
                      cutoff_analysis_only = FALSE,
+                     cutoff_analysis_max = 100,
+                     cutoff_analysis_steps = 100,
+                     format = "BAMPE",
                      em_skip = FALSE,
                      em_means = list(50, 200, 400, 600),
                      em_stddevs = list(20, 20, 20, 20),
@@ -132,6 +139,7 @@ hmmratac <- function(bam, outdir = ".", name = "NA", verbose = 2L, log = TRUE,
                      hmm_training_regions = NULL,
                      hmm_randomSeed = 10151,
                      hmm_modelonly = FALSE,
+                     hmm_type = "gaussian",
                      prescan_cutoff = 1.2,
                      openregion_minlen = 100,
                      pileup_short = FALSE,
@@ -152,10 +160,13 @@ hmmratac <- function(bam, outdir = ".", name = "NA", verbose = 2L, log = TRUE,
     on.exit(basiliskStop(cl))
     res <- basiliskRun(cl, function(.namespace, outdir,
                                     ...){
-        opts <- .namespace()$Namespace(bam_file = bam_file,
+        opts <- .namespace()$Namespace(input_file = bam_file,
                                        name = name,
                                        outdir = outdir,
                                        cutoff_analysis_only = cutoff_analysis_only,
+                                       cutoff_analysis_max = cutoff_analysis_max,
+                                       cutoff_analysis_steps = cutoff_analysis_steps,
+                                       format = format,
                                        em_skip = em_skip,
                                        em_means = em_means,
                                        em_stddevs = em_stddevs,
@@ -169,6 +180,7 @@ hmmratac <- function(bam, outdir = ".", name = "NA", verbose = 2L, log = TRUE,
                                        hmm_file = hmm_file,
                                        hmm_training_regions = hmm_training_regions,
                                        hmm_modelonly = hmm_modelonly,
+                                       hmm_type = hmm_type,
                                        prescan_cutoff = prescan_cutoff,
                                        openregion_minlen = openregion_minlen,
                                        pileup_short = pileup_short,
