@@ -14,6 +14,7 @@ refinepeak(
   verbose = 2L,
   outdir = "./",
   outputfile = character(),
+  oprefix = character(),
   log = TRUE
 )
 }
@@ -32,7 +33,7 @@ which format the file is. Please check the definition in README
 file if you choose
 ELAND/ELANDMULTI/ELANDEXPORT/SAM/BAM/BOWTIE. DEFAULT: \"AUTO\""}
 
-\item{cutoff}{Cutoff DEFAULT: 5}
+\item{cutoff}{Cutoff. Regions with SPP wtd score lower than cutoff will not be considerred.  DEFAULT: 5}
 
 \item{windowsize}{Scan window size on both side of the summit
 (default: 100bp)}
@@ -52,10 +53,12 @@ show additional warning message, 2: show process information,
 3: show debug messages. If you want to know where are the
 duplicate reads, use 3. DEFAULT:2}
 
-\item{outdir}{The output directory.}
+\item{outdir}{Output file name. Mutually exclusive with --o-prefix.}
 
 \item{outputfile}{Output bedGraph file name. If not specified, will
 write to standard output. REQUIRED.}
+
+\item{oprefix}{Output file prefix. Mutually exclusive with -o/--ofile.}
 
 \item{log}{Whether to capture logs.}
 }
@@ -63,9 +66,7 @@ write to standard output. REQUIRED.}
 \code{macsList} object.
 }
 \description{
-(Experimental) Take raw reads alignment, refine peak summits and
-give scores measuring balance of waston/crick tags. Inspired by
-SPP.
+Take raw reads alignment, refine peak summits. Inspired by SPP.
 }
 \examples{
 eh <- ExperimentHub::ExperimentHub()
