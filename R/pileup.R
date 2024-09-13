@@ -5,9 +5,7 @@
 #' filtering or sequencing depth scaling, so you may need to do
 #' certain pre/post-processing.
 #'
-#' @param ifile Alignment file. If multiple files are given as '-t A B
-#'     C', then they will all be read and combined. Note that pair-end
-#'     data is not supposed to work with this command. REQUIRED.
+#' @param ifile Alignment file. If multiple files are given as '-t A B C', then they will all be read and combined. REQUIRED.
 #' @param format Format of tag file, \"AUTO\", \"BED\", \"ELAND\",
 #'     \"ELANDMULTI\", \"ELANDEXPORT\", \"SAM\", \"BAM\", \"BOWTIE\",
 #'     \"BAMPE\", or \"BEDPE\". The default AUTO option will let
@@ -17,21 +15,7 @@
 #'     \"BOWTIE\". If the format is BAMPE or BEDPE, please specify it
 #'     explicitly. Please note that when the format is BAMPE or BEDPE,
 #'     the -B and --extsize options would be ignored.
-#' @param bothdirection By default, any read will be extended towards
-#'     downstream direction by extension size. So it's \[0,size-1\]
-#'     (1-based index system) for plus strand read and \[-size+1,0\] for
-#'     minus strand read where position 0 is 5' end of the aligned
-#'     read. Default behavior can simulate MACS3 way of piling up ChIP
-#'     sample reads where extension size is set as fragment size/d. If
-#'     this option is set as on, aligned reads will be extended in
-#'     both upstream and downstream directions by extension size. It
-#'     means \[-size,size\] where 0 is the 5' end of a aligned read. It
-#'     can partially simulate MACS3 way of piling up control
-#'     reads. However MACS3 local bias is calculated by maximizing the
-#'     expected pileup over a ChIP fragment size/d estimated from
-#'     10kb, 1kb, d and whole genome background. This option will be
-#'     ignored when the format is set as BAMPE or BEDPE. DEFAULT:
-#'     False
+#' @param bothdirection By default, any read will be extended towards downstream direction by extension size. So it's [0,size-1] (1-based index system) for plus strand read and [-size+1,0] for minus strand read where position 0 is 5' end of the aligned read. Default behavior can simulate MACS3 way of piling up ChIP sample reads where extension size is set as fragment size/d. If this option is set as on, aligned reads will be extended in both upstream and downstream directions by extension size. It means [-size,size] where 0 is the 5' end of a aligned read. It can partially simulate MACS3 way of piling up control reads. However MACS3 local bias is calculated by maximizing the expected pileup over a ChIP fragment size/d estimated from 10kb, 1kb, d and whole genome background. This option will be ignored when the format is set as BAMPE or BEDPE. DEFAULT: False
 #' @param extsize The extension size in bps. Each alignment read will
 #'     become a EXTSIZE of fragment, then be piled up. Check
 #'     description for -B for detail. It's twice the `shiftsize` in
@@ -50,8 +34,7 @@
 #'     show additional warning message, 2: show process information,
 #'     3: show debug messages. If you want to know where are the
 #'     duplicate reads, use 3. DEFAULT:2
-#' @param outputfile Output bedGraph file name. If not specified, will
-#'     write to standard output. REQUIRED.
+#' @param outputfile Output bedGraph file name. If not specified, will write to standard output. REQUIRED.
 #' @param outdir The output directory.
 #' @param log Whether to capture logs.
 #' @return `macsList` object.

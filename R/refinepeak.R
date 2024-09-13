@@ -1,8 +1,6 @@
 #' refinepeak
 #'
-#' (Experimental) Take raw reads alignment, refine peak summits and
-#' give scores measuring balance of waston/crick tags. Inspired by
-#' SPP.
+#' Take raw reads alignment, refine peak summits. Inspired by SPP.
 #'
 #' @param bedfile Candidate peak file in BED format. REQUIRED.
 #' @param ifile ChIP-seq alignment file. If multiple files are given
@@ -15,7 +13,7 @@
 #'     which format the file is. Please check the definition in README
 #'     file if you choose
 #'     ELAND/ELANDMULTI/ELANDEXPORT/SAM/BAM/BOWTIE. DEFAULT: \"AUTO\""
-#' @param cutoff Cutoff DEFAULT: 5
+#' @param cutoff Cutoff. Regions with SPP wtd score lower than cutoff will not be considerred.  DEFAULT: 5
 #' 
 #' @param windowsize Scan window size on both side of the summit
 #'     (default: 100bp)
@@ -34,7 +32,8 @@
 #'     duplicate reads, use 3. DEFAULT:2
 #' @param outputfile Output bedGraph file name. If not specified, will
 #'     write to standard output. REQUIRED.
-#' @param outdir The output directory.
+#' @param oprefix Output file prefix. Mutually exclusive with -o/--ofile.
+#' @param outdir Output file name. Mutually exclusive with --o-prefix.
 #' @param log Whether to capture logs.
 #' @return `macsList` object.
 #' @export
@@ -51,7 +50,8 @@ refinepeak <- function(bedfile, ifile,
                                   "ELANDMULTI","ELANDEXPORT","BOWTIE"),
                        cutoff = 5, windowsize = 200L,
                        buffer_size = 100000L, verbose = 2L,
-                       outdir = "./", outputfile = character(), log =TRUE){
+                       outdir = "./", outputfile = character(), 
+                       oprefix = character(), log =TRUE){
     format <- match.arg(format)
     if(is.character(ifile)){
         ifile <- as.list(normalizePath(ifile))
@@ -67,6 +67,7 @@ refinepeak <- function(bedfile, ifile,
                                        buffer_size = buffer_size,
                                        verbose = verbose,
                                        ofile = outputfile,
+                                       oprefix = oprefix,
                                        outdir = outdir)
         .refinepeak <- reticulate::import("MACS3.Commands.refinepeak_cmd")
         if(log){

@@ -13,26 +13,18 @@
 #'     1. Incompatible with callpeak --SPMR output. REQUIRED
 #' @param c2bdg MACS control lambda bedGraph for condition
 #'     2. Incompatible with callpeak --SPMR output. REQUIRED
-#' @param cutoff logLR cutoff. DEFAULT: 3 (likelihood
-#'     ratio=1000)", default = 3
+#' @param cutoff log10LR cutoff. Regions with signals lower than cutoff will not be considerred as enriched regions. DEFAULT: 3 (likelihood ratio=1000)
 #' @param minlen Minimum length of differential region. Try bigger value to remove small regions. DEFAULT: 200",
 #'     default = 200
 #' @param maxgap Maximum gap to merge nearby differential
 #'     regions. Consider a wider gap for broad marks. Maximum gap
 #'     should be smaller than minimum length (-g). DEFAULT:
-#'     100", default = 100
+#'     100
 #' @param depth1 Sequencing depth (# of non-redundant reads in
 #'     million) for condition 1. It will be used together with
 #'     --d2. See description for --d2 below for how to assign
 #'     them. Default: 1
-#' @param depth2 Sequencing depth (# of non-redundant reads in
-#'     million) for condition 2. It will be used together with
-#'     --d1. DEPTH1 and DEPTH2 will be used to calculate scaling
-#'     factor for each sample, to down-scale larger sample to the
-#'     level of smaller one. For example, while comparing 10 million
-#'     condition 1 and 20 million condition 2, use --d1 10 --d2 20,
-#'     then pileup value in bedGraph for condition 2 will be divided
-#'     by 2. Default: 1
+#' @param depth2 Sequencing depth (# of non-redundant reads in million) for condition 2. It will be used together with --d1. DEPTH1 and DEPTH2 will be used to calculate scaling factor for each sample, to down-scale larger sample to the level of smaller one. For example, while comparing 10 million condition 1 and 20 million condition 2, use --d1 10 --d2 20, then pileup value in bedGraph for condition 2 will be divided by 2. Default: 1
 #' 
 #' @param oprefix Output file prefix. Actual files will be named as
 #'     PREFIX_cond1.bed, PREFIX_cond2.bed and
