@@ -84,7 +84,7 @@
 #'     time to read alignment files). Minimum memory requested for
 #'     reading an alignment file is about # of CHROMOSOME *
 #'     BUFFER_SIZE * 8 Bytes. DEFAULT: 100000
-#' @param ... More options for macs2.
+#' @param ... More options for macs3.
 #' @export
 hmmratac <- function(input_file, outdir = ".", name = "NA", verbose = 2L, log = TRUE,
                      cutoff_analysis_only = FALSE,

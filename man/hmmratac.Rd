@@ -157,7 +157,7 @@ time to read alignment files). Minimum memory requested for
 reading an alignment file is about # of CHROMOSOME *
 BUFFER_SIZE * 8 Bytes. DEFAULT: 100000}
 
-\item{...}{More options for macs2.}
+\item{...}{More options for macs3.}
 }
 \description{
 Dedicated peak calling based on Hidden Markov Model for ATAC-seq

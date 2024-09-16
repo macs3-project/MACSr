@@ -45,7 +45,7 @@
 #'     critical message, 1: show additional warning message, 2: show
 #'     process information, 3: show debug messages. DEFAULT:2
 #' @param log Whether to capture logs.
-#' @param ... More options for macs2.
+#' @param ... More options for macs3.
 #' @importFrom reticulate py_capture_output
 #' @return `macsList` object.
 #' @export

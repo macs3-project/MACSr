@@ -127,7 +127,7 @@ process information, 3: show debug messages. DEFAULT:2}
 
 \item{log}{Whether to capture logs.}
 
-\item{...}{More options for macs2.}
+\item{...}{More options for macs3.}
 }
 \value{
 \code{macsList} object.

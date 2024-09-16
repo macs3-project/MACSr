@@ -46,7 +46,7 @@ files. The trackline is required by UCSC.}
 scores. If it is given as A, and method is 'ppois', output file
 will be A_ppois.bdg. Mutually exclusive with -o/--ofile.}
 
-\item{log}{Whether to capture logs. ?? not seeing logs as an option}
+\item{log}{Whether to capture logs.}
 
 \item{verbose}{Set verbose level of runtime message. 0: only show
 critical message, 1: show additional warning message, 2: show
