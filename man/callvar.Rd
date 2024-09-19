@@ -27,14 +27,9 @@ callvar(
 \item{peakbed}{Peak regions in BED format, sorted by
 coordinates. REQUIRED.}
 
-\item{tfile}{ChIP-seq/ATAC-seq treatment file in BAM format,
-containing only records in peak regions, sorted by
-coordinates. Check instruction on how to make the file using
-samtools. REQUIRED.}
+\item{tfile}{ChIP-seq/ATAC-seq treatment file in BAM format, sorted by coordinates. Make sure the .bai file is avaiable in the same directory. REQUIRED.}
 
-\item{cfile}{Control file in BAM format, containing only records in
-peak regions, sorted by coordinates. Check instruction on how
-to make the file using samtools.}
+\item{cfile}{Optional control file in BAM format, sorted by coordinates. Make sure the .bai file is avaiable in the same directory.}
 
 \item{outputfile}{Output VCF file name.}
 
@@ -55,15 +50,7 @@ position, mapping strand and the same CIGAR code. Default:
 1. When sequencing depth is high, to set a higher value might
 help evaluate the correct allele ratio.}
 
-\item{fermi}{Option to control when to apply local assembly through
-Fermi. By default (set as 'auto'), while SAPPER detects any
-INDEL variant in a peak region, it will utilize Fermi to
-recover the actual DNA sequences to refine the read
-alignments. If set as 'on', Fermi will be always invoked. It
-can increase specificity however sensivity and speed will be
-significantly lower. If set as 'off', Fermi won't be invoked at
-all. If so, speed and sensitivity can be higher but specificity
-will be significantly lower. Default: auto}
+\item{fermi}{Option to control when to apply local assembly through fermi-lite. By default (set as 'auto'), while callvar detects any INDEL variant in a peak region, it will utilize fermi-lite to recover the actual DNA sequences to refine the read alignments. If set as 'on', fermi-lite will be always invoked. It can increase specificity however sensivity and speed will be significantly lower. If set as 'off', Fermi won't be invoked at all. If so, speed and sensitivity can be higher but specificity will be significantly lower. Default: auto}
 
 \item{fermiMinOverlap}{The minimal overlap for fermi to initially
 assemble two reads. Must be between 1 and read length. A longer

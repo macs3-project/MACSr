@@ -38,18 +38,7 @@ sample. DEFAULT: 1.0}
 logFE or FE. The count will be applied after normalization of
 sequencing depth. DEFAULT: 0.0, no pseudocount is applied.}
 
-\item{method}{Method to use while calculating a score in any bin by
-comparing treatment value and control value. Available choices
-are: ppois, qpois, subtract, logFE, logLR, and slogLR. They
-represent Poisson Pvalue (-log10(pvalue) form) using control as
-lambda and treatment as observation, q-value through a BH
-process for poisson pvalues, subtraction from treatment, linear
-scale fold enrichment, log10 fold enrichment(need to set
-pseudocount), log10 likelihood between ChIP-enriched model and
-open chromatin model(need to set pseudocount), symmetric log10
-likelihood between two ChIP-enrichment models, or maximum value
-between the two tracks. Default option is
-ppois.",default="ppois".}
+\item{method}{Method to use while calculating a score in any bin by comparing treatment value and control value. Available choices are: ppois, qpois, subtract, logFE, FE, logLR, slogLR, and max. They represent Poisson Pvalue (-log10(pvalue) form) using control as lambda and treatment as observation, q-value through a BH process for poisson pvalues, subtraction from treatment, linear scale fold enrichment, log10 fold enrichment(need to set pseudocount), log10 likelihood between ChIP-enriched model and open chromatin model(need to set pseudocount), symmetric log10 likelihood between two ChIP-enrichment models, or maximum value between the two tracks. Default option is ppois.}
 
 \item{oprefix}{The PREFIX of output bedGraph file to write
 scores. If it is given as A, and method is 'ppois', output file

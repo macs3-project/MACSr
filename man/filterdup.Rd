@@ -20,37 +20,21 @@ filterdup(
 )
 }
 \arguments{
-\item{ifile}{Input file(s).}
+\item{ifile}{Alignment file. If multiple files are given as '-t A B C', then they will all be read and combined. REQUIRED.}
 
-\item{gsize}{Effective genome size. It can be 1.0e+9 or 1000000000,
-or shortcuts:'hs' for human (2.7e9), 'mm' for mouse (1.87e9),
-'ce' for C. elegans (9e7) and 'dm' for fruitfly (1.2e8),
-Default:hs.}
+\item{gsize}{Effective genome size. It can be 1.0e+9 or 1000000000, or shortcuts:'hs' for human (2,913,022,398), 'mm' for mouse (2,652,783,500), 'ce' for C. elegans (100,286,401) and 'dm' for fruitfly (142,573,017), Default:hs. The effective genome size numbers for the above four species are collected from Deeptools https://deeptools.readthedocs.io/en/develop/content/feature/effectiveGenomeSize.html Please refer to deeptools to define the best genome size you plan to use.}
 
-\item{format}{Input file format.}
+\item{format}{Format of tag file, \"AUTO\", \"BED\" or \"ELAND\" or \"ELANDMULTI\" or \"ELANDEXPORT\" or \"SAM\" or \"BAM\" or \"BOWTIE\" or \"BAMPE\" or \"BEDPE\". The default AUTO option will let '\%(prog)s' decide which format the file is. Please check the definition in README file if you choose ELAND/ELANDMULTI/ELANDEXPORT/SAM/BAM/BOWTIE or BAMPE/BEDPE. DEFAULT: \"AUTO\"}
 
 \item{tsize}{Tag size. This will override the auto detected tag
-size.}
+size. DEFAULT: Not set}
 
 \item{pvalue}{Pvalue cutoff for binomial distribution
 test. DEFAULT:1e-5.}
 
-\item{keepduplicates}{It controls the behavior towards duplicate
-tags at the exact same location -- the same coordination and
-the same strand. The 'auto' option makes MACS calculate the
-maximum tags at the exact same location based on binomal
-distribution using 1e-5 as pvalue cutoff; and the 'all' option
-keeps every tags.  If an integer is given, at most this number
-of tags will be kept at the same location. Note, if you've used
-samtools or picard to flag reads as 'PCR/Optical duplicate' in
-bit 1024, MACS2 will still read them although the reads may be
-decided by MACS2 as duplicate later. If you plan to rely on
-samtools/picard/any other tool to filter duplicates, please
-remove those duplicate reads and save a new alignment file then
-ask MACS2 to keep all by '--keep-dup all'. The default is to
-keep one tag at the same location. Default: 1".}
+\item{keepduplicates}{It controls the 'macs3 filterdup' behavior towards duplicate tags/pairs at the exact same location -- the same coordination and the same strand. The 'auto' option makes '\%(prog)s' calculate the maximum tags at the exact same location based on binomal distribution using given -p as pvalue cutoff; and the 'all' option keeps every tags (useful if you only want to convert formats). If an integer is given, at most this number of tags will be kept at the same location. Note, MACS3 callpeak function uses KEEPDUPLICATES=1 as default. Note, if you've used samtools or picard to flag reads as 'PCR/Optical duplicate' in bit 1024, MACS3 will still read them although the reads may be decided by MACS3 as duplicate later. Default: auto}
 
-\item{outputfile}{The output file.}
+\item{outputfile}{Output BED file name. If not specified, will write to standard output. Note, if the input format is BAMPE or BEDPE, the output will be in BEDPE format. DEFAULT: stdout}
 
 \item{outdir}{The output directory.}
 

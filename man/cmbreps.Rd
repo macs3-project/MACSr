@@ -6,7 +6,6 @@
 \usage{
 cmbreps(
   ifiles = list(),
-  weights = 1,
   method = c("fisher", "max", "mean"),
   outputfile = character(),
   outdir = ".",
@@ -18,9 +17,6 @@ cmbreps(
 \item{ifiles}{MACS score in bedGraph for each replicate. Require at
 least 2 files such as '-i A B C D'. REQUIRED}
 
-\item{weights}{Weight for each replicate. Default is 1.0 for
-each. When given, require same number of parameters as IFILE.}
-
 \item{method}{to use while combining scores from replicates. 1)
 fisher: Fisher's combined probability test. It requires scores
 in ppois form (-log10 pvalues) from bdgcmp. Other types of
@@ -31,9 +27,7 @@ Fisher's method, max or mean will take scores AS IS which means
 they won't convert scores from log scale to linear scale or
 vice versa.", default="fisher"}
 
-\item{outputfile}{Output filename. Mutually exclusive with
---o-prefix. The number and the order of arguments for --ofile
-must be the same as for -m.}
+\item{outputfile}{Output BEDGraph filename for combined scores.}
 
 \item{outdir}{The output directory.}
 

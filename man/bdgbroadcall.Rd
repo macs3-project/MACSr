@@ -14,6 +14,7 @@ bdgbroadcall(
   trackline = TRUE,
   outdir = ".",
   outputfile = character(),
+  oprefix = character(),
   log = TRUE,
   verbose = 2L
 )
@@ -21,14 +22,9 @@ bdgbroadcall(
 \arguments{
 \item{ifile}{MACS score in bedGraph. REQUIRED.}
 
-\item{cutoffpeak}{Cutoff for peaks depending on which method you
-used for score track. If the file contains qvalue scores from
-MACS3, score 2 means qvalue 0.01. DEFAULT: 2}
+\item{cutoffpeak}{Cutoff for peaks depending on which method you used for score track. If the file contains qvalue scores from MACS3, score 2 means qvalue 0.01. Regions with signals lower than cutoff will not be considerred as enriched regions. DEFAULT: 2}
 
-\item{cutofflink}{Cutoff for linking regions/low abundance regions
-depending on which method you used for score track. If the file
-contains qvalue scores from MACS3, score 1 means qvalue 0.1,
-and score 0.3 means qvalue 0.5. DEFAULT: 1", default = 1}
+\item{cutofflink}{Cutoff for linking regions/low abundance regions depending on which method you used for score track. If the file contains qvalue scores from MACS3, score 1 means qvalue 0.1, and score 0.3 means qvalue 0.5. DEFAULT: 1}
 
 \item{minlen}{minimum length of peak, better to set it as d value. DEFAULT: 200",
 default = 200}
@@ -44,7 +40,11 @@ files. The trackline is required by UCSC.}
 
 \item{outdir}{The output directory.}
 
-\item{outputfile}{The output file.}
+\item{outputfile}{Output file name. Mutually exclusive with --o-prefix}
+
+\item{oprefix}{The PREFIX of output bedGraph file to write
+scores. If it is given as A, and method is 'ppois', output file
+will be A_ppois.bdg. Mutually exclusive with -o/--ofile.}
 
 \item{log}{Whether to capture logs.}
 

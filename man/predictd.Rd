@@ -19,19 +19,16 @@ predictd(
 )
 }
 \arguments{
-\item{ifile}{Input file(s).}
+\item{ifile}{ChIP-seq alignment file. If multiple files are given as '-t A B C', then they will all be read and combined. REQUIRED.}
 
-\item{gsize}{Effective genome size. It can be 1.0e+9 or 1000000000,
-or shortcuts:'hs' for human (2.7e9), 'mm' for mouse (1.87e9),
-'ce' for C. elegans (9e7) and 'dm' for fruitfly (1.2e8),
-Default:hs.}
+\item{gsize}{Effective genome size. It can be 1.0e+9 or 1000000000, or shortcuts:'hs' for human (2,913,022,398), 'mm' for mouse (2,652,783,500), 'ce' for C. elegans (100,286,401) and 'dm' for fruitfly (142,573,017), Default:hs. The effective genome size numbers for the above four species are collected from Deeptools https://deeptools.readthedocs.io/en/develop/content/feature/effectiveGenomeSize.html Please refer to deeptools to define the best genome size you plan to use.}
 
-\item{format}{Input file format.}
+\item{format}{Format of tag file, \"AUTO\", \"BED\" or \"ELAND\" or \"ELANDMULTI\" or \"ELANDEXPORT\" or \"SAM\" or \"BAM\" or \"BOWTIE\" or \"BAMPE\" or \"BEDPE\". The default AUTO option will let MACS decide which format the file is. However, if you want to decide the average insertion size/fragment size from PE data such as BEDPE or BAMPE, please specify the format as BAMPE or BEDPE since MACS3 won't automatically recognize three two formats with -f AUTO. Please be aware that in PE mode, -g, -s, --bw, --d-min, -m, and --rfile have NO effect. DEFAULT: \"AUTO\"}
 
 \item{plot}{PDF path of peak model and correlation plots.}
 
 \item{tsize}{Tag size. This will override the auto detected tag
-size.}
+size. DEFAULT: Not set}
 
 \item{bw}{Band width for picking regions to compute fragment
 size. This value is only used while building the shifting

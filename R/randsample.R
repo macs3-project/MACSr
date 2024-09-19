@@ -1,19 +1,11 @@
 #' randsample
 #'
-#' Randomly sample number/percentage of total reads.
+#' Randomly choose a number/percentage of total reads, then save in BED/BEDPE format file.
 #'
-#' @param ifile Alignment file. If multiple files are given as '-t A B
-#'     C', then they will all be read and combined. Note that pair-end
-#'     data is not supposed to work with this command. REQUIRED.
-#' @param percentage Percentage of tags you want to keep. Input 80.0
-#'     for 80%%. This option can't be used at the same time with
-#'     -n/--num. REQUIRED
-#' @param number Number of tags you want to keep. Input 8000000 or
-#'     8e+6 for 8 million. This option can't be used at the same time
-#'     with -p/--percent. Note that the number of tags in output is
-#'     approximate as the number specified here. REQUIRED
-#' @param seed Set the random seed while down sampling data. Must be a
-#'     non-negative integer in order to be effective. DEFAULT: not set
+#' @param ifile Alignment file. If multiple files are given as '-t A B C', then they will all be read and combined. REQUIRED.
+#' @param percentage Percentage of tags you want to keep. Input 80.0 for 80%%. This option can't be used at the same time with -n/--num. If the setting is 100, it will keep all the reads and convert any format that MACS3 supports into BED or BEDPE (if input is BAMPE) format. REQUIRED
+#' @param number Number of tags you want to keep. Input 8000000 or 8e+6 for 8 million. This option can't be used at the same time with -p/--percent. Note that the number of tags in output is approximate as the number specified here. REQUIRED
+#' @param seed Set the random seed while down sampling data. Must be a non-negative integer in order to be effective. If you want more reproducible results, please specify a random seed and record it.DEFAULT: not set
 #' @param tsize Tag size. This will override the auto detected tag
 #'     size. DEFAULT: Not set
 #' @param format Format of tag file, \"AUTO\", \"BED\" or \"ELAND\" or
@@ -37,8 +29,7 @@
 #'     show additional warning message, 2: show process information,
 #'     3: show debug messages. If you want to know where are the
 #'     duplicate reads, use 3. DEFAULT:2
-#' @param outputfile Output bedGraph file name. If not specified, will
-#'     write to standard output. REQUIRED.
+#' @param outputfile Output BED file name. If not specified, will write to standard output. Note, if the input format is BAMPE or BEDPE, the output will be in BEDPE format. DEFAULT: stdout
 #' @param outdir The output directory.
 #' @param log Whether to capture logs.
 #' @return `macsList` object.

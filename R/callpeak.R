@@ -1,81 +1,51 @@
 #' callpeak
 #'
 #' Main MACS3 Function to call peaks from alignment results.
-#' @param tfile ChIP-seq treatment files.
-#' @param cfile Control files.
-#' @param gsize Effective genome size. It can be 1.0e+9 or 1000000000,
-#'     or shortcuts:'hs' for human (2.7e9), 'mm' for mouse (1.87e9),
-#'     'ce' for C. elegans (9e7) and 'dm' for fruitfly (1.2e8),
-#'     Default:hs.
+#' @param tfile ChIP-seq treatment file. If multiple files are given as '-t A B C', then they will all be read and pooled together. REQUIRED.
+#' @param cfile Control file. If multiple files are given as '-c A B C', they will be pooled to estimate ChIP-seq background noise.
+#' @param gsize Effective genome size. It can be 1.0e+9 or 1000000000, or shortcuts:'hs' for human (2,913,022,398), 'mm' for mouse (2,652,783,500), 'ce' for C. elegans (100,286,401) and 'dm' for fruitfly (142,573,017), Default:hs. The effective genome size numbers for the above four species are collected from Deeptools https://deeptools.readthedocs.io/en/develop/content/feature/effectiveGenomeSize.html Please refer to deeptools to define the best genome size you plan to use.
 #' @param tsize Tag size/read length. This will override the auto
 #'     detected tag size. DEFAULT: Not set
-#' @param format Format of tag file, "AUTO", "BED" or "ELAND" or
-#'     "ELANDMULTI" or "ELANDEXPORT" or "SAM" or "BAM" or "BOWTIE" or
-#'     "BAMPE" or "BEDPE".
-#' @param keepduplicates It controls the behavior towards duplicate
-#'     tags at the exact same location -- the same coordination and
-#'     the same strand.
+#' @param format Format of tag file, \"AUTO\", \"BED\" or \"ELAND\" or \"ELANDMULTI\" or \"ELANDEXPORT\" or \"SAM\" or \"BAM\" or \"BOWTIE\" or \"BAMPE\" or \"BEDPE\". The default AUTO option will let MACS decide which format (except for BAMPE and BEDPE which should be implicitly set) the file is. Please check the definition in README. Please note that if the format is set as BAMPE or BEDPE, MACS3 will call its special Paired-end mode to call peaks by piling up the actual ChIPed fragments defined by both aligned ends, instead of predicting the fragment size first and extending reads. Also please note that the BEDPE only contains three columns, and is NOT the same BEDPE format used by BEDTOOLS. DEFAULT: \"AUTO\"
+#' @param keepduplicates It controls the  behavior towards duplicate tags at the exact same location -- the same coordination and the same strand. The 'auto' option makes MACS calculate the maximum tags at the exact same location based on binomal distribution using 1e-5 as pvalue cutoff; and the 'all' option keeps every tags. If an integer is given, at most this number of tags will be kept at the same location. Note, if you've used samtools or picard to flag reads as 'PCR/Optical duplicate' in bit 1024, MACS3 will still read them although the reads may be decided by MACS3 as duplicate later. If you plan to rely on samtools/picard/any other tool to filter duplicates, please remove those duplicate reads and save a new alignment file then ask MACS3 to keep all by '--keep-dup all'. The default is to keep one tag at the same location. Default: 1
 #' @param outdir If specified all output files will be written to that
 #'     directory.
-#' @param name Experiment name, which will be used to generate output
-#'     file names.
+#' @param name Experiment name, which will be used to generate output file names. DEFAULT: \"NA\"
 #' @param store_bdg Whether or not to save extended fragment pileup,
 #'     and local lambda tracks (two files) at every bp into a bedGraph
 #'     file.
-#' @param do_SPMR If True, MACS will SAVE signal per million reads for
-#'     fragment pileup profiles.
-#' @param trackline Tells MACS to include trackline with bedGraph
-#'     files.
-#' @param nomodel Whether or not to build the shifting model.
-#' @param shift The arbitrary shift in bp. Use discretion while
-#'     setting it other than default value.
-#' @param extsize The arbitrary extension size in bp.
-#' @param bw Band width for picking regions to compute fragment size.
-#' @param d_min Minimum fragment size in basepair. Any predicted
-#'     fragment size less than this will be excluded.
-#' @param mfold Select the regions within MFOLD range of
-#'     high-confidence enrichment ratio against background to build
-#'     model.
-#' @param onauto Whether turn on the auto pair model process.
-#' @param qvalue Minimum FDR (q-value) cutoff for peak detection.
-#' @param pvalue Pvalue cutoff for peak detection. DEFAULT: not set.
+#' @param do_SPMR If True, MACS will SAVE signal per million reads for fragment pileup profiles. It won't interfere with computing pvalue/qvalue during peak calling, since internally MACS3 keeps using the raw pileup and scaling factors between larger and smaller dataset to calculate statistics measurements. If you plan to use the signal output in bedGraph to call peaks using bdgcmp and bdgpeakcall, you shouldn't use this option because you will end up with different results. However, this option is recommended for displaying normalized pileup tracks across many datasets. Require -B to be set. Default: False
+#' @param trackline Instruct MACS to include trackline in the header of output files, including the bedGraph, narrowPeak, gappedPeak, BED format files. To include this trackline is necessary while uploading them to the UCSC genome browser. You can also mannually add these trackline to corresponding output files. For example, in order to upload narrowPeak file to UCSC browser, add this to as the first line -- `track type=narrowPeak name=\"my_peaks\" description=\"my peaks\"`. Default: Not to include trackline.
+#' @param nomodel Whether or not to build the shifting model. If True, MACS will not build model. by default it means shifting size = 100, try to set extsize to change it. It's highly recommended that while you have many datasets to process and you plan to compare different conditions, aka differential calling, use both 'nomodel' and 'extsize' to make signal files from different datasets comparable. DEFAULT: False
+#' @param shift (NOT the legacy --shiftsize option!) The arbitrary shift in bp. Use discretion while setting it other than default value. When NOMODEL is set, MACS will use this value to move cutting ends (5') towards 5'->3' direction then apply EXTSIZE to extend them to fragments. When this value is negative, ends will be moved toward 3'->5' direction. Recommended to keep it as default 0 for ChIP-Seq datasets, or -1 * half of EXTSIZE together with EXTSIZE option for detecting enriched cutting loci such as certain DNAseI-Seq datasets. Note, you can't set values other than 0 if format is BAMPE or BEDPE for paired-end data. DEFAULT: 0.
+#' @param extsize The arbitrary extension size in bp. When nomodel is true, MACS will use this value as fragment size to extend each read towards 3' end, then pile them up. It's exactly twice the number of obsolete SHIFTSIZE. In previous language, each read is moved 5'->3' direction to middle of fragment by 1/2 d, then extended to both direction with 1/2 d. This is equivalent to say each read is extended towards 5'->3' into a d size fragment. DEFAULT: 200. EXTSIZE and SHIFT can be combined when necessary. Check SHIFT option.
+#' @param bw Band width for picking regions to compute fragment size. This value is only used while building the shifting model. Tweaking this is not recommended. DEFAULT: 300
+#' @param d_min Minimum fragment size in basepair. Any predicted fragment size less than this will be excluded. DEFAULT: 20
+#' @param mfold Select the regions within MFOLD range of high-confidence enrichment ratio against background to build model. Fold-enrichment in regions must be lower than upper limit, and higher than the lower limit. Use as \"-m 10 30\". This setting is only used while building the shifting model. Tweaking it is not recommended. DEFAULT:5 50
+#' @param onauto Whether turn on the auto pair model process. If set, when MACS failed to build paired model, it will use the nomodel settings, the --exsize parameter to extend each tags towards 3' direction. Not to use this automate fixation is a default behavior now. DEFAULT: False
+#' @param qvalue Minimum FDR (q-value) cutoff for peak detection. DEFAULT: 0.05. -q, and -p are mutually exclusive.
+#' @param pvalue Pvalue cutoff for peak detection. DEFAULT: not set. -q, and -p are mutually exclusive. If pvalue cutoff is set, qvalue will not be calculated and reported as -1 in the final .xls file.
 #' @param tempdir Optional directory to store temp files.
-#' @param nolambda If True, MACS will use fixed background lambda as
-#'     local lambda for every peak region.
-#' @param scaleto When set to 'small', scale the larger sample up to
-#'     the smaller sample.
-#' @param downsample When set, random sampling method will scale down
-#'     the bigger sample. By default, MACS uses linear scaling.
-#' @param slocal The small nearby region in basepairs to calculate
-#'     dynamic lambda.
-#' @param llocal The large nearby region in basepairs to calculate
-#'     dynamic lambda.
-#' @param broad If set, MACS will try to call broad peaks using the
-#'     --broad-cutoff setting.
+#' @param nolambda If True, MACS will use fixed background lambda as local lambda for every peak region. Normally, MACS calculates a dynamic local lambda to reflect the local bias due to the potential chromatin accessibility.
+#' @param scaleto When set to 'small', scale the larger sample up to the smaller sample. When set to 'larger', scale the smaller sample up to the bigger sample. By default, scale to 'small'. This option replaces the obsolete '--to-large' option. The default behavior is recommended since it will lead to less significant p/q-values in general but more specific results. Keep in mind that scaling down will influence control/input sample more. DEFAULT: 'small', the choice is either 'small' or 'large'.
+#' @param downsample When set, random sampling method will scale down the bigger sample. By default, MACS uses linear scaling. Warning: This option will make your result unstable and irreproducible since each time, random reads would be selected. Consider to use 'randsample' script instead. <not implmented>If used together with --SPMR, 1 million unique reads will be randomly picked.</not implemented> Caution: due to the implementation, the final number of selected reads may not be as you expected! DEFAULT: False
+#' @param seed Set the random seed while down sampling data. Must be a non-negative integer in order to be effective. DEFAULT: not set
+#' @param slocal The small nearby region in basepairs to calculate dynamic lambda. This is used to capture the bias near the peak summit region. Invalid if there is no control data. If you set this to 0, MACS will skip slocal lambda calculation. *Note* that MACS will always perform a d-size local lambda calculation while the control data is available. The final local bias would be the maximum of the lambda value from d, slocal, and llocal size windows. While control is not available, d and slocal lambda won't be considered. DEFAULT: 1000
+#' @param llocal The large nearby region in basepairs to calculate dynamic lambda. This is used to capture the surround bias. If you set this to 0, MACS will skip llocal lambda calculation. *Note* that MACS will always perform a d-size local lambda calculation while the control data is available. The final local bias would be the maximum of the lambda value from d, slocal, and llocal size windows. While control is not available, d and slocal lambda won't be considered. DEFAULT: 10000.
+#' @param broad Cutoff for broad region. This option is not available unless --broad is set. If -p is set, this is a pvalue cutoff, otherwise, it's a qvalue cutoff. Please note that in broad peakcalling mode, MACS3 uses this setting to control the overall peak calling behavior, then uses -q or -p setting to define regions inside broad region as 'stronger' enrichment. DEFAULT: 0.1
 #' @param broadcutoff Cutoff for broad region. This option is not
 #'     available unless --broad is set.
-#' @param maxgap Maximum gap between significant sites to cluster them
-#'     together. The DEFAULT value is the detected read length/tag
-#'     size.
-#' @param minlen Minimum length of a peak. The DEFAULT value is the predicted
-#'     fragment size d.
-#' @param cutoff_analysis While set, MACS2 will analyze number or
-#'     total length of peaks that can be called by different p-value
-#'     cutoff then output a summary table to help user decide a better
-#'     cutoff.
-#' @param fecutoff When set, the value will be used to filter out
-#'     peaks with low fold-enrichment.
-#' @param call_summits If set, MACS will use a more sophisticated
-#'     signal processing approach to find subpeak summits in each
-#'     enriched peak region.
-#' @param buffer_size Buffer size for incrementally increasing
-#'     internal array size to store reads alignment
-#'     information. DEFAULT: 100000.
+#' @param maxgap Maximum gap between significant sites to cluster them together. The DEFAULT value is the detected read length/tag size.
+#' @param minlen Minimum length of a peak. The DEFAULT value is the predicted fragment size d. Note, if you set a value smaller than the fragment size, it may have NO effect on the result. For BROAD peak calling, try to set a large value such as 500bps. You can also use '--cutoff-analysis' option with default setting, and  check the column 'avelpeak' under different cutoff values to decide a reasonable minlen value.
+#' @param cutoff_analysis While set, MACS3 will analyze number or total length of peaks that can be called by different p-value cutoff then output a summary table to help user decide a better cutoff. The table will be saved in NAME_cutoff_analysis.txt file. Note, minlen and maxgap may affect the results. WARNING: May take  ~30 folds longer time to finish. The result can be useful for users to decide a reasonable cutoff value. DEFAULT: False
+#' @param fecutoff When set, the value will be used as the minimum requirement to filter out peaks with low fold-enrichment. Note, MACS3 adds one as pseudocount while calculating fold-enrichment. By default, it is set as 1 so there is no filtering. DEFAULT: 1.0
+#' @param call_summits If set, MACS will use a more sophisticated signal processing approach to find subpeak summits in each enriched peak region. DEFAULT: False
+#' @param buffer_size Buffer size for incrementally increasing internal array size to store reads alignment information. In most cases, you don't have to change this parameter. However, if there are large number of chromosomes/contigs/scaffolds in your alignment, it's recommended to specify a smaller buffer size in order to decrease memory usage (but it will take longer time to read alignment files). Minimum memory requested for reading an alignment file is about # of CHROMOSOME * BUFFER_SIZE * 8 Bytes. DEFAULT: 100000
 #' @param verbose Set verbose level of runtime message. 0: only show
 #'     critical message, 1: show additional warning message, 2: show
 #'     process information, 3: show debug messages. DEFAULT:2
 #' @param log Whether to capture logs.
-#' @param ... More options for macs2.
+#' @param ... More options for macs3.
 #' @importFrom reticulate py_capture_output
 #' @return `macsList` object.
 #' @export
@@ -93,7 +63,7 @@ callpeak <- function(tfile, cfile = NULL, gsize = "hs", tsize = NULL, format = "
                      mfold = c(5, 50), onauto = FALSE, qvalue = 0.05, pvalue = NULL,
                      tempdir = "/tmp", nolambda = FALSE, scaleto = "small", downsample = FALSE,
                      slocal = 1000, llocal = 10000, broad = FALSE, broadcutoff = 0.1,
-                     maxgap = NULL, minlen = NULL,
+                     maxgap = NULL, minlen = NULL, seed = -1,
                      cutoff_analysis = FALSE, fecutoff = 0.1, call_summits = FALSE,
                      buffer_size = 100000, verbose = 2L, log = TRUE, ...){
     if(is.character(tfile)){

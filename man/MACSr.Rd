@@ -2,10 +2,15 @@
 % Please edit documentation in R/MACSr-package.R
 \docType{package}
 \name{MACSr}
+\alias{MACSr-package}
 \alias{MACSr}
 \title{MACSr}
 \description{
 The Model-based Analysis of ChIP-Seq (MACS) is a widely used
 toolkit for identifying transcript factor binding sites. This
 package is an R wrapper of the lastest MACS3.
+}
+\author{
+\strong{Maintainer}: Qiang Hu \email{Qiang.Hu@roswellpark.org}
+
 }

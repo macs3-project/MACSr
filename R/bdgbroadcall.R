@@ -5,13 +5,8 @@
 #' bedGraph files from MACS3 are accpetable.
 #'
 #' @param ifile MACS score in bedGraph. REQUIRED.
-#' @param cutoffpeak Cutoff for peaks depending on which method you
-#'     used for score track. If the file contains qvalue scores from
-#'     MACS3, score 2 means qvalue 0.01. DEFAULT: 2
-#' @param cutofflink Cutoff for linking regions/low abundance regions
-#'     depending on which method you used for score track. If the file
-#'     contains qvalue scores from MACS3, score 1 means qvalue 0.1,
-#'     and score 0.3 means qvalue 0.5. DEFAULT: 1", default = 1
+#' @param cutoffpeak Cutoff for peaks depending on which method you used for score track. If the file contains qvalue scores from MACS3, score 2 means qvalue 0.01. Regions with signals lower than cutoff will not be considerred as enriched regions. DEFAULT: 2
+#' @param cutofflink Cutoff for linking regions/low abundance regions depending on which method you used for score track. If the file contains qvalue scores from MACS3, score 1 means qvalue 0.1, and score 0.3 means qvalue 0.5. DEFAULT: 1
 #' @param minlen minimum length of peak, better to set it as d value. DEFAULT: 200",
 #'     default = 200
 #' @param lvl1maxgap maximum gap between significant peaks, better to
@@ -20,7 +15,10 @@
 #'     to set it as 4 times of d value. DEFAULT: 800
 #' @param trackline Tells MACS not to include trackline with bedGraph
 #'     files. The trackline is required by UCSC.
-#' @param outputfile The output file.
+#' @param outputfile Output file name. Mutually exclusive with --o-prefix
+#' @param oprefix The PREFIX of output bedGraph file to write
+#'     scores. If it is given as A, and method is 'ppois', output file
+#'     will be A_ppois.bdg. Mutually exclusive with -o/--ofile.
 #' @param outdir The output directory.
 #' @param log Whether to capture logs.
 #' @param verbose Set verbose level of runtime message. 0: only show
@@ -44,6 +42,7 @@ bdgbroadcall <- function(ifile, cutoffpeak = 2, cutofflink = 1,
                          minlen = 200L, lvl1maxgap = 30L,
                          lvl2maxgap = 800L, trackline = TRUE,
                          outdir = ".", outputfile = character(),
+                         oprefix = character(),
                          log = TRUE, verbose = 2L){
     ifile <- normalizePath(ifile)
     cl <- basiliskStart(env_macs)
@@ -58,6 +57,7 @@ bdgbroadcall <- function(ifile, cutoffpeak = 2, cutofflink = 1,
                                        trackline = trackline,
                                        outdir = outdir,
                                        ofile = outputfile,
+                                       oprefix = oprefix,
                                        verbose = verbose)
         .bdgbroadcall <- reticulate::import("MACS3.Commands.bdgbroadcall_cmd")
         if(log){
