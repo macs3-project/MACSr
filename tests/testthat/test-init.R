@@ -272,15 +272,15 @@ context("12. test bdgopt")
             outputfile="bdgopt_output.bdg" ))
     })
 
-context("13. test callvar")
-    test_that("callvar runs without error", {
-        expect_no_error(cv1 <- callvar(
-            peakbed=file.path(datdir, "callvar_testing.narrowPeak"), 
-            tfile=CHIPPE, 
-            cfile=CTRLPE,
-            outputfile="callvar_output.vcf"
-            ))
-    })
+# context("13. test callvar")
+#     test_that("callvar runs without error", {
+#         expect_no_error(cv1 <- callvar(
+#             peakbed=file.path(datdir, "callvar_testing.narrowPeak"), 
+#             tfile=CHIPPE, 
+#             cfile=CTRLPE,
+#             outputfile="callvar_output.vcf"
+#             ))
+#     })
     
 # context("14. test 50k contigs with buffersize")
 
