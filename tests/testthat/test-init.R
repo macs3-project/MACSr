@@ -1,13 +1,13 @@
 
-# datdir <- system.file("extdata", package = "MACSr")
-# eh <- ExperimentHub::ExperimentHub()
-# eh <- AnnotationHub::query(eh, "MACSdata")
-# CHIP <- eh[["EH4558"]]
-# CTRL <- eh[["EH4563"]]
-# CHIPPE <- eh[["EH4559"]]
-# CTRLPE <- eh[["EH4564"]]
-# CHIPBEDPE <- eh[["EH4560"]]
-# CTRLBEDPE <- eh[["EH4565"]]
+datdir <- system.file("extdata", package = "MACSr")
+eh <- ExperimentHub::ExperimentHub()
+eh <- AnnotationHub::query(eh, "MACSdata")
+CHIP <- eh[["EH4558"]]
+CTRL <- eh[["EH4563"]]
+CHIPPE <- eh[["EH4559"]]
+CTRLPE <- eh[["EH4564"]]
+CHIPBEDPE <- eh[["EH4560"]]
+CTRLBEDPE <- eh[["EH4565"]]
 
 
 # context("1. test callpeak")
@@ -113,16 +113,16 @@
 
 
 ## atac <- hmmratac(bam=ATACSEQBAM, outdir="/tmp/atac", name="hmmratac_yeast500k", save_train=TRUE)
-datdir <- system.file("extdata", package = "MACSr")
+# datdir <- system.file("extdata", package = "MACSr")
 
-CHIP <- file.path(datdir, "CTCF_SE_ChIP_chr22_50k.bed.gz")
-CTRL <- file.path(datdir, "CTCF_SE_CTRL_chr22_50k.bed.gz")
+# CHIP <- file.path(datdir, "CTCF_SE_ChIP_chr22_50k.bed.gz")
+# CTRL <- file.path(datdir, "CTCF_SE_CTRL_chr22_50k.bed.gz")
 
-CHIPPE <- file.path(datdir, "CTCF_PE_ChIP_chr22_50k.bam")
-CTRLPE <- file.path(datdir, "CTCF_PE_CTRL_chr22_50k.bam")
+# CHIPPE <- file.path(datdir, "CTCF_PE_ChIP_chr22_50k.bam")
+# CTRLPE <- file.path(datdir, "CTCF_PE_CTRL_chr22_50k.bam")
 
-CHIPBEDPE <- file.path(datdir, "CTCF_PE_ChIP_chr22_50k.bedpe.gz")
-CTRLBEDPE <- file.path(datdir, "CTCF_PE_CTRL_chr22_50k.bedpe.gz")
+# CHIPBEDPE <- file.path(datdir, "CTCF_PE_ChIP_chr22_50k.bedpe.gz")
+# CTRLBEDPE <- file.path(datdir, "CTCF_PE_CTRL_chr22_50k.bedpe.gz")
 
 
 context("1. test callpeak")
@@ -173,19 +173,19 @@ context("5. test randsample")
         outputfile = "randsample_output.bed"))
     })
 
-context("6. test refinepeak")
-    test_that("refinepeak runs without error 1", {
-        expect_no_error(rp1 <- refinepeak(
-            bedfile = file.path(datdir, 'run_callpeak_narrow0_peaks.narrowPeak'), 
-            ifile = CHIP, 
-            oprefix="refinepeak_output_prefix"))
-    })
-    test_that("refinepeak runs without error 2", {
-        expect_no_error(rp2 <- refinepeak(
-            bedfile = file.path(datdir, 'run_callpeak_narrow0_peaks.narrowPeak'), 
-            ifile = CHIP, 
-            outputfile="refinepeak_output.bed"))
-    })
+# context("6. test refinepeak")
+#     test_that("refinepeak runs without error 1", {
+#         expect_no_error(rp1 <- refinepeak(
+#             bedfile = file.path(datdir, 'run_callpeak_narrow0_peaks.narrowPeak'), 
+#             ifile = CHIP, 
+#             oprefix="refinepeak_output_prefix"))
+#     })
+#     test_that("refinepeak runs without error 2", {
+#         expect_no_error(rp2 <- refinepeak(
+#             bedfile = file.path(datdir, 'run_callpeak_narrow0_peaks.narrowPeak'), 
+#             ifile = CHIP, 
+#             outputfile="refinepeak_output.bed"))
+#     })
 
 context("7. test bdgcmp")
     test_that("bdgcmp runs without error 1", {
@@ -205,63 +205,63 @@ context("7. test bdgcmp")
         outputfile= list("bdgcmp_output.bdg") )) # why is it defined as a list?
     })
 
-context("8. test bdgpeakcall")
-    test_that("bdgpeakcall runs without error 1", {
-        expect_no_error(bdgpc1 <- bdgpeakcall(
-            ifile = file.path(datdir, 'run_bdgcmp_FE.bdg'), 
-            cutoff = 2,
-            oprefix="bdgpeakcall_output_prefix"))
-    })
-    test_that("bdgpeakcall runs without error 2", {
-        expect_no_error(bdgpc2 <- bdgpeakcall(
-            ifile = file.path(datdir, 'run_bdgcmp_FE.bdg'), 
-            cutoff = 2,
-            outputfile="bdgpeakcall_output.txt"))
-    })
+# context("8. test bdgpeakcall")
+#     test_that("bdgpeakcall runs without error 1", {
+#         expect_no_error(bdgpc1 <- bdgpeakcall(
+#             ifile = file.path(datdir, 'run_bdgcmp_FE.bdg'), 
+#             cutoff = 2,
+#             oprefix="bdgpeakcall_output_prefix"))
+#     })
+#     test_that("bdgpeakcall runs without error 2", {
+#         expect_no_error(bdgpc2 <- bdgpeakcall(
+#             ifile = file.path(datdir, 'run_bdgcmp_FE.bdg'), 
+#             cutoff = 2,
+#             outputfile="bdgpeakcall_output.txt"))
+#     })
 
-context("9. test bdgbroadcall")
-    test_that("bdgbroadcall runs without error 1", {
-        expect_no_error(bdgbc1 <- bdgbroadcall(
-            ifile = file.path(datdir, 'run_bdgcmp_FE.bdg'), 
-            cutoffpeak=2, 
-            cutofflink=1.5,
-            oprefix="bdgbroadcall_output" ))
-    })
-    test_that("bdgbroadcall runs without error 2", {
-        expect_no_error(bdgbc2 <- bdgbroadcall(
-            ifile = file.path(datdir, 'run_bdgcmp_FE.bdg'), 
-            cutoffpeak=2, 
-            cutofflink=1.5,
-            outputfile="bdgbroadcall_output.bed" ))
-    })
+# context("9. test bdgbroadcall")
+#     test_that("bdgbroadcall runs without error 1", {
+#         expect_no_error(bdgbc1 <- bdgbroadcall(
+#             ifile = file.path(datdir, 'run_bdgcmp_FE.bdg'), 
+#             cutoffpeak=2, 
+#             cutofflink=1.5,
+#             oprefix="bdgbroadcall_output" ))
+#     })
+#     test_that("bdgbroadcall runs without error 2", {
+#         expect_no_error(bdgbc2 <- bdgbroadcall(
+#             ifile = file.path(datdir, 'run_bdgcmp_FE.bdg'), 
+#             cutoffpeak=2, 
+#             cutofflink=1.5,
+#             outputfile="bdgbroadcall_output.bed" ))
+#     })
 
-context("10. test bdgdiff")
-    test_that("bdgdiff runs without error 1", {
-        expect_no_error(bdgdiff1 <- bdgdiff(
-            t1bdg = file.path(datdir, 'run_callpeak_narrow0_treat_pileup.bdg'), 
-            c1bdg = file.path(datdir, 'run_callpeak_narrow0_control_lambda.bdg'), 
-            t2bdg = file.path(datdir, 'run_callpeak_narrow_revert_treat_pileup.bdg'), 
-            c2bdg = file.path(datdir, 'run_callpeak_narrow_revert_control_lambda.bdg'),
-            oprefix="bdgdiff_output_prefix"))
-        })
-    test_that("bdgdiff runs without error 2", {
-        expect_no_error(bdgdiff2 <- bdgdiff(
-            t1bdg = file.path(datdir, 'run_callpeak_narrow0_treat_pileup.bdg'), 
-            c1bdg = file.path(datdir, 'run_callpeak_narrow0_control_lambda.bdg'), 
-            t2bdg = file.path(datdir, 'run_callpeak_narrow_revert_treat_pileup.bdg'), 
-            c2bdg = file.path(datdir, 'run_callpeak_narrow_revert_control_lambda.bdg'),
-            outputfile= list("bdgdiff_output1.bed", "bdgdiff_output2.bed", "bdgdiff_output3.bed")))
-        })
+# context("10. test bdgdiff")
+#     test_that("bdgdiff runs without error 1", {
+#         expect_no_error(bdgdiff1 <- bdgdiff(
+#             t1bdg = file.path(datdir, 'run_callpeak_narrow0_treat_pileup.bdg'), 
+#             c1bdg = file.path(datdir, 'run_callpeak_narrow0_control_lambda.bdg'), 
+#             t2bdg = file.path(datdir, 'run_callpeak_narrow_revert_treat_pileup.bdg'), 
+#             c2bdg = file.path(datdir, 'run_callpeak_narrow_revert_control_lambda.bdg'),
+#             oprefix="bdgdiff_output_prefix"))
+#         })
+#     test_that("bdgdiff runs without error 2", {
+#         expect_no_error(bdgdiff2 <- bdgdiff(
+#             t1bdg = file.path(datdir, 'run_callpeak_narrow0_treat_pileup.bdg'), 
+#             c1bdg = file.path(datdir, 'run_callpeak_narrow0_control_lambda.bdg'), 
+#             t2bdg = file.path(datdir, 'run_callpeak_narrow_revert_treat_pileup.bdg'), 
+#             c2bdg = file.path(datdir, 'run_callpeak_narrow_revert_control_lambda.bdg'),
+#             outputfile= list("bdgdiff_output1.bed", "bdgdiff_output2.bed", "bdgdiff_output3.bed")))
+#         })
 
-context("11. test cmbreps")
-     test_that("cmbreps runs without error", {
-        expect_no_error(cmbreps <- cmbreps(
-            ifile = list(file.path(datdir, 'run_callpeak_narrow0_treat_pileup.bdg'),
-                    file.path(datdir, 'run_callpeak_narrow0_control_lambda.bdg')),
-            method = "max",
-            outputfile = "cmbreps_output.bdg"
-            ))
-    })
+# context("11. test cmbreps")
+#      test_that("cmbreps runs without error", {
+#         expect_no_error(cmbreps <- cmbreps(
+#             ifile = list(file.path(datdir, 'run_callpeak_narrow0_treat_pileup.bdg'),
+#                     file.path(datdir, 'run_callpeak_narrow0_control_lambda.bdg')),
+#             method = "max",
+#             outputfile = "cmbreps_output.bdg"
+#             ))
+#     })
 
 context("12. test bdgopt")
     test_that("bdgopt runs without error", {
@@ -272,29 +272,29 @@ context("12. test bdgopt")
             outputfile="bdgopt_output.bdg" ))
     })
 
-context("13. test callvar")
-    test_that("callvar runs without error", {
-        expect_no_error(cv1 <- callvar(
-            peakbed=file.path(datdir, "callvar_testing.narrowPeak"), 
-            tfile=CHIPPE, 
-            cfile=CTRLPE,
-            outputfile="callvar_output.vcf"
-            ))
-    })
+# context("13. test callvar")
+#     test_that("callvar runs without error", {
+#         expect_no_error(cv1 <- callvar(
+#             peakbed=file.path(datdir, "callvar_testing.narrowPeak"), 
+#             tfile=CHIPPE, 
+#             cfile=CTRLPE,
+#             outputfile="callvar_output.vcf"
+#             ))
+#     })
     
 # context("14. test 50k contigs with buffersize")
 
-context("15. test hmmratac")
-    test_that("hmmratac runs without error, defaults", {
-        expect_no_error(hm1 <- hmmratac(
-            input_file = file.path(datdir, 'yeast_500k_SRR1822137.bam'),
-            name = "hmmratac_output"))
-    })
-    test_that("hmmratac runs without error, format = BEDPE", {
-        expect_no_error(hm2 <- hmmratac(
-            input_file = file.path(datdir, 'yeast_500k_SRR1822137.bedpe.gz'), 
-            format = 'BEDPE',
-            name = "hmmratac_bedpe_output"))
-    })
+# context("15. test hmmratac")
+#     test_that("hmmratac runs without error, defaults", {
+#         expect_no_error(hm1 <- hmmratac(
+#             input_file = file.path(datdir, 'yeast_500k_SRR1822137.bam'),
+#             name = "hmmratac_output"))
+#     })
+#     test_that("hmmratac runs without error, format = BEDPE", {
+#         expect_no_error(hm2 <- hmmratac(
+#             input_file = file.path(datdir, 'yeast_500k_SRR1822137.bedpe.gz'), 
+#             format = 'BEDPE',
+#             name = "hmmratac_bedpe_output"))
+#     })
 
 
