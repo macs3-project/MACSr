@@ -1,6 +1,6 @@
 Package: MACSr
 Title: MACS: Model-based Analysis for ChIP-Seq
-Version: 1.13.1
+Version: 1.13.2
 Authors@R: c(
     person(given = "Philippa",
            family = "Doherty",
