@@ -72,10 +72,19 @@ can be checked from its manual.
 
 ## Function `callpeak`
 We have uploaded multipe test datasets from MACS to a data package
-`MACSdata` in the `ExperimentHub`. For example, Here we download a
-pair of single-end bed files to run the `callpeak` function.
+`MACSdata` in the `ExperimentHub`. A pair of single-end bed files
+(`EH4558` and `EH4563`) is also included in this package. Here we use
+them to run the `callpeak` function.
 
 ```{r}
+CHIP <- system.file("extdata", "CTCF_SE_ChIP_chr22_50k.bed.gz",
+                    package = "MACSr")
+CTRL <- system.file("extdata", "CTCF_SE_CTRL_chr22_50k.bed.gz",
+                    package = "MACSr")
+```
+
+The same files can be downloaded from `ExperimentHub`:
+```{r, eval = FALSE}
 eh <- ExperimentHub::ExperimentHub()
 eh <- AnnotationHub::query(eh, "MACSdata")
 CHIP <- eh[["EH4558"]]
