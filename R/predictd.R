@@ -30,8 +30,8 @@
 #' @return predicted fragment sizes.
 #' @export
 #' @examples
-#' eh <- ExperimentHub::ExperimentHub()
-#' CHIP <- eh[["EH4558"]]
+#' CHIP <- system.file("extdata", "CTCF_SE_ChIP_chr22_50k.bed.gz",
+#'                     package = "MACSr")
 #' predictd(CHIP, d_min = 10, gsize=5.2e+7, plot = NULL)
 predictd <- function(ifile, gsize = "hs", format = "AUTO",
                      plot = normalizePath(tempdir(), "predictd_mode.pdf"),

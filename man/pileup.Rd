@@ -69,7 +69,7 @@ filtering or sequencing depth scaling, so you may need to do
 certain pre/post-processing.
 }
 \examples{
-eh <- ExperimentHub::ExperimentHub()
-CHIP <- eh[["EH4558"]]
+CHIP <- system.file("extdata", "CTCF_SE_ChIP_chr22_50k.bed.gz",
+                    package = "MACSr")
 p <- pileup(CHIP, outdir = tempdir(), outputfile = "pileup_bed.bdg", format = "BED")
 }

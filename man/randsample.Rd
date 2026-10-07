@@ -67,7 +67,7 @@ duplicate reads, use 3. DEFAULT:2}
 Randomly choose a number/percentage of total reads, then save in BED/BEDPE format file.
 }
 \examples{
-eh <- ExperimentHub::ExperimentHub()
-CHIP <- eh[["EH4558"]]
+CHIP <- system.file("extdata", "CTCF_SE_ChIP_chr22_50k.bed.gz",
+                    package = "MACSr")
 randsample(CHIP, number = 1000, outdir = tempdir(), outputfile = "randsample.bed")
 }

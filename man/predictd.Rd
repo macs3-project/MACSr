@@ -62,7 +62,7 @@ data, report the average insertion/fragment size from all
 pairs. \emph{Will NOT filter duplicates}
 }
 \examples{
-eh <- ExperimentHub::ExperimentHub()
-CHIP <- eh[["EH4558"]]
+CHIP <- system.file("extdata", "CTCF_SE_ChIP_chr22_50k.bed.gz",
+                    package = "MACSr")
 predictd(CHIP, d_min = 10, gsize=5.2e+7, plot = NULL)
 }

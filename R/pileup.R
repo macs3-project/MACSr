@@ -40,8 +40,8 @@
 #' @return `macsList` object.
 #' @export
 #' @examples
-#' eh <- ExperimentHub::ExperimentHub()
-#' CHIP <- eh[["EH4558"]]
+#' CHIP <- system.file("extdata", "CTCF_SE_ChIP_chr22_50k.bed.gz",
+#'                     package = "MACSr")
 #' p <- pileup(CHIP, outdir = tempdir(), outputfile = "pileup_bed.bdg", format = "BED")
 pileup <- function(ifile, outputfile = character(), outdir = ".",
                    format = c("AUTO","BAM","SAM","BED","ELAND","ELANDMULTI",

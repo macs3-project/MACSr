@@ -136,9 +136,10 @@ process information, 3: show debug messages. DEFAULT:2}
 Main MACS3 Function to call peaks from alignment results.
 }
 \examples{
-eh <- ExperimentHub::ExperimentHub()
-CHIP <- eh[["EH4558"]]
-CTRL <- eh[["EH4563"]]
+CHIP <- system.file("extdata", "CTCF_SE_ChIP_chr22_50k.bed.gz",
+                    package = "MACSr")
+CTRL <- system.file("extdata", "CTCF_SE_CTRL_chr22_50k.bed.gz",
+                    package = "MACSr")
 res <- callpeak(CHIP, CTRL, gsize = 5.2e7,
                 cutoff_analysis = TRUE,
                 outdir = tempdir(),

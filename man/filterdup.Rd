@@ -67,7 +67,7 @@ not set.}
 filterdup
 }
 \examples{
-eh <- ExperimentHub::ExperimentHub()
-CHIP <- eh[["EH4558"]]
+CHIP <- system.file("extdata", "CTCF_SE_ChIP_chr22_50k.bed.gz",
+                    package = "MACSr")
 res <- filterdup(ifile = CHIP, outputfile = "test.bed", outdir = tempdir())
 }

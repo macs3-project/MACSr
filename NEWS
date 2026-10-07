@@ -1,3 +1,6 @@
+Changes in version 1.21.3 (2026-10-07)
++ Use bundled test data in examples and tests instead of ExperimentHub.
+
 Changes in version 1.21.2 (2026-10-02)
 + Use bundled test data in the vignette instead of ExperimentHub.
 

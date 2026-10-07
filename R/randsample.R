@@ -35,8 +35,8 @@
 #' @return `macsList` object.
 #' @export
 #' @examples
-#' eh <- ExperimentHub::ExperimentHub()
-#' CHIP <- eh[["EH4558"]]
+#' CHIP <- system.file("extdata", "CTCF_SE_ChIP_chr22_50k.bed.gz",
+#'                     package = "MACSr")
 #' randsample(CHIP, number = 1000, outdir = tempdir(), outputfile = "randsample.bed")
 randsample <- function(ifile, outdir = ".", outputfile = character(),
                        percentage = numeric(), number = numeric(),
